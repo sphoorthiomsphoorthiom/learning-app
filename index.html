@@ -18,6 +18,8 @@
       --shadow-soft: 0 10px 25px rgba(15, 23, 42, 0.1);
       --radius-lg: 18px;
       --radius-xl: 24px;
+      --ai-bg: #fff9f2;
+      --ai-border: #ffe0b2;
     }
 
     * {
@@ -475,96 +477,251 @@
       opacity: 0.65;
     }
 
-    /* ==== NEW TOOLS SECTION ==== */
-    .tools-section {
-      margin-top: 8px;
-      padding-top: 8px;
-      border-top: 1px dashed #e5e7eb;
+    /* ================= AI ASSISTANT UI ================= */
+
+    .ai-fab {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      z-index: 9999;
     }
 
-    .tool-title {
+    .ai-fab button {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 16px;
       font-size: 13px;
       font-weight: 600;
-      margin-bottom: 4px;
+      background: linear-gradient(135deg, #ffb347, #ff7b54);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+      cursor: pointer;
+    }
+
+    .ai-fab button span.icon {
+      font-size: 18px;
+    }
+
+    .ai-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,0.3);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9998;
+    }
+
+    .ai-modal {
+      width: 100%;
+      max-width: 720px;
+      max-height: 90vh;
+      background: var(--ai-bg);
+      border-radius: 20px;
+      border: 1px solid var(--ai-border);
+      box-shadow: 0 20px 40px rgba(15,23,42,0.35);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .ai-modal-header {
+      padding: 10px 14px;
+      border-bottom: 1px solid #ffe0b2;
+      background: #fff4e0;
       display: flex;
       align-items: center;
-      gap: 4px;
+      justify-content: space-between;
+      gap: 8px;
     }
 
-    .tool-note {
+    .ai-modal-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ai-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #ffd1a8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .ai-meta h3 {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .ai-meta p {
       font-size: 11px;
-      opacity: 0.7;
-      margin-bottom: 4px;
+      opacity: 0.75;
     }
 
-    .tool-input-row {
+    .ai-modal-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+    }
+
+    .ai-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+    }
+
+    .ai-btn-ghost {
+      border: none;
+      background: transparent;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .ai-modal-body {
+      padding: 8px 14px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      height: 100%;
+    }
+
+    .ai-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 11px;
+      align-items: center;
+    }
+
+    .ai-chip-btn {
+      border-radius: 999px;
+      border: 1px dashed #f59e0b;
+      padding: 4px 8px;
+      background: #fffaf0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+    }
+
+    .ai-chip-btn input[type="file"] {
+      display: none;
+    }
+
+    .ai-url-input {
+      flex: 1;
+      min-width: 140px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      border: 1px solid #facc6b;
+      font-size: 11px;
+      background: #fffaf0;
+    }
+
+    .ai-url-button {
+      border-radius: 999px;
+      border: none;
+      padding: 5px 8px;
+      font-size: 11px;
+      background: #fbbf24;
+      color: #111827;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .ai-chat {
+      flex: 1;
+      min-height: 160px;
+      max-height: 340px;
+      background: #fffdf8;
+      border-radius: 14px;
+      border: 1px solid #ffe0b2;
+      padding: 8px;
+      overflow-y: auto;
+      font-size: 12px;
+    }
+
+    .ai-message-row {
+      display: flex;
+      margin-bottom: 6px;
+      gap: 6px;
+    }
+
+    .ai-message-row.user {
+      justify-content: flex-end;
+    }
+
+    .ai-message-bubble {
+      max-width: 80%;
+      padding: 6px 9px;
+      border-radius: 12px;
+      line-height: 1.4;
+    }
+
+    .ai-message-row.user .ai-message-bubble {
+      background: #dbeafe;
+      border-bottom-right-radius: 2px;
+    }
+
+    .ai-message-row.assistant .ai-message-bubble {
+      background: #fff4e0;
+      border-bottom-left-radius: 2px;
+    }
+
+    .ai-input-row {
+      margin-top: 6px;
       display: flex;
       gap: 6px;
-      flex-wrap: wrap;
-      margin-bottom: 4px;
+      align-items: flex-end;
     }
 
-    .tool-input-row input[type="text"],
-    .tool-input-row textarea {
+    .ai-textarea {
       flex: 1;
-      min-width: 0;
-      padding: 6px 8px;
-      border-radius: 10px;
-      border: 1px solid #e5e7eb;
-      font-size: 12px;
-    }
-
-    .tool-input-row textarea {
       min-height: 40px;
-      resize: vertical;
-    }
-
-    .file-list {
-      font-size: 11px;
-      max-height: 60px;
-      overflow-y: auto;
-      margin-bottom: 4px;
-    }
-
-    .file-list div {
-      margin-bottom: 2px;
-    }
-
-    .file-preview {
-      border-radius: 10px;
-      border: 1px solid #e5e7eb;
-      padding: 4px;
-      max-height: 140px;
-      overflow: auto;
-      font-size: 11px;
-      background: #f9fafb;
-    }
-
-    .file-preview img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 8px;
-    }
-
-    .url-result,
-    .chat-answer {
+      max-height: 80px;
+      padding: 6px 8px;
+      border-radius: 12px;
+      border: 1px solid #facc6b;
       font-size: 12px;
-      border-radius: 10px;
-      border: 1px solid #e5e7eb;
-      padding: 6px;
-      background: #f9fafb;
-      max-height: 120px;
-      overflow-y: auto;
-      white-space: pre-wrap;
+      resize: vertical;
+      background: #fffdf8;
     }
 
-    .youtube-frame {
-      width: 100%;
-      height: 180px;
-      border-radius: 10px;
+    .ai-send-btn {
+      border-radius: 999px;
       border: none;
-      margin-top: 4px;
+      padding: 7px 11px;
+      font-size: 12px;
+      font-weight: 600;
+      background: linear-gradient(135deg, #f97316, #f97316);
+      color: #fff;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
+
+    .ai-helper-note {
+      font-size: 10px;
+      opacity: 0.7;
+      margin-top: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .ai-modal {
+        max-width: 96vw;
+      }
     }
   </style>
 </head>
@@ -593,7 +750,7 @@
       </div>
     </header>
 
-    <!-- LEFT PANEL: Class + Subject + Progress -->
+    <!-- LEFT PANEL -->
     <section class="panel panel-left">
       <div>
         <h2 id="classHeading">Choose your Class</h2>
@@ -618,8 +775,8 @@
       </div>
     </section>
 
-    <!-- RIGHT PANEL: Topics + Lesson + Quiz + Tools -->
-    <section class="panel panel-right" id="contentPanel">
+    <!-- RIGHT PANEL -->
+    <section class="panel panel-right">
       <div>
         <h2 id="topicHeading">Topics & Lessons</h2>
         <p class="subtitle" id="topicSubtitle">
@@ -633,7 +790,7 @@
         <span id="metaTopicCount">0 topics</span>
       </div>
 
-      <!-- Language pair controls (shown only for World Languages subject) -->
+      <!-- World Languages controls -->
       <div class="lesson-meta" id="langPairControls" style="display:none; margin-top:-4px;">
         <span style="font-size:11px;">I know:</span>
         <select id="knownLangSelect" style="font-size:11px; padding:3px 6px; border-radius:999px; border:1px solid #e5e7eb;"></select>
@@ -661,64 +818,68 @@
         </div>
       </div>
 
-      <!-- NEW: Tools section -->
-      <div class="tools-section">
-        <!-- Files -->
-        <div style="margin-bottom:8px;">
-          <div class="tool-title">📁 Files (offline, local only)</div>
-          <div class="tool-note">
-            Select files from this device. They never upload to any server; preview is done locally.
-          </div>
-          <div class="tool-input-row">
-            <input type="file" id="fileInput" multiple />
-          </div>
-          <div class="file-list" id="fileList"></div>
-          <div class="file-preview" id="filePreview">No file selected yet.</div>
-        </div>
-
-        <!-- URLs / YouTube -->
-        <div style="margin-bottom:8px;">
-          <div class="tool-title">🔗 Links & YouTube</div>
-          <div class="tool-note">
-            For YouTube links we show a player. For other sites we try to read basic info (needs internet; some sites may block it).
-          </div>
-          <div class="tool-input-row">
-            <input type="text" id="urlInput" placeholder="Paste YouTube or any URL..." />
-            <button class="btn-secondary" id="processUrlBtn">Process</button>
-          </div>
-          <div class="url-result" id="urlResult">No link processed yet.</div>
-          <iframe id="youtubeFrame" class="youtube-frame" style="display:none;"></iframe>
-        </div>
-
-        <!-- Chat-like mini mentor -->
-        <div>
-          <div class="tool-title">💬 Mini Mentor (offline helper)</div>
-          <div class="tool-note">
-            This is a lightweight, offline-friendly assistant for simple questions and study help.
-            For full internet AI like ChatGPT, this app must be connected to an online AI API (not included here).
-          </div>
-          <div class="tool-input-row">
-            <textarea id="chatInput" placeholder="Ask a question about math, study tips, or anything simple..."></textarea>
-          </div>
-          <div class="tool-input-row">
-            <button class="btn-main" id="chatAskBtn">Ask Mentor</button>
-          </div>
-          <div class="chat-answer" id="chatAnswer">Your answer will appear here.</div>
-        </div>
-      </div>
-
       <div class="status-row">
-        <div class="status-pill" id="progressPill">
+        <div class="status-pill">
           <div class="dot-online" id="dotOnline"></div>
           <span id="progressPillText">0 lessons • 0 quizzes • 0% avg</span>
         </div>
-        <span class="tiny" id="storageNote">Progress and files stay only on this device. No account, no upload.</span>
+        <span class="tiny" id="storageNote">Progress saved only on this device. No account needed.</span>
       </div>
     </section>
   </div>
 
+  <!-- AI Assistant -->
+  <div class="ai-fab">
+    <button id="openAiBtn">
+      <span class="icon">🤖</span>
+      <span>AI Helper</span>
+    </button>
+  </div>
+
+  <div class="ai-modal-backdrop" id="aiBackdrop">
+    <div class="ai-modal">
+      <div class="ai-modal-header">
+        <div class="ai-modal-left">
+          <div class="ai-avatar">💡</div>
+          <div class="ai-meta">
+            <h3>Comet AI Tutor</h3>
+            <p id="aiStatusLine">Hybrid: Offline knowledge + Online AI when available</p>
+          </div>
+        </div>
+        <div class="ai-modal-right">
+          <div class="ai-status-dot" id="aiStatusDot"></div>
+          <span id="aiOnlineStatusText">Online</span>
+          <button class="ai-btn-ghost" id="closeAiBtn" title="Close">✖</button>
+        </div>
+      </div>
+
+      <div class="ai-modal-body">
+        <div class="ai-toolbar">
+          <label class="ai-chip-btn">
+            📎 File
+            <input type="file" id="aiFileInput" multiple />
+          </label>
+
+          <input type="text" id="aiUrlInput" class="ai-url-input" placeholder="Paste YouTube / website URL..." />
+
+          <button class="ai-url-button" id="aiUrlAnalyzeBtn">Analyze URL</button>
+        </div>
+
+        <div class="ai-chat" id="aiChat"></div>
+
+        <div class="ai-input-row">
+          <textarea id="aiTextInput" class="ai-textarea" placeholder="Ask anything: homework, explanation, life, ideas..."></textarea>
+          <button class="ai-send-btn" id="aiSendBtn">Send ➜</button>
+        </div>
+        <div class="ai-helper-note">
+          Offline: uses built-in school knowledge. Online: uses a free OpenRouter AI model (after you add API key).
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // ============ BASIC TRANSLATIONS (UI ONLY) ============
+    // ------------ UI translations (English / Hindi / Telugu UI only) ------------
     const uiText = {
       en: {
         title: "Global Learning",
@@ -733,7 +894,7 @@
         noLessons: "No lessons completed yet.",
         avgScore: s => `Average score: ${s}%`,
         progressPill: (l, q, a) => `${l} lessons • ${q} quizzes • ${a}% avg`,
-        storageNote: "Progress and tools data stay only on this device. No upload.",
+        storageNote: "Progress saved only on this device. No account needed.",
         startTitle: "Start by choosing a topic.",
         startBody: "Once you pick a topic, you’ll see a short, simple explanation here, followed by questions."
       },
@@ -750,7 +911,7 @@
         noLessons: "अभी कोई पाठ पूरा नहीं हुआ।",
         avgScore: s => `औसत अंक: ${s}%`,
         progressPill: (l, q, a) => `${l} पाठ • ${q} क्विज़ • ${a}% औसत`,
-        storageNote: "प्रगति और टूल्स डेटा केवल इस डिवाइस पर सेव होता है। अपलोड नहीं होता।",
+        storageNote: "प्रगति केवल इस डिवाइस पर सेव होती है। किसी खाते की ज़रूरत नहीं।",
         startTitle: "पहले कोई टॉपिक चुनें।",
         startBody: "जैसे ही आप टॉपिक चुनेंगे, यहाँ सरल व्याख्या और प्रश्न दिखेंगे।"
       },
@@ -767,7 +928,7 @@
         noLessons: "ఇంకా ఏ పాఠం పూర్తి కాలేదు.",
         avgScore: s => `సగటు స్కోర్: ${s}%`,
         progressPill: (l, q, a) => `${l} పాఠాలు • ${q} క్విజ్‌లు • ${a}% సగటు`,
-        storageNote: "ప్రోగ్రెస్, టూల్స్ డేటా ఈ డివైస్‌లో మాత్రమే సేవ్ అవుతుంది. ఎక్కడికీ అప్లోడ్ కాదు.",
+        storageNote: "ప్రోగ్రెస్ ఈ డివైస్‌లో మాత్రమే సేవ్ అవుతుంది. ఖాతా అవసరం లేదు.",
         startTitle: "మొదట టాపిక్ ఎంచుకోండి.",
         startBody: "మీరు టాపిక్ ఎంచుకున్న తరువాత, ఇక్కడ సింపుల్ వివరణ, ప్రశ్నలు కనిపిస్తాయి."
       }
@@ -775,30 +936,38 @@
 
     let currentLang = localStorage.getItem("gl_lang") || "en";
 
-    // ============ SUPPORTED LEARNING LANGUAGES ============
+    // ------------ Supported learning languages for "World Languages" subject ------------
     const supportedLanguages = [
       { code: "en", name: "English", native: "English" },
-      { code: "hi", name: "Hindi", native: "हिन्दी" },
-      { code: "te", name: "Telugu", native: "తెలుగు" },
-      { code: "es", name: "Spanish", native: "Español" },
       { code: "zh", name: "Mandarin Chinese", native: "中文" },
+      { code: "hi", name: "Hindi", native: "हिन्दी" },
+      { code: "es", name: "Spanish", native: "Español" },
       { code: "ar", name: "Arabic", native: "العربية" },
-      { code: "fr", name: "French", native: "Français" }
+      { code: "fr", name: "French", native: "Français" },
+      { code: "pt", name: "Portuguese (Brazil)", native: "Português (BR)" },
+      { code: "ru", name: "Russian", native: "Русский" },
+      { code: "ja", name: "Japanese", native: "日本語" },
+      { code: "de", name: "German", native: "Deutsch" },
+      { code: "te", name: "Telugu", native: "తెలుగు" }   // bonus
     ];
 
-    // Phrase bank: each concept has translations in many languages
+    // Phrase bank used for cross-language learning
     const languagePhrases = [
       {
         key: "hello",
         concept: "Basic greeting: Hello",
         translations: {
           en: "Hello",
-          hi: "नमस्ते",
-          te: "నమస్తే",
-          es: "Hola",
           zh: "你好",
+          hi: "नमस्ते",
+          es: "Hola",
           ar: "مرحبا",
-          fr: "Bonjour"
+          fr: "Bonjour",
+          pt: "Olá",
+          ru: "Здравствуйте",
+          ja: "こんにちは",
+          de: "Hallo",
+          te: "నమస్తే"
         }
       },
       {
@@ -806,698 +975,3 @@
         concept: "Polite phrase: Thank you",
         translations: {
           en: "Thank you",
-          hi: "धन्यवाद",
-          te: "ధన్యవాదాలు",
-          es: "Gracias",
-          zh: "谢谢",
-          ar: "شكرا",
-          fr: "Merci"
-        }
-      },
-      {
-        key: "please",
-        concept: "Polite phrase: Please",
-        translations: {
-          en: "Please",
-          hi: "कृपया",
-          te: "దయచేసి",
-          es: "Por favor",
-          zh: "请",
-          ar: "من فضلك",
-          fr: "S'il vous plaît"
-        }
-      },
-      {
-        key: "how_are_you",
-        concept: "Common question: How are you?",
-        translations: {
-          en: "How are you?",
-          hi: "आप कैसे हैं?",
-          te: "మీరు ఎలా ఉన్నారు?",
-          es: "¿Cómo estás?",
-          zh: "你好吗？",
-          ar: "كيف حالك؟",
-          fr: "Comment ça va ?"
-        }
-      }
-    ];
-
-    // ============ COMMON SUBJECT BLOCKS ============
-    const commonSuperLearning = {
-      subjectLabel: "Super Learning",
-      level: "Brain Skills",
-      topics: [
-        {
-          id: "sl-active-recall",
-          title: "Active Recall (Ask Yourself)",
-          level: "Core",
-          body:
-`Active recall means you close the book and ask yourself questions instead of only reading.
-
-Steps:
-1) Read a small part (1–2 paragraphs or 1 example).
-2) Close your eyes or notebook.
-3) Ask yourself: “What did I just learn?” “How will I explain this?”
-4) Speak or write the answer from memory.
-
-Why it works:
-• Your brain works harder to remember.
-• Memory becomes stronger each time you try to recall.
-• You learn faster than by just re-reading.`,
-          quiz: {
-            question: "What is the MAIN action in active recall?",
-            options: [
-              "Reading again and again",
-              "Closing book and testing yourself",
-              "Highlighting with many colours",
-              "Listening without thinking"
-            ],
-            answerIndex: 1
-          }
-        },
-        {
-          id: "sl-spaced-repetition",
-          title: "Spaced Repetition (Smart Revision)",
-          level: "Core",
-          body:
-`Spaced repetition means revising the same topic with gaps between days.
-
-Simple schedule:
-• Day 1 – Learn new topic
-• Day 2 – Quick revision (5–10 min)
-• Day 4 – Second revision
-• Day 7 – Third revision
-• Day 15 – Very short revision
-
-Instead of 2 hours in one day, you do many small revisions. This saves time and builds strong long-term memory.`,
-          quiz: {
-            question: "Spaced repetition works by:",
-            options: [
-              "Studying everything in one day",
-              "Never revising again",
-              "Revising with gaps between days",
-              "Only reading before exam"
-            ],
-            answerIndex: 2
-          }
-        },
-        {
-          id: "sl-mental-math",
-          title: "Mental Math (No Calculator)",
-          level: "Core",
-          body:
-`Mental math means solving sums in your head using patterns and shortcuts.
-
-Example:
-• 9 × 7 = (10 × 7) − 7 = 70 − 7 = 63
-• 19 + 18 = (20 + 20) − 3 = 40 − 3 = 37
-
-If you practice these tricks daily, your brain becomes faster than a calculator for many daily tasks.`,
-          quiz: {
-            question: "9 × 7 can be quickly seen as:",
-            options: [
-              "(10 × 7) − 7",
-              "(5 × 7) + 2",
-              "(7 × 7) + 9",
-              "(9 × 9) − 7"
-            ],
-            answerIndex: 0
-          }
-        }
-      ]
-    };
-
-    const commonLanguagesSubject = {
-      subjectLabel: "World Languages",
-      level: "Any language",
-      topics: [
-        {
-          id: "lang-5-phrases",
-          title: "5 Magic Phrases in Any Language",
-          level: "Easy",
-          body:
-`When you start a new language, first learn 5 daily phrases:
-
-1) Hello / Hi
-2) Thank you
-3) Sorry / Excuse me
-4) Please
-5) How are you?
-
-Steps:
-• Write them in your language and the language you want to learn.
-• Say them 10 times each with feeling.
-• Use them with friends or talk in your mind all day.
-
-This builds confidence and daily use.`,
-          quiz: {
-            question: "Which is a good first step in any language?",
-            options: [
-              "Memorise full dictionary",
-              "Learn 5 daily phrases",
-              "Only read grammar rules",
-              "Wait for school to teach"
-            ],
-            answerIndex: 1
-          }
-        },
-        {
-          id: "lang-sound-first",
-          title: "Listen & Copy Sounds First",
-          level: "Core",
-          body:
-`Before reading or writing, train your ears.
-
-For any language:
-• Listen to native speakers (videos, audio, songs).
-• Repeat aloud like a child copying a parent.
-• Do not worry about spelling at first.
-
-Sound → Meaning → Spelling is faster than only reading books.`,
-          quiz: {
-            question: "For fast language learning, what comes FIRST?",
-            options: [
-              "Spelling and writing",
-              "Listening and copying sounds",
-              "Memorising exams",
-              "Translating big essays"
-            ],
-            answerIndex: 1
-          }
-        }
-      ]
-    };
-
-    // ============ SYLLABUS (SAMPLE CLASSES) ============
-    const syllabus = {
-      "1": {
-        Math: {
-          subjectLabel: "Math",
-          level: "Foundation",
-          topics: [
-            {
-              id: "c1-math-numbers-1to10",
-              title: "Numbers 1 to 10",
-              level: "Easy",
-              body:
-`Numbers 1 to 10 are the first counting numbers.
-
-We write them as:
-1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-
-You can count your fingers, toys or steps while walking. Counting helps you know “how many”.`,
-              quiz: {
-                question: "How many fingers are there on one hand?",
-                options: ["3", "4", "5", "6"],
-                answerIndex: 2
-              }
-            },
-            {
-              id: "c1-math-shapes-basic",
-              title: "Basic Shapes",
-              level: "Easy",
-              body:
-`A shape is how something looks from outside.
-
-Important basic shapes:
-• Circle – like a coin
-• Square – like a chess board box
-• Rectangle – like your notebook
-• Triangle – like a slice of pizza`,
-              quiz: {
-                question: "Which shape looks like a coin?",
-                options: ["Square", "Circle", "Triangle", "Rectangle"],
-                answerIndex: 1
-              }
-            }
-          ]
-        },
-        Science: {
-          subjectLabel: "Science",
-          level: "Environment",
-          topics: [
-            {
-              id: "c1-sci-5senses",
-              title: "Our Five Senses",
-              level: "Easy",
-              body:
-`We understand the world using our five sense organs:
-
-• Eyes – to see
-• Ears – to hear
-• Nose – to smell
-• Tongue – to taste
-• Skin – to feel
-
-All senses are important to stay safe and enjoy life.`,
-              quiz: {
-                question: "Which organ helps you to see?",
-                options: ["Ears", "Eyes", "Nose", "Skin"],
-                answerIndex: 1
-              }
-            }
-          ]
-        },
-        English: {
-          subjectLabel: "English",
-          level: "Reading",
-          topics: [
-            {
-              id: "c1-eng-alphabet",
-              title: "Alphabet A to Z",
-              level: "Easy",
-              body:
-`The English alphabet has 26 letters.
-
-Capital letters: A B C ... Z
-Small letters: a b c ... z
-
-We use letters to make words like cat, dog, home.`,
-              quiz: {
-                question: "How many letters are there in the English alphabet?",
-                options: ["20", "24", "26", "30"],
-                answerIndex: 2
-              }
-            }
-          ]
-        },
-        Hindi: {
-          subjectLabel: "Hindi",
-          level: "Akshar",
-          topics: [
-            {
-              id: "c1-hin-swar",
-              title: "स्वर (Vowels)",
-              level: "Easy",
-              body:
-`हिन्दी में स्वर (vowels) हैं:
-
-अ, आ, इ, ई, उ, ऊ, ए, ऐ, ओ, औ, ऋ
-
-स्वर ध्वनियों को स्पष्ट बोलने में मदद करते हैं।`,
-              quiz: {
-                question: "‘आ’ किस समूह में आता है?",
-                options: ["व्यंजन", "स्वर", "संख्या", "काल"],
-                answerIndex: 1
-              }
-            }
-          ]
-        },
-        SuperLearning: commonSuperLearning,
-        Languages: commonLanguagesSubject
-      },
-
-      "10": {
-        Math: {
-          subjectLabel: "Math",
-          level: "Board Core",
-          topics: [
-            {
-              id: "c10-math-triangle-similarity",
-              title: "Similarity of Triangles",
-              level: "Medium",
-              body:
-`Two triangles are similar if:
-
-• Their corresponding angles are equal, and
-• Their corresponding sides are in the same ratio.
-
-Important criteria: AA, SAS, and SSS similarity.
-
-Once triangles are similar, ratio of areas is square of ratio of corresponding sides.`,
-              quiz: {
-                question: "If two triangles are similar, their corresponding angles are:",
-                options: [
-                  "Different",
-                  "Equal",
-                  "Right angles only",
-                  "Obtuse only"
-                ],
-                answerIndex: 1
-              }
-            }
-          ]
-        },
-        Science: {
-          subjectLabel: "Science",
-          level: "Physics/Chem/Bio",
-          topics: [
-            {
-              id: "c10-sci-electricity-ohmslaw",
-              title: "Ohm’s Law",
-              level: "Medium",
-              body:
-`Ohm’s law relates voltage (V), current (I) and resistance (R):
-
-V = I × R
-
-If temperature is constant, current through a conductor is directly proportional to the potential difference across it.`,
-              quiz: {
-                question: "According to Ohm’s law, V equals:",
-                options: ["I / R", "I × R", "R / I", "I + R"],
-                answerIndex: 1
-              }
-            }
-          ]
-        },
-        English: {
-          subjectLabel: "English",
-          level: "Language",
-          topics: [
-            {
-              id: "c10-eng-report-writing",
-              title: "Report Writing Basics",
-              level: "Medium",
-              body:
-`A report is a formal account of an event or situation.
-
-Basic format:
-• Heading
-• By line
-• Date & place (if needed)
-• Body in 3–4 paragraphs: what, when, where, who, how.
-
-Use past tense, third person, and formal tone.`,
-              quiz: {
-                question: "Which of these is important in a report?",
-                options: [
-                  "Past tense",
-                  "SMS language",
-                  "Random emojis",
-                  "Informal tone"
-                ],
-                answerIndex: 0
-              }
-            }
-          ]
-        },
-        Hindi: {
-          subjectLabel: "Hindi",
-          level: "Language",
-          topics: [
-            {
-              id: "c10-hin-anuched",
-              title: "अनुच्छेद लेखन",
-              level: "Medium",
-              body:
-`अनुच्छेद किसी एक विषय पर छोटा, सुसंगठित और क्रमबद्ध लेख होता है।
-
-मुख्य बातें:
-• एक ही मुख्य विचार
-• सरल और स्पष्ट भाषा
-• तार्किक क्रम`,
-              quiz: {
-                question: "अच्छा अनुच्छेद कैसा होता है?",
-                options: [
-                  "कई विषयों वाला",
-                  "छोटा और सुसंगठित",
-                  "बिना अर्थ के",
-                  "अव्यवस्थित"
-                ],
-                answerIndex: 1
-              }
-            }
-          ]
-        },
-        SuperLearning: commonSuperLearning,
-        Languages: commonLanguagesSubject
-      },
-
-      "12": {
-        Math: {
-          subjectLabel: "Math (PCM)",
-          level: "Advanced",
-          topics: [
-            {
-              id: "c12-math-limits-basic",
-              title: "Limit of a Function",
-              level: "Medium",
-              body:
-`Limit describes the value that a function approaches as input approaches some point.
-
-Notation: limₓ→a f(x)
-
-If left-hand limit (LHL) and right-hand limit (RHL) at x = a are equal, the limit exists at a.`,
-              quiz: {
-                question: "For limit to exist at x = a:",
-                options: [
-                  "Only LHL must exist",
-                  "Only RHL must exist",
-                  "LHL and RHL must be equal",
-                  "Function must be linear"
-                ],
-                answerIndex: 2
-              }
-            }
-          ]
-        },
-        Science: {
-          subjectLabel: "Physics/Chem/Bio",
-          level: "Advanced",
-          topics: [
-            {
-              id: "c12-phy-electric-field",
-              title: "Electric Field",
-              level: "Medium",
-              body:
-`Electric field at a point is the force experienced by a unit positive test charge at that point.
-
-E = F / q
-
-It is a vector quantity and is represented by field lines.`,
-              quiz: {
-                question: "Electric field is:",
-                options: [
-                  "Scalar",
-                  "Vector",
-                  "Imaginary only",
-                  "Always zero"
-                ],
-                answerIndex: 1
-              }
-            }
-          ]
-        },
-        English: {
-          subjectLabel: "English",
-          level: "Higher",
-          topics: [
-            {
-              id: "c12-eng-article-writing",
-              title: "Article Writing (Boards)",
-              level: "Medium",
-              body:
-`An article presents views on an issue for a newspaper or magazine.
-
-Key points:
-• Catchy title
-• By line
-• Introduction, body, conclusion
-• Balanced and logical arguments.`,
-              quiz: {
-                question: "Which is NOT suitable for an article?",
-                options: [
-                  "Catchy title",
-                  "Clear paragraphs",
-                  "Balanced view",
-                  "Random unrelated points"
-                ],
-                answerIndex: 3
-              }
-            }
-          ]
-        },
-        Hindi: {
-          subjectLabel: "Hindi",
-          level: "Higher",
-          topics: [
-            {
-              id: "c12-hin-nibandh",
-              title: "निबंध लेखन",
-              level: "Medium",
-              body:
-`निबंध किसी विषय पर विस्तार से लिखा गया विचारात्मक लेख है।
-
-विशेषताएँ:
-• विषय की स्पष्टता
-• क्रमबद्धता
-• भाषा की शुद्धता
-• ప్రభావశీల निष्कर्ष`,
-              quiz: {
-                question: "निबंध की एक प्रमुख विशेषता क्या है?",
-                options: [
-                  "अस्पष्टता",
-                  "क्रमबद्धता",
-                  "त्रुटिपूर्ण भाषा",
-                  "बिना निष्कर्ष"
-                ],
-                answerIndex: 1
-              }
-            }
-          ]
-        },
-        SuperLearning: commonSuperLearning,
-        Languages: commonLanguagesSubject
-      }
-    };
-
-    const STORAGE_KEY = "gl_progress_v1";
-
-    let progress = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null") || {
-      lessons: {}, // key: class-subject-topicId -> { completed, bestScore }
-      quizAttempts: 0,
-      quizCorrect: 0
-    };
-
-    function saveProgress() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
-      updateGlobalProgressUI();
-    }
-
-    // ============ DOM ELEMENTS ============
-    const classGrid = document.getElementById("classGrid");
-    const subjectsRow = document.getElementById("subjectsRow");
-    const topicList = document.getElementById("topicList");
-    const lessonTitle = document.getElementById("lessonTitle");
-    const lessonBody = document.getElementById("lessonBody");
-    const qaSection = document.getElementById("qaSection");
-    const quizQuestionEl = document.getElementById("quizQuestion");
-    const optionsContainer = document.getElementById("optionsContainer");
-    const nextQuestionBtn = document.getElementById("nextQuestionBtn");
-    const speakLessonBtn = document.getElementById("speakLessonBtn");
-    const speakQuestionBtn = document.getElementById("speakQuestionBtn");
-
-    const overallProgressFill = document.getElementById("overallProgressFill");
-    const overallProgressLabel = document.getElementById("overallProgressLabel");
-    const overallScoreLabel = document.getElementById("overallScoreLabel");
-    const progressPillText = document.getElementById("progressPillText");
-    const offlineLabel = document.getElementById("offlineLabel");
-    const onlineChip = document.getElementById("onlineChip");
-    const storageNote = document.getElementById("storageNote");
-
-    const languageSelect = document.getElementById("languageSelect");
-    const appTitle = document.getElementById("appTitle");
-    const appSubtitle = document.getElementById("appSubtitle");
-    const classHeading = document.getElementById("classHeading");
-    const classSubtitle = document.getElementById("classSubtitle");
-    const subjectHeading = document.getElementById("subjectHeading");
-    const subjectSubtitle = document.getElementById("subjectSubtitle");
-    const topicHeading = document.getElementById("topicHeading");
-    const topicSubtitle = document.getElementById("topicSubtitle");
-    const metaClass = document.getElementById("metaClass");
-    const metaSubject = document.getElementById("metaSubject");
-    const metaTopicCount = document.getElementById("metaTopicCount");
-
-    const knownLangSelect = document.getElementById("knownLangSelect");
-    const targetLangSelect = document.getElementById("targetLangSelect");
-    const langPairControls = document.getElementById("langPairControls");
-
-    // New tools elements
-    const fileInput = document.getElementById("fileInput");
-    const fileListEl = document.getElementById("fileList");
-    const filePreviewEl = document.getElementById("filePreview");
-    const urlInput = document.getElementById("urlInput");
-    const processUrlBtn = document.getElementById("processUrlBtn");
-    const urlResultEl = document.getElementById("urlResult");
-    const youtubeFrame = document.getElementById("youtubeFrame");
-    const chatInput = document.getElementById("chatInput");
-    const chatAskBtn = document.getElementById("chatAskBtn");
-    const chatAnswerEl = document.getElementById("chatAnswer");
-
-    // ============ STATE ============
-    let currentClass = null;
-    let currentSubject = null;
-    let currentTopicIndex = 0;
-
-    // ============ LANGUAGE (UI) ============
-    function renderLanguage() {
-      const t = uiText[currentLang];
-      appTitle.textContent = t.title;
-      appSubtitle.textContent = t.subtitle;
-      classHeading.textContent = t.classHeading;
-      classSubtitle.textContent = t.classSubtitle;
-      subjectHeading.textContent = t.subjectHeading;
-      subjectSubtitle.textContent = t.subjectSubtitle;
-      topicHeading.textContent = t.topicHeading;
-      topicSubtitle.textContent = t.topicSubtitle;
-      offlineLabel.textContent = t.offlineReady;
-      storageNote.textContent = t.storageNote;
-
-      if (!currentClass || !currentSubject) {
-        lessonTitle.textContent = t.startTitle;
-        lessonBody.textContent = t.startBody;
-      }
-
-      updateGlobalProgressUI();
-    }
-
-    languageSelect.value = currentLang;
-    languageSelect.addEventListener("change", () => {
-      currentLang = languageSelect.value;
-      localStorage.setItem("gl_lang", currentLang);
-      renderLanguage();
-    });
-
-    // ============ CLASS & SUBJECT ============
-    function initClassGrid() {
-      classGrid.innerHTML = "";
-      for (let c = 1; c <= 12; c++) {
-        const btn = document.createElement("button");
-        btn.className = "pill-btn";
-        btn.textContent = "Class " + c;
-        btn.dataset.classValue = String(c);
-        btn.addEventListener("click", () => {
-          document.querySelectorAll("#classGrid .pill-btn")
-            .forEach(b => b.classList.remove("active"));
-          btn.classList.add("active");
-          currentClass = String(c);
-          currentSubject = null;
-          renderSubjects();
-          renderTopics();
-          metaClass.textContent = "Class " + currentClass;
-          metaSubject.textContent = "Subject –";
-        });
-        classGrid.appendChild(btn);
-      }
-    }
-
-    function renderSubjects() {
-      subjectsRow.innerHTML = "";
-      const data = syllabus[currentClass];
-      if (!data) {
-        subjectsRow.innerHTML =
-          '<span style="font-size:12px;opacity:0.7;">Syllabus for this class will be added soon.</span>';
-        metaTopicCount.textContent = "0 topics";
-        langPairControls.style.display = "none";
-        return;
-      }
-
-      Object.keys(data).forEach(subjectKey => {
-        const subject = data[subjectKey];
-        const card = document.createElement("div");
-        card.className = "subject-card";
-        if (currentSubject === subjectKey) card.classList.add("active");
-
-        const icon =
-          subjectKey === "Math" ? "🧮" :
-          subjectKey === "Science" ? "🔬" :
-          subjectKey === "English" ? "📚" :
-          subjectKey === "Hindi" ? "📝" :
-          subjectKey === "SuperLearning" ? "⚡" :
-          subjectKey === "Languages" ? "🌍" :
-          "📘";
-
-        card.innerHTML = `
-          <div class="subject-pill">${icon} ${subject.subjectLabel}</div>
-          <div class="subject-main">${subject.subjectLabel}</div>
-          <div class="subject-sub">${subject.level}</div>
-          <div class="tag-row">
-            <span class="tiny-tag">${subject.topics.length} topics</span>
-            <span class="tiny-tag">Quick quiz</span>
-          </div>
-        `;
-
-        card.addEventListener("click", () => {
-          document.querySelectorAll(".subject-card")
-            .forEach(c => c.classList.remove("active"));
-          card.classList.add("active");
