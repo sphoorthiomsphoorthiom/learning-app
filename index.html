@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Global Learning App</title>
+  <title>Future-Ready Skills Learning App</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="manifest" href="manifest.webmanifest" />
   <meta name="theme-color" content="#ff7b54" />
@@ -42,7 +42,7 @@
 
     .app-shell {
       width: 100%;
-      max-width: 1000px;
+      max-width: 1100px;
       background: linear-gradient(145deg, #ffffff, #fef2ff);
       border-radius: var(--radius-xl);
       box-shadow: var(--shadow-soft);
@@ -154,7 +154,7 @@
       padding: 12px 12px 14px;
       position: relative;
       z-index: 1;
-      max-height: 480px;
+      max-height: 500px;
       overflow-y: auto;
     }
 
@@ -229,7 +229,7 @@
 
     .subject-card {
       flex: 1 1 calc(50% - 10px);
-      min-width: 120px;
+      min-width: 130px;
       background: #f7f7ff;
       border-radius: 14px;
       padding: 8px;
@@ -477,7 +477,7 @@
       opacity: 0.65;
     }
 
-    /* ================= AI ASSISTANT UI ================= */
+    /* AI Assistant UI */
 
     .ai-fab {
       position: fixed;
@@ -729,10 +729,10 @@
   <div class="app-shell">
     <header>
       <div class="brand">
-        <div class="logo-circle">GL</div>
+        <div class="logo-circle">FS</div>
         <div class="brand-text">
-          <h1 id="appTitle">Global Learning</h1>
-          <p id="appSubtitle">Class 1–12 • World syllabus • Offline + AI-ready</p>
+          <h1 id="appTitle">Future-Ready Skills</h1>
+          <p id="appSubtitle">Class 1–12 • Skills + AI • Job-ready from day one</p>
         </div>
       </div>
       <div class="top-actions">
@@ -740,12 +740,12 @@
           <span>📴</span><span id="offlineLabel">Offline-ready</span>
         </div>
         <div class="chip" id="onlineChip" style="display:none;">
-          <span>🌐</span><span>Online sync enabled</span>
+          <span>🌐</span><span>Online AI & web tools</span>
         </div>
         <select id="languageSelect" class="lang-select">
-          <option value="en">English</option>
-          <option value="hi">हिन्दी</option>
-          <option value="te">తెలుగు</option>
+          <option value="en">English UI</option>
+          <option value="hi">हिन्दी UI</option>
+          <option value="te">తెలుగు UI</option>
         </select>
       </div>
     </header>
@@ -754,13 +754,13 @@
     <section class="panel panel-left">
       <div>
         <h2 id="classHeading">Choose your Class</h2>
-        <p class="subtitle" id="classSubtitle">Tap a class, then pick a subject to start learning.</p>
+        <p class="subtitle" id="classSubtitle">Start skills journey from Class 1. Tap a class below.</p>
         <div class="grid-classes" id="classGrid"></div>
       </div>
 
       <div>
-        <h2 id="subjectHeading">Subjects</h2>
-        <p class="subtitle" id="subjectSubtitle">We’ll load topics for your selected class and subject.</p>
+        <h2 id="subjectHeading">Skill Tracks & Subjects</h2>
+        <p class="subtitle" id="subjectSubtitle">Academic + skills + AI tracks for your chosen class.</p>
         <div class="subjects-row" id="subjectsRow"></div>
       </div>
 
@@ -778,15 +778,15 @@
     <!-- RIGHT PANEL -->
     <section class="panel panel-right">
       <div>
-        <h2 id="topicHeading">Topics & Lessons</h2>
+        <h2 id="topicHeading">Topics, Skills & AI</h2>
         <p class="subtitle" id="topicSubtitle">
-          Choose a topic, read the explanation, then try the quick quiz.
+          Each topic blends concepts + AI tools + real-world application + money skills.
         </p>
       </div>
 
       <div class="lesson-meta">
         <span id="metaClass">Class –</span>
-        <span id="metaSubject">Subject –</span>
+        <span id="metaSubject">Track –</span>
         <span id="metaTopicCount">0 topics</span>
       </div>
 
@@ -801,9 +801,13 @@
       <div class="topic-list" id="topicList"></div>
 
       <div id="lessonArea">
-        <div class="lesson-title" id="lessonTitle">Start by choosing a topic.</div>
+        <div class="lesson-title" id="lessonTitle">Start by choosing a skill track.</div>
         <div class="lesson-body" id="lessonBody">
-          Once you pick a topic, you’ll see a short, simple explanation here, followed by questions.
+          Once you pick a track and topic, you’ll see:
+          • Concept in simple words
+          • How AI/LLMs connect
+          • Real-world application
+          • Project idea that can earn or help others
         </div>
 
         <div class="qa-section" id="qaSection" style="display:none;">
@@ -813,7 +817,7 @@
           <div class="controls-row">
             <button class="btn-secondary" id="speakLessonBtn">🔊 Speak</button>
             <button class="btn-secondary" id="speakQuestionBtn">🔊 Speak Q</button>
-            <button class="btn-main" id="nextQuestionBtn">Next Question ➜</button>
+            <button class="btn-main" id="nextQuestionBtn">Next Checkpoint ➜</button>
           </div>
         </div>
       </div>
@@ -823,12 +827,12 @@
           <div class="dot-online" id="dotOnline"></div>
           <span id="progressPillText">0 lessons • 0 quizzes • 0% avg</span>
         </div>
-        <span class="tiny" id="storageNote">Progress saved only on this device. No account needed.</span>
+        <span class="tiny" id="storageNote">All progress is stored only on this device. No login needed.</span>
       </div>
     </section>
   </div>
 
-  <!-- AI Assistant -->
+  <!-- AI Assistant Floating Button -->
   <div class="ai-fab">
     <button id="openAiBtn">
       <span class="icon">🤖</span>
@@ -836,6 +840,7 @@
     </button>
   </div>
 
+  <!-- AI Assistant Modal -->
   <div class="ai-modal-backdrop" id="aiBackdrop">
     <div class="ai-modal">
       <div class="ai-modal-header">
@@ -843,7 +848,7 @@
           <div class="ai-avatar">💡</div>
           <div class="ai-meta">
             <h3>Comet AI Tutor</h3>
-            <p id="aiStatusLine">Hybrid: Offline knowledge + Online AI when available</p>
+            <p id="aiStatusLine">Hybrid: offline knowledge + online AI when available</p>
           </div>
         </div>
         <div class="ai-modal-right">
@@ -868,75 +873,78 @@
         <div class="ai-chat" id="aiChat"></div>
 
         <div class="ai-input-row">
-          <textarea id="aiTextInput" class="ai-textarea" placeholder="Ask anything: homework, explanation, life, ideas..."></textarea>
+          <textarea id="aiTextInput" class="ai-textarea" placeholder="Ask anything: skills, AI, projects, money, life..."></textarea>
           <button class="ai-send-btn" id="aiSendBtn">Send ➜</button>
         </div>
         <div class="ai-helper-note">
-          Offline: uses built-in school knowledge. Online: uses a free OpenRouter AI model (after you add API key).
+          Offline: uses built-in skills syllabus. Online: uses a free OpenRouter AI model (after you add API key in code).
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    // ------------ UI translations (English / Hindi / Telugu UI only) ------------
+    // ---------- UI Language Text ----------
     const uiText = {
       en: {
-        title: "Global Learning",
-        subtitle: "Class 1–12 • World syllabus • Offline + AI-ready",
+        title: "Future-Ready Skills",
+        subtitle: "Class 1–12 • Skills + AI • Job-ready from day one",
         classHeading: "Choose your Class",
-        classSubtitle: "Tap a class, then pick a subject to start learning.",
-        subjectHeading: "Subjects",
-        subjectSubtitle: "We’ll load topics for your selected class and subject.",
-        topicHeading: "Topics & Lessons",
-        topicSubtitle: "Choose a topic, read the explanation, then try the quick quiz.",
+        classSubtitle: "Start your skill journey from Class 1.",
+        subjectHeading: "Skill Tracks & Subjects",
+        subjectSubtitle: "Academic + power skills + AI in every topic.",
+        topicHeading: "Topics, Skills & AI",
+        topicSubtitle: "Each topic links to AI, real work and projects.",
         offlineReady: "Offline-ready",
         noLessons: "No lessons completed yet.",
         avgScore: s => `Average score: ${s}%`,
         progressPill: (l, q, a) => `${l} lessons • ${q} quizzes • ${a}% avg`,
-        storageNote: "Progress saved only on this device. No account needed.",
-        startTitle: "Start by choosing a topic.",
-        startBody: "Once you pick a topic, you’ll see a short, simple explanation here, followed by questions."
+        storageNote: "All progress is stored only on this device. No login needed.",
+        startTitle: "Start by choosing a skill track.",
+        startBody:
+"Once you pick a track and topic, you’ll see:\n• Concept in simple words\n• How AI/LLMs connect\n• Real-world application\n• Project idea that can earn or help others"
       },
       hi: {
-        title: "वैश्विक लर्निंग",
-        subtitle: "कक्षा 1–12 • विश्व पाठ्यक्रम • ऑफ़लाइन + एआई",
+        title: "भविष्य-प्रधान कौशल",
+        subtitle: "कक्षा 1–12 • कौशल + एआई • जॉब-रेडी विद्यार्थी",
         classHeading: "अपनी कक्षा चुनें",
-        classSubtitle: "किसी कक्षा पर टैप करें, फिर विषय चुनें।",
-        subjectHeading: "विषय",
-        subjectSubtitle: "कक्षा और विषय चुनने के बाद हम टॉपिक दिखाएँगे।",
-        topicHeading: "टॉपिक और पाठ",
-        topicSubtitle: "एक टॉपिक चुनें, समझें, फिर प्रश्न हल करें।",
+        classSubtitle: "कक्षा 1 से ही कौशल यात्रा शुरू करें।",
+        subjectHeading: "स्किल ट्रैक्स और विषय",
+        subjectSubtitle: "शैक्षणिक + पावर स्किल + हर टॉपिक में एआई।",
+        topicHeading: "टॉपिक, स्किल और एआई",
+        topicSubtitle: "हर टॉपिक को एआई, वास्तविक जीवन और प्रोजेक्ट से जोड़ते हैं।",
         offlineReady: "ऑफ़लाइन तैयार",
         noLessons: "अभी कोई पाठ पूरा नहीं हुआ।",
         avgScore: s => `औसत अंक: ${s}%`,
         progressPill: (l, q, a) => `${l} पाठ • ${q} क्विज़ • ${a}% औसत`,
-        storageNote: "प्रगति केवल इस डिवाइस पर सेव होती है। किसी खाते की ज़रूरत नहीं।",
-        startTitle: "पहले कोई टॉपिक चुनें।",
-        startBody: "जैसे ही आप टॉपिक चुनेंगे, यहाँ सरल व्याख्या और प्रश्न दिखेंगे।"
+        storageNote: "सारी प्रगति केवल इस डिवाइस पर सेव होती है। किसी लॉगिन की ज़रूरत नहीं।",
+        startTitle: "पहले कोई स्किल ट्रैक चुनें।",
+        startBody:
+"जैसे ही आप ट्रैक और टॉपिक चुनेंगे, आपको मिलेगा:\n• सरल भाषा में कॉन्सेप्ट\n• एआई/एलएलएम से संबंध\n• वास्तविक जीवन में उपयोग\n• ऐसा प्रोजेक्ट जो कमाई या मदद कर सके"
       },
       te: {
-        title: "గ్లోబల్ లెర్నింగ్",
-        subtitle: "1–12 తరగతులు • ప్రపంచ సిలబస్ • ఆఫ్లైన్ + ఏఐ",
+        title: "ఫ్యూచర్ రెడీ స్కిల్స్",
+        subtitle: "1–12 తరగతులు • స్కిల్స్ + ఏఐ • జాబ్-రెడీ స్టూడెంట్స్",
         classHeading: "మీ క్లాస్ ఎంచుకోండి",
-        classSubtitle: "మొదట క్లాస్, తరువాత సబ్జెక్ట్ ఎంచుకోండి.",
-        subjectHeading: "విషయాలు",
-        subjectSubtitle: "క్లాస్, సబ్జెక్ట్ ఎంచుకున్న తరువాత టాపిక్స్ కనిపిస్తాయి.",
-        topicHeading: "టాపిక్స్ & పాఠాలు",
-        topicSubtitle: "టాపిక్ ఎంచుకొని వివరణ చదవండి, తరువాత ప్రశ్నలు ప్రయత్నించండి.",
+        classSubtitle: "1వ తరగతి నుంచే స్కిల్ జర్నీ ప్రారంభించండి.",
+        subjectHeading: "స్కిల్ ట్రాక్స్ & సబ్జెక్ట్స్",
+        subjectSubtitle: "అకాడెమిక్ + పవర్ స్కిల్స్ + ప్రతి టాపిక్‌లో ఏఐ.",
+        topicHeading: "టాపిక్స్, స్కిల్స్ & ఏఐ",
+        topicSubtitle: "ప్రతి టాపిక్‌ను ఏఐ, రియల్ లైఫ్, ప్రాజెక్ట్‌తో కలుపుతాం.",
         offlineReady: "ఆఫ్లైన్ సిద్ధంగా",
-        noLessons: "ఇంకా ఏ పాఠం పూర్తి కాలేదు.",
+        noLessons: "ఇంకా ఏ పాఠం పూర్తికాలేదు.",
         avgScore: s => `సగటు స్కోర్: ${s}%`,
         progressPill: (l, q, a) => `${l} పాఠాలు • ${q} క్విజ్‌లు • ${a}% సగటు`,
-        storageNote: "ప్రోగ్రెస్ ఈ డివైస్‌లో మాత్రమే సేవ్ అవుతుంది. ఖాతా అవసరం లేదు.",
-        startTitle: "మొదట టాపిక్ ఎంచుకోండి.",
-        startBody: "మీరు టాపిక్ ఎంచుకున్న తరువాత, ఇక్కడ సింపుల్ వివరణ, ప్రశ్నలు కనిపిస్తాయి."
+        storageNote: "ప్రోగ్రెస్ ఈ డివైస్‌లో మాత్రమే సేవ్ అవుతుంది. లాగిన్ అవసరం లేదు.",
+        startTitle: "మొదట ఒక స్కిల్ ట్రాక్ ఎంచుకోండి.",
+        startBody:
+"మీరు ట్రాక్, టాపిక్ ఎంచుకున్న తరువాత మీరు చూస్తారు:\n• సింపుల్‌గా కాన్సెప్ట్\n• ఏఐ/ఎల్ఎల్ఎమ్‌తో లింక్\n• రియల్ వరల్డ్ యూజ్\n• డబ్బు సంపాదించగలిగే లేదా హెల్ప్ చేసే ప్రాజెక్ట్ ఐడియా"
       }
     };
 
-    let currentLang = localStorage.getItem("gl_lang") || "en";
+    let currentLang = localStorage.getItem("fs_lang") || "en";
 
-    // ------------ Supported learning languages for "World Languages" subject ------------
+    // ---------- Supported Languages for World Languages Subject ----------
     const supportedLanguages = [
       { code: "en", name: "English", native: "English" },
       { code: "zh", name: "Mandarin Chinese", native: "中文" },
@@ -948,10 +956,9 @@
       { code: "ru", name: "Russian", native: "Русский" },
       { code: "ja", name: "Japanese", native: "日本語" },
       { code: "de", name: "German", native: "Deutsch" },
-      { code: "te", name: "Telugu", native: "తెలుగు" }   // bonus
+      { code: "te", name: "Telugu", native: "తెలుగు" }
     ];
 
-    // Phrase bank used for cross-language learning
     const languagePhrases = [
       {
         key: "hello",
@@ -975,3 +982,526 @@
         concept: "Polite phrase: Thank you",
         translations: {
           en: "Thank you",
+          zh: "谢谢",
+          hi: "धन्यवाद",
+          es: "Gracias",
+          ar: "شكرا",
+          fr: "Merci",
+          pt: "Obrigado / Obrigada",
+          ru: "Спасибо",
+          ja: "ありがとうございます",
+          de: "Danke",
+          te: "ధన్యవాదాలు"
+        }
+      },
+      {
+        key: "please",
+        concept: "Polite phrase: Please",
+        translations: {
+          en: "Please",
+          zh: "请",
+          hi: "कृपया",
+          es: "Por favor",
+          ar: "من فضلك",
+          fr: "S'il vous plaît",
+          pt: "Por favor",
+          ru: "Пожалуйста",
+          ja: "お願いします",
+          de: "Bitte",
+          te: "దయచేసి"
+        }
+      },
+      {
+        key: "how_are_you",
+        concept: "Common question: How are you?",
+        translations: {
+          en: "How are you?",
+          zh: "你好吗？",
+          hi: "आप कैसे हैं?",
+          es: "¿Cómo estás?",
+          ar: "كيف حالك؟",
+          fr: "Comment ça va ?",
+          pt: "Como vai você?",
+          ru: "Как дела?",
+          ja: "お元気ですか？",
+          de: "Wie geht es dir?",
+          te: "మీరు ఎలా ఉన్నారు?"
+        }
+      }
+    ];
+
+    // ---------- Shared Tracks (used across classes) ----------
+
+    const superLearning = {
+      subjectLabel: "Super Learning & Brain Skills",
+      level: "All classes",
+      topics: [
+        {
+          id: "sl-active-recall",
+          title: "Active Recall + AI: Study Faster",
+          level: "Core skill",
+          body:
+`Concept:
+Active recall means closing the book and testing yourself instead of only re-reading.
+
+AI Connection:
+• Class 1–5: Ask Comet: “Explain this in simple words, then hide it and let me recall.”
+• Class 6–8: Use an AI tool to generate practice questions and answer them without looking.
+• Class 9–12: Ask AI to create exam-style questions and try to answer before looking at suggestions.
+
+Real-World Application:
+You learn faster than others, clear exams with less time, and free up time to build skills / projects.
+
+Mini Project:
+Pick any chapter, ask Comet AI to generate 5 questions, write answers in a notebook from memory, then compare.`,
+          quiz: {
+            question: "What is the main idea of active recall?",
+            options: [
+              "Reading the same page 10 times",
+              "Testing yourself without seeing the book",
+              "Only watching videos",
+              "Highlighting with 5 colours"
+            ],
+            answerIndex: 1
+          }
+        },
+        {
+          id: "sl-ai-mindset",
+          title: "AI Mindset: Human + AI > AI alone",
+          level: "Core skill",
+          body:
+`Concept:
+AI is a powerful assistant, not a replacement for your brain. You ask good questions, AI gives ideas, you decide.
+
+AI/LLM Connection:
+• A Large Language Model (LLM) like ChatGPT or Comet reads huge amounts of text and predicts the “next best word”.
+• It does NOT truly understand life like a human. You provide direction, values and judgement.
+
+Real-World Application:
+• You can work faster than people who don’t know AI.
+• You can earn by combining your thinking + AI speed (content, code, design, marketing).
+
+Mini Project:
+Write one problem you have (study, money, time). Ask Comet AI for 3 solutions. Choose the best one and implement it today.`,
+          quiz: {
+            question: "Which is more powerful?",
+            options: [
+              "AI alone",
+              "Human alone",
+              "Human + AI working together",
+              "Neither"
+            ],
+            answerIndex: 2
+          }
+        }
+      ]
+    };
+
+    const worldLanguages = {
+      subjectLabel: "World Languages (10+)",
+      level: "Any class",
+      topics: [
+        {
+          id: "lang-5-phrases",
+          title: "5 Magic Phrases (Any Language Pair)",
+          level: "Easy",
+          body:
+`Concept:
+Learning any language becomes easier when you master a few daily phrases first.
+
+AI/LLM Connection:
+• Ask Comet: “Translate these 5 phrases between [my language] and [target language] with pronunciation.”
+• Use AI to get example sentences and practice aloud.
+
+Real-World Application:
+• Talk to people from other countries.
+• Open remote work, freelancing, customer support, global teams.
+
+Mini Project:
+Choose ‘I know’ and ‘I want to learn’ languages in the controls above. Practice saying all 5 phrases 10 times each using both languages.`,
+          quiz: {
+            question: "What is a good first step in any language?",
+            options: [
+              "Memorise full dictionary",
+              "Learn 5 daily phrases and use them",
+              "Only read grammar rules",
+              "Wait for school to teach everything"
+            ],
+            answerIndex: 1
+          }
+        },
+        {
+          id: "lang-listen-copy",
+          title: "Listen + Copy: Sound First, Spelling Later",
+          level: "Core",
+          body:
+`Concept:
+Children learn language by listening and copying, not by reading grammar first.
+
+AI/LLM Connection:
+• Use AI to get slow audio sentences (text-to-speech) and repeat after it.
+• Ask Comet: “Give me 10 simple sentences in [target language] with meaning in [my language].”
+
+Real-World Application:
+• You sound more natural when speaking.
+• Helps in interviews, customer calls, remote jobs.
+
+Mini Project:
+Pick 3 phrases from the table below. Use device TTS or Comet AI to speak them. Record yourself and compare.`,
+          quiz: {
+            question: "For fast language learning, what usually comes first?",
+            options: [
+              "Spelling and writing",
+              "Listening and copying sounds",
+              "Memorising exam answers",
+              "Translating big essays"
+            ],
+            answerIndex: 1
+          }
+        }
+      ]
+    };
+
+    // ---------- Future-Ready Skill Tracks per Class ----------
+
+    // For brevity, we give full detail for some classes and sample topics for others.
+    // You can keep adding more topics later following this structure.
+
+    const syllabus = {};
+
+    // Helper to attach common skill tracks to any class:
+    function buildClassSyllabus(levelLabel) {
+      return {
+        // Academic + Skills
+        MathSkills: {
+          subjectLabel: "Math + Money & Data",
+          level: levelLabel,
+          topics: [
+            {
+              id: "math-money-basics",
+              title: "Numbers + Money Sense",
+              level: "Starter",
+              body:
+`Concept:
+Math is not only for exams; it is for money, shopping, saving and business.
+
+AI/LLM Connection:
+• Ask Comet: “Explain profit, loss, discount in very simple steps with real examples.”
+• Use AI to generate small word problems about pocket money.
+
+Real-World Application:
+• You can check if someone overcharged you.
+• You understand savings, interest and small business ideas.
+
+Mini Project:
+Track every rupee you spend today (snacks, travel, recharge). At night, ask Comet to help you make a simple daily budget from that list.`,
+              quiz: {
+                question: "Why is math important in real life here?",
+                options: [
+                  "Only for passing exams",
+                  "For checking money, prices and savings",
+                  "Only for scientists",
+                  "It has no real use"
+                ],
+                answerIndex: 1
+              }
+            }
+          ]
+        },
+
+        ScienceThinking: {
+          subjectLabel: "Science + Problem Solving",
+          level: levelLabel,
+          topics: [
+            {
+              id: "sci-curiosity-ai",
+              title: "Curiosity, Experiments & AI",
+              level: "Starter",
+              body:
+`Concept:
+Science starts with curiosity: “Why?” “How?” “What if?”. Experiments test ideas.
+
+AI/LLM Connection:
+• Ask Comet: “Give me 3 simple experiments I can do at home with safety.”
+• Use AI to predict and then test the result.
+
+Real-World Application:
+• You become better at troubleshooting (devices, code, daily problems).
+• Companies pay problem-solvers, not memorisers.
+
+Mini Project:
+Pick a daily problem (slow phone, messy bag, late homework). Ask Comet for 3 scientific-style solutions. Test one and write what changed.`,
+              quiz: {
+                question: "Science mainly starts with:",
+                options: [
+                  "Memorising definitions",
+                  "Curiosity and questions",
+                  "Copying notes",
+                  "Ignoring problems"
+                ],
+                answerIndex: 1
+              }
+            }
+          ]
+        },
+
+        EnglishCommunication: {
+          subjectLabel: "English + Communication & Content",
+          level: levelLabel,
+          topics: [
+            {
+              id: "eng-clear-ideas",
+              title: "Clear Communication in Simple Words",
+              level: "Starter",
+              body:
+`Concept:
+Good communication = simple, clear, honest words that others understand easily.
+
+AI/LLM Connection:
+• Ask Comet: “Rewrite my sentence in simple, friendly English.”
+• Ask: “Give me 3 better subject lines for this message.”
+
+Real-World Application:
+• Email to clients, messages to teachers, job applications, freelancing profiles.
+
+Mini Project:
+Write a message to a friend explaining your dream skill or job. Ask Comet to improve it for clarity and politeness, then compare versions.`,
+              quiz: {
+                question: "Good communication is mainly about:",
+                options: [
+                  "Using very difficult words",
+                  "Being confusing and long",
+                  "Being simple, clear and honest",
+                  "Copying others’ style without thinking"
+                ],
+                answerIndex: 2
+              }
+            }
+          ]
+        },
+
+        Hindi: {
+          subjectLabel: "Hindi Language",
+          level: levelLabel,
+          topics: [
+            {
+              id: "hin-basic-express",
+              title: "स्पष्ट अभिव्यक्ति (Clear Expression)",
+              level: "Starter",
+              body:
+`संकल्पना:
+साफ़ और सरल भाषा में अपने विचार लिखना और बोलना एक महत्वपूर्ण कौशल है।
+
+एआई संबंध:
+• Comet से कहें: “मेरे वाक्य को सरल हिन्दी में सुधारो।”
+• एआई से छोटे संदेश, आवेदन-पत्र या रिपोर्ट तैयार करवाकर खुद भी लिखने की कोशिश करें।
+
+वास्तविक उपयोग:
+• आवेदन-पत्र, पत्र, व्हाट्सऐप संदेश, नोटिस आदि में मदद।
+
+मिनी प्रोजेक्ट:
+किसी एक समस्या पर 4–5 वाक्य हिन्दी में लिखें, फिर Comet से उसे सुधारने को कहें और दोनों की तुलना करें।`,
+              quiz: {
+                question: "स्पष्ट अभिव्यक्ति में क्या ज़रूरी है?",
+                options: [
+                  "बहुत कठिन शब्द",
+                  "लंबे-लंबे वाक्य",
+                  "साफ़ और सरल भाषा",
+                  "केवल अंग्रेज़ी शब्द"
+                ],
+                answerIndex: 2
+              }
+            }
+          ]
+        },
+
+        SuperLearning: superLearning,
+        Languages: worldLanguages,
+
+        // New Skill Tracks
+        DigitalMarketing: {
+          subjectLabel: "Digital Marketing & Social Media",
+          level: levelLabel,
+          topics: [
+            {
+              id: "dm-storytelling-basic",
+              title: "Story Posts vs. Plain Posts",
+              level: "Starter",
+              body:
+`Concept:
+On social media, stories (before/after, problem/solution) work better than random posts.
+
+AI/LLM Connection:
+• Ask Comet: “Turn this boring sentence into a short story for Instagram or YouTube community.”
+• Ask: “Give 5 hook lines for a reel about [topic].”
+
+Real-World Application:
+• You can promote school events, projects, small businesses.
+• Later, you can earn by handling social media for clients.
+
+Mini Project:
+Pick one topic you love (cricket, drawing, coding, food). Ask Comet for 3 reel hook ideas. Write them down and choose your favourite.`,
+              quiz: {
+                question: "What works better in social media content?",
+                options: [
+                  "Random plain statements",
+                  "Copy-pasting others’ posts",
+                  "Story-based posts with hook and solution",
+                  "Long textbook paragraphs"
+                ],
+                answerIndex: 2
+              }
+            }
+          ]
+        },
+
+        CodingNoCode: {
+          subjectLabel: "Coding & No-Code Apps",
+          level: levelLabel,
+          topics: [
+            {
+              id: "code-think-like-computer",
+              title: "Think Like a Computer (Logic Blocks)",
+              level: "Starter",
+              body:
+`Concept:
+Coding = giving step-by-step instructions a computer can follow.
+
+AI/LLM Connection:
+• Ask Comet: “Explain if/else and loops with simple daily life examples.”
+• Ask: “Generate a simple pseudo-code to remind me to drink water every hour.”
+
+Real-World Application:
+• You can build tools that save time (timers, calculators, trackers).
+• Connect no-code tools with AI to make mini-automations.
+
+Mini Project:
+Describe a daily routine (wake up, school, study, play). Ask Comet to convert it to step-by-step pseudo-code. See how close coding is to your real day.`,
+              quiz: {
+                question: "Coding mainly means:",
+                options: [
+                  "Memorising many languages",
+                  "Giving step-by-step instructions to a computer",
+                  "Only designing screens",
+                  "Playing video games"
+                ],
+                answerIndex: 1
+              }
+            }
+          ]
+        },
+
+        DesignVideo: {
+          subjectLabel: "Graphic Design & Video Editing",
+          level: levelLabel,
+          topics: [
+            {
+              id: "design-simple-layout",
+              title: "Simple Layout > Too Many Effects",
+              level: "Starter",
+              body:
+`Concept:
+Good design is clear and focused: few colours, readable text, one main message.
+
+AI/LLM Connection:
+• Ask Comet: “Give me a layout idea for a poster about [topic] with headings and subpoints.”
+• Ask: “Give title ideas for a YouTube thumbnail that are short and powerful.”
+
+Real-World Application:
+• Posters for school, NGO, fundraising, local business.
+• Thumbnails and shorts that get more clicks.
+
+Mini Project:
+Choose one cause (save water, help strays, fundraiser). Ask Comet to suggest a poster structure. Then design it using any free tool (Canva, etc.).`,
+              quiz: {
+                question: "Which is usually better in design?",
+                options: [
+                  "Too many colours and fonts",
+                  "Clear layout with one main message",
+                  "Tiny text everywhere",
+                  "Maximum animations"
+                ],
+                answerIndex: 1
+              }
+            }
+          ]
+        },
+
+        BusinessEntrepreneurship: {
+          subjectLabel: "Business & Entrepreneurship",
+          level: levelLabel,
+          topics: [
+            {
+              id: "biz-problem-solution",
+              title: "Business = Solving Problems",
+              level: "Starter",
+              body:
+`Concept:
+A business is simply: find a problem, solve it, get paid fairly for the solution.
+
+AI/LLM Connection:
+• Ask Comet: “List 10 problems students/parents/teachers face daily. Turn them into simple business ideas.”
+• Ask: “Help me create a one-line pitch for this idea.”
+
+Real-World Application:
+• You can start tiny services: notes summarising, poster design, local delivery coordination, etc.
+
+Mini Project:
+Write down 3 problems you or your friends face at school or home. Ask Comet to turn each into a small service idea and first paying customer type.`,
+              quiz: {
+                question: "According to this lesson, business mainly starts from:",
+                options: [
+                  "Having lots of money",
+                  "Solving real problems",
+                  "Copying big companies",
+                  "Creating an app first"
+                ],
+                answerIndex: 1
+              }
+            }
+          ]
+        },
+
+        AITools: {
+          subjectLabel: "AI Tools, LLMs & Automation",
+          level: levelLabel,
+          topics: [
+            {
+              id: "ai-basics-llm",
+              title: "What is an LLM? (Class 1–5 version)",
+              level: "Core",
+              body:
+`Concept:
+LLM = Large Language Model. It is a computer program that learned from many texts and predicts the next word.
+
+For Small Classes:
+• Think of it as a super-fast reader that suggests sentences, stories, answers.
+• It doesn’t “know everything”, but can help think faster.
+
+Real-World Application:
+• Homework help, idea generation, content creation, research.
+• Later: code, marketing, customer support, automation.
+
+Mini Project:
+Ask Comet: “Explain what you are in 3 lines to a 10-year-old.” Read and show it to a friend or parent.`,
+              quiz: {
+                question: "An LLM mainly does what?",
+                options: [
+                  "Predicts the next word based on patterns",
+                  "Controls robots directly",
+                  "Prints money",
+                  "Reads minds"
+                ],
+                answerIndex: 0
+              }
+            }
+          ]
+        },
+
+        ContentWriting: {
+          subjectLabel: "Content Writing & Copywriting",
+          level: levelLabel,
+          topics: [
+            {
+              id: "cw-hook-body-cta",
+              tit
