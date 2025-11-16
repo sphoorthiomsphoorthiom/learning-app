@@ -2,2672 +2,1239 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Future-Ready Skills Learning App</title>
+  <title>IndiaLearn – Smart School App (Class 1–12)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="manifest" href="manifest.webmanifest" />
-  <meta name="theme-color" content="#ff7b54" />
-
+  <!-- Simple Google Font for nicer look -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --bg: #f7f4ff;
-      --primary: #ff7b54;
-      --primary-dark: #ff5a2b;
-      --accent: #4cc9f0;
-      --text: #1f2330;
-      --card: #ffffff;
-      --shadow-soft: 0 10px 25px rgba(15, 23, 42, 0.1);
-      --radius-lg: 18px;
-      --radius-xl: 24px;
-      --ai-bg: #fff9f2;
-      --ai-border: #ffe0b2;
-    }
-
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, sans-serif;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     body {
       min-height: 100vh;
-      background: radial-gradient(circle at top, #ffe7da, #f7f4ff);
+      background: radial-gradient(circle at top left, #ffecd2, #fcb69f);
       display: flex;
-      align-items: center;
+      align-items: stretch;
       justify-content: center;
       padding: 16px;
-      color: var(--text);
     }
 
-    .app-shell {
-      width: 100%;
+    #app {
+      background: #ffffffee;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
       max-width: 1100px;
-      background: linear-gradient(145deg, #ffffff, #fef2ff);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow-soft);
-      padding: 16px;
-      position: relative;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.8fr);
+      width: 100%;
+      padding: 16px 16px 24px;
+      display: flex;
+      flex-direction: column;
       gap: 12px;
-    }
-
-    @media (max-width: 768px) {
-      .app-shell {
-        grid-template-columns: 1fr;
-        max-height: 100vh;
-        overflow-y: auto;
-      }
-    }
-
-    .app-shell::before {
-      content: "";
-      position: absolute;
-      width: 220px;
-      height: 220px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.9), transparent);
-      top: -60px;
-      right: -40px;
-      opacity: 0.7;
-      pointer-events: none;
     }
 
     header {
-      grid-column: 1 / -1;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 4px;
-      position: relative;
-      z-index: 1;
+      gap: 8px;
+      padding: 8px 10px 4px;
+      border-bottom: 1px dashed rgba(0,0,0,0.08);
     }
 
-    .brand {
+    .logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .logo-circle {
-      width: 52px;
-      height: 52px;
+    .logo-badge {
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
-      background: conic-gradient(from 200deg, #ff7b54, #ffb347, #ffe66d, #ff7b54);
+      background: linear-gradient(135deg, #ffb347, #ffcc33);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
-      font-size: 22px;
-      font-weight: 800;
-      box-shadow: 0 5px 12px rgba(255,123,84,0.5);
-    }
-
-    .brand-text h1 {
+      font-weight: 700;
       font-size: 20px;
-      font-weight: 800;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.18);
     }
 
-    .brand-text p {
-      font-size: 12px;
-      opacity: 0.75;
+    .logo-text-main {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ff7043;
     }
 
-    .top-actions {
+    .logo-text-sub {
+      font-size: 11px;
+      color: #777;
+      line-height: 1.2;
+    }
+
+    .chip-row {
       display: flex;
-      gap: 8px;
       flex-wrap: wrap;
+      gap: 6px;
+      font-size: 10px;
       justify-content: flex-end;
     }
 
     .chip {
-      padding: 6px 10px;
+      padding: 2px 8px;
       border-radius: 999px;
-      font-size: 11px;
-      background: rgba(76, 201, 240, 0.12);
-      color: #0077b6;
-      display: inline-flex;
+      border: 1px solid rgba(0,0,0,0.06);
+      background: #fff7e6;
+      color: #ff7043;
+      font-weight: 500;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.6fr);
+      gap: 12px;
+    }
+
+    @media (max-width: 860px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 10px 12px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
       align-items: center;
       gap: 6px;
     }
 
-    .chip span {
-      font-size: 15px;
+    .card-title span.emoji {
+      font-size: 18px;
     }
 
-    .lang-select {
-      border-radius: 999px;
-      border: none;
-      padding: 6px 10px;
+    .card-subtitle {
       font-size: 11px;
-      background: rgba(255,255,255,0.85);
-      box-shadow: 0 3px 8px rgba(15,23,42,0.12);
+      color: #777;
     }
 
-    .panel {
-      background: rgba(255,255,255,0.96);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-soft);
-      padding: 12px 12px 14px;
-      position: relative;
-      z-index: 1;
-      max-height: 500px;
-      overflow-y: auto;
-    }
-
-    .panel-left {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .panel-right {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .panel h2 {
-      font-size: 16px;
-      margin-bottom: 4px;
-    }
-
-    .subtitle {
-      font-size: 12px;
-      opacity: 0.75;
-      margin-bottom: 8px;
-    }
-
-    .grid-classes {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 6px;
-      margin-bottom: 8px;
-    }
-
-    @media (max-width: 768px) {
-      .grid-classes {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
-    }
-
-    .pill-btn {
-      border: none;
+    .pill {
+      padding: 2px 8px;
       border-radius: 999px;
-      padding: 6px 0;
-      font-size: 12px;
+      font-size: 10px;
+      background: #e3f2fd;
+      color: #1976d2;
       font-weight: 600;
-      background: #fff6f0;
-      color: #ff7b54;
-      box-shadow: 0 2px 6px rgba(15,23,42,0.08);
-      cursor: pointer;
-      transition: transform 0.12s ease, box-shadow 0.12s ease,
-        background 0.12s ease, color 0.12s ease;
-      text-align: center;
-      white-space: nowrap;
     }
 
-    .pill-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba(15,23,42,0.14);
-      background: #ffe7d6;
-    }
-
-    .pill-btn.active {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: #fff;
-    }
-
-    .subjects-row {
+    .section-body {
+      font-size: 12px;
+      color: #555;
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       gap: 8px;
     }
 
-    .subject-card {
-      flex: 1 1 calc(50% - 10px);
-      min-width: 130px;
-      background: #f7f7ff;
-      border-radius: 14px;
-      padding: 8px;
-      cursor: pointer;
-      box-shadow: 0 3px 8px rgba(15,23,42,0.08);
-      transition: transform 0.12s ease, box-shadow 0.12s ease,
-        background 0.12s ease;
-      font-size: 12px;
+    .welcome-banner {
+      border-radius: 12px;
+      padding: 10px;
+      background: linear-gradient(135deg, #ff9a9e, #fecfef);
+      color: #4a148c;
       display: flex;
       flex-direction: column;
       gap: 4px;
     }
 
-    .subject-card:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(15,23,42,0.12);
-      background: #eef3ff;
+    .welcome-title {
+      font-size: 16px;
+      font-weight: 700;
     }
 
-    .subject-card.active {
-      outline: 2px solid var(--primary);
-      outline-offset: 1px;
-    }
-
-    .subject-pill {
+    .welcome-sub {
       font-size: 11px;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: rgba(76,201,240,0.18);
-      color: #0077b6;
-      align-self: flex-start;
     }
 
-    .subject-main {
-      font-size: 13px;
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+      font-size: 10px;
+    }
+
+    .badge {
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: #ffffffcc;
+      color: #4a148c;
       font-weight: 600;
     }
 
-    .subject-sub {
-      font-size: 11px;
-      opacity: 0.7;
-    }
-
-    .tag-row {
-      display: flex;
+    .grid {
+      display: grid;
       gap: 6px;
+    }
+
+    .grid-classes {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .grid-subjects {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    @media (max-width: 600px) {
+      .grid-classes {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      .grid-subjects {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .btn {
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 6px 8px;
+      border-radius: 999px;
+      background: #f5f5f5;
+      font-size: 12px;
+      font-weight: 600;
+      color: #555;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+      transition: transform 0.08s ease, box-shadow 0.1s ease, background 0.1s ease;
+      text-align: center;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+      background: #fffaf0;
+    }
+
+    .btn.selected {
+      background: linear-gradient(135deg, #ff9800, #ffb74d);
+      color: #fff;
+      box-shadow: 0 3px 8px rgba(255,152,0,0.4);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #42a5f5, #5c6bc0);
+      color: #fff;
+      border-radius: 999px;
+      font-size: 12px;
+      padding: 6px 14px;
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .hint {
+      font-size: 11px;
+      color: #888;
+    }
+
+    .inline-info {
+      display: flex;
       flex-wrap: wrap;
-      margin-top: 4px;
+      gap: 6px;
+      font-size: 11px;
+      align-items: center;
+      color: #666;
     }
 
-    .tiny-tag {
-      font-size: 10px;
-      padding: 1px 6px;
-      border-radius: 999px;
-      background: rgba(148, 163, 184, 0.18);
-    }
-
-    .progress-bar {
-      width: 100%;
+    .dot {
+      width: 6px;
       height: 6px;
-      background: #edf2ff;
-      border-radius: 999px;
-      overflow: hidden;
-      margin-top: 4px;
+      border-radius: 50%;
+      background: #ff9800;
     }
 
-    .progress-fill {
-      height: 100%;
-      width: 0;
-      background: linear-gradient(90deg, #ff7b54, #ffb347);
-      border-radius: inherit;
-      transition: width 0.3s ease;
+    .syllabus-list,
+    .quiz-question,
+    .quiz-options,
+    .ai-output {
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .syllabus-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .syllabus-tag {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .skill-chip {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      background: #e3f2fd;
+      color: #1565c0;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 70px;
+      border-radius: 10px;
+      border: 1px solid #eee;
+      padding: 6px 8px;
+      font-size: 12px;
+      resize: vertical;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: #42a5f5;
+      box-shadow: 0 0 0 2px rgba(66,165,245,0.15);
     }
 
     .progress-row {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 11px;
-      margin-top: 2px;
-      opacity: 0.75;
       flex-wrap: wrap;
-      gap: 4px;
+      gap: 8px;
+      font-size: 11px;
     }
 
-    .lesson-meta {
-      font-size: 11px;
-      opacity: 0.75;
-      display: flex;
-      justify-content: space-between;
-      gap: 6px;
-      margin-bottom: 6px;
-      flex-wrap: wrap;
+    .progress-pill {
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #f1f8e9;
+      color: #558b2f;
+      font-weight: 600;
     }
 
-    .topic-list {
-      margin-bottom: 8px;
-      border-radius: 12px;
-      background: #f9fafb;
-      padding: 6px;
-      max-height: 120px;
+    .ai-output-box {
+      border-radius: 10px;
+      border: 1px dashed #e0e0e0;
+      padding: 6px 8px;
+      background: #fafafa;
+      max-height: 180px;
       overflow-y: auto;
     }
 
-    .topic-item {
-      font-size: 12px;
-      padding: 4px 6px;
-      border-radius: 8px;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      gap: 6px;
-    }
-
-    .topic-item:hover {
-      background: rgba(148,163,184,0.12);
-    }
-
-    .topic-item.active {
-      background: rgba(76,201,240,0.12);
-      font-weight: 600;
-    }
-
-    .lesson-title {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .lesson-body {
-      font-size: 13px;
-      line-height: 1.45;
-      margin-bottom: 8px;
-      white-space: pre-wrap;
-    }
-
-    .qa-section {
-      margin-top: 6px;
-      padding-top: 6px;
-      border-top: 1px dashed #e5e7eb;
-    }
-
-    .quiz-question {
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .options {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .option-btn {
-      border-radius: 999px;
-      border: 1px solid #e5e7eb;
-      padding: 7px 10px;
-      font-size: 12px;
-      background: #ffffff;
-      text-align: left;
-      cursor: pointer;
-      transition: background 0.12s ease, border-color 0.12s ease,
-        transform 0.12s ease, box-shadow 0.12s ease;
-    }
-
-    .option-btn:hover {
-      background: #f9fafb;
-      transform: translateY(-1px);
-      box-shadow: 0 3px 7px rgba(15,23,42,0.12);
-    }
-
-    .option-btn.correct {
-      background: #e6ffed;
-      border-color: #22c55e;
-    }
-
-    .option-btn.wrong {
-      background: #fee2e2;
-      border-color: #ef4444;
-    }
-
-    .controls-row {
-      display: flex;
-      gap: 6px;
-      margin-top: 6px;
-      flex-wrap: wrap;
-    }
-
-    .btn-main, .btn-secondary {
-      border-radius: 999px;
-      border: none;
-      padding: 7px 11px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      white-space: nowrap;
-    }
-
-    .btn-main {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: #fff;
-      box-shadow: 0 4px 10px rgba(255,123,84,0.5);
-    }
-
-    .btn-secondary {
-      background: #eef2ff;
-      color: #111827;
-    }
-
-    .status-row {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 6px;
-      font-size: 11px;
-      opacity: 0.75;
-      flex-wrap: wrap;
-      gap: 4px;
-    }
-
-    .status-pill {
-      padding: 5px 9px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.9);
-      box-shadow: 0 3px 8px rgba(15,23,42,0.08);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-    }
-
-    .dot-online {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #22c55e;
-    }
-
-    .tiny {
+    .small-label {
       font-size: 10px;
-      opacity: 0.65;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
-    /* AI Assistant UI */
-
-    .ai-fab {
-      position: fixed;
-      bottom: 16px;
-      right: 16px;
-      z-index: 9999;
-    }
-
-    .ai-fab button {
-      border: none;
+    .pill-soft {
+      padding: 2px 8px;
       border-radius: 999px;
-      padding: 10px 16px;
-      font-size: 13px;
+      background: #fff3e0;
+      color: #ef6c00;
+      font-size: 10px;
       font-weight: 600;
-      background: linear-gradient(135deg, #ffb347, #ff7b54);
-      color: #fff;
-      display: inline-flex;
+    }
+
+    .row-between {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 8px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+      gap: 6px;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(0,0,0,0.06), transparent);
+      margin: 4px 0 2px;
+    }
+
+    .quiz-options label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 6px;
+      border-radius: 999px;
+      background: #f9fbe7;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: border 0.08s ease, background 0.08s ease;
+    }
+
+    .quiz-options input[type="radio"] {
+      accent-color: #ff9800;
       cursor: pointer;
     }
 
-    .ai-fab button span.icon {
-      font-size: 18px;
+    .quiz-options label:hover {
+      border-color: #ffb74d;
+      background: #fffde7;
     }
 
-    .ai-modal-backdrop {
+    .status-text {
+      font-size: 11px;
+      color: #888;
+    }
+
+    footer {
+      margin-top: 6px;
+      font-size: 10px;
+      color: #999;
+      text-align: right;
+    }
+
+    /* DEBUG OVERLAY */
+
+    #debugToggle {
       position: fixed;
-      inset: 0;
-      background: rgba(15,23,42,0.3);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 9998;
-    }
-
-    .ai-modal {
-      width: 100%;
-      max-width: 720px;
-      max-height: 90vh;
-      background: var(--ai-bg);
-      border-radius: 20px;
-      border: 1px solid var(--ai-border);
-      box-shadow: 0 20px 40px rgba(15,23,42,0.35);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .ai-modal-header {
-      padding: 10px 14px;
-      border-bottom: 1px solid #ffe0b2;
-      background: #fff4e0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .ai-modal-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .ai-avatar {
+      right: 8px;
+      bottom: 8px;
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: #ffd1a8;
+      background: #212121ee;
+      color: #ffeb3b;
+      font-size: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+      z-index: 9999;
+      user-select: none;
     }
 
-    .ai-meta h3 {
-      font-size: 14px;
-      font-weight: 700;
+    #debugPanel {
+      position: fixed;
+      right: 8px;
+      bottom: 48px;
+      width: min(380px, 90vw);
+      height: 40vh;
+      background: #1e1e1ef0;
+      color: #e0e0e0;
+      border-radius: 12px 12px 0 12px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+      display: none;
+      flex-direction: column;
+      z-index: 9998;
+      backdrop-filter: blur(4px);
     }
 
-    .ai-meta p {
-      font-size: 11px;
-      opacity: 0.75;
-    }
-
-    .ai-modal-right {
+    #debugPanelHeader {
+      padding: 4px 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 8px;
       font-size: 11px;
     }
 
-    .ai-status-dot {
+    #debugPanelHeader span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    #debugPanelHeader button {
+      background: transparent;
+      border: none;
+      color: #f5f5f5;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    #debugLog {
+      flex: 1;
+      padding: 4px 8px;
+      font-family: "Fira Code", "Consolas", monospace;
+      font-size: 10px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+
+    #debugPanelFooter {
+      padding: 2px 8px 4px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      font-size: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #debugStatusDot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #22c55e;
+      background: #66bb6a;
+      box-shadow: 0 0 8px #66bb6a;
     }
 
-    .ai-btn-ghost {
-      border: none;
-      background: transparent;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .ai-modal-body {
-      padding: 8px 14px 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      height: 100%;
-    }
-
-    .ai-toolbar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      font-size: 11px;
-      align-items: center;
-    }
-
-    .ai-chip-btn {
+    .debug-tag {
+      padding: 1px 6px;
       border-radius: 999px;
-      border: 1px dashed #f59e0b;
-      padding: 4px 8px;
-      background: #fffaf0;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 11px;
+      border: 1px solid rgba(255,255,255,0.3);
+      font-size: 9px;
+      opacity: 0.8;
     }
-
-    .ai-chip-btn input[type="file"] {
-      display: none;
-    }
-
-    .ai-url-input {
-      flex: 1;
-      min-width: 140px;
-      padding: 5px 8px;
-      border-radius: 999px;
-      border: 1px solid #facc6b;
-      font-size: 11px;
-      background: #fffaf0;
-    }
-
-    .ai-url-button {
-      border-radius: 999px;
-      border: none;
-      padding: 5px 8px;
-      font-size: 11px;
-      background: #fbbf24;
-      color: #111827;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .ai-chat {
-      flex: 1;
-      min-height: 160px;
-      max-height: 340px;
-      background: #fffdf8;
-      border-radius: 14px;
-      border: 1px solid #ffe0b2;
-      padding: 8px;
-      overflow-y: auto;
-      font-size: 12px;
-    }
-
-    .ai-message-row {
-      display: flex;
-      margin-bottom: 6px;
-      gap: 6px;
-    }
-
-    .ai-message-row.user {
-      justify-content: flex-end;
-    }
-
-    .ai-message-bubble {
-      max-width: 80%;
-      padding: 6px 9px;
-      border-radius: 12px;
-      line-height: 1.4;
-    }
-
-    .ai-message-row.user .ai-message-bubble {
-      background: #dbeafe;
-      border-bottom-right-radius: 2px;
-    }
-
-    .ai-message-row.assistant .ai-message-bubble {
-      background: #fff4e0;
-      border-bottom-left-radius: 2px;
-    }
-
-    .ai-input-row {
-      margin-top: 6px;
-      display: flex;
-      gap: 6px;
-      align-items: flex-end;
-    }
-
-    .ai-textarea {
-      flex: 1;
-      min-height: 40px;
-      max-height: 80px;
-      padding: 6px 8px;
-      border-radius: 12px;
-      border: 1px solid #facc6b;
-      font-size: 12px;
-      resize: vertical;
-      background: #fffdf8;
-    }
-
-    .ai-send-btn {
-      border-radius: 999px;
-      border: none;
-      padding: 7px 11px;
-      font-size: 12px;
-      font-weight: 600;
-      background: linear-gradient(135deg, #f97316, #f97316);
-      color: #fff;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      white-space: nowrap;
-    }
-
-    .ai-helper-note {
-      font-size: 10px;
-      opacity: 0.7;
-      margin-top: 2px;
-    }
-
-    @media (max-width: 768px) {
-      .ai-modal {
-        max-width: 96vw;
-      }
-    }
-
-    /* --- Inspiring Wisdom Sidebar --- */
-
-.wisdom-toggle {
-  position: fixed;
-  top: 50%;
-  left: 4px;
-  transform: translateY(-50%);
-  z-index: 9998;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
-  color: #fff;
-  padding: 8px 10px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.3);
-}
-
-.wisdom-toggle span.icon {
-  font-size: 16px;
-}
-
-.wisdom-panel {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 320px;
-  max-width: 88vw;
-  background: #0f172a;
-  color: #e5e7eb;
-  z-index: 9997;
-  box-shadow: 4px 0 20px rgba(0,0,0,0.5);
-  transform: translateX(-100%);
-  transition: transform 0.25s ease-out;
-  display: flex;
-  flex-direction: column;
-}
-
-.wisdom-panel.open {
-  transform: translateX(0);
-}
-
-.wisdom-header {
-  padding: 10px 12px;
-  border-bottom: 1px solid rgba(148,163,184,0.4);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-}
-
-.wisdom-header-left {
-  display: flex;
-  flex-direction: column;
-}
-
-.wisdom-title-main {
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.wisdom-title-sub {
-  font-size: 11px;
-  opacity: 0.7;
-}
-
-.wisdom-header-right {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.wisdom-lang-select {
-  font-size: 11px;
-  padding: 3px 6px;
-  border-radius: 999px;
-  border: 1px solid rgba(148,163,184,0.8);
-  background: #020617;
-  color: #e5e7eb;
-}
-
-.wisdom-close-btn {
-  border: none;
-  background: transparent;
-  color: #e5e7eb;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.wisdom-body {
-  flex: 1;
-  display: grid;
-  grid-template-rows: minmax(0, 1.3fr) minmax(0, 2fr);
-  gap: 6px;
-  padding: 8px 10px 10px;
-  font-size: 12px;
-}
-
-.wisdom-list {
-  overflow-y: auto;
-  border-radius: 10px;
-  background: rgba(15,23,42,0.9);
-  border: 1px solid rgba(148,163,184,0.4);
-}
-
-.wisdom-item {
-  padding: 6px 8px;
-  border-bottom: 1px solid rgba(30,41,59,0.9);
-  cursor: pointer;
-}
-
-.wisdom-item:last-child {
-  border-bottom: none;
-}
-
-.wisdom-item-title {
-  font-weight: 600;
-}
-
-.wisdom-item-meta {
-  font-size: 11px;
-  opacity: 0.7;
-}
-
-.wisdom-item.active {
-  background: linear-gradient(90deg, rgba(129,140,248,0.4), rgba(56,189,248,0.25));
-}
-
-.wisdom-content {
-  overflow-y: auto;
-  border-radius: 10px;
-  background: rgba(15,23,42,0.95);
-  border: 1px solid rgba(148,163,184,0.5);
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.wisdom-story-title {
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.wisdom-story-meta {
-  font-size: 11px;
-  opacity: 0.7;
-}
-
-.wisdom-section-label {
-  font-size: 11px;
-  font-weight: 600;
-  opacity: 0.8;
-  margin-top: 4px;
-}
-
-.wisdom-story-text,
-.wisdom-reflection,
-.wisdom-challenge {
-  font-size: 12px;
-  line-height: 1.4;
-  white-space: pre-wrap;
-}
-
-.wisdom-footer {
-  margin-top: 4px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.wisdom-audio-btn {
-  border-radius: 999px;
-  border: 1px solid rgba(248,250,252,0.7);
-  background: #111827;
-  color: #f9fafb;
-  font-size: 11px;
-  padding: 5px 8px;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  cursor: pointer;
-}
-
-.wisdom-theme-pill {
-  font-size: 10px;
-  padding: 3px 7px;
-  border-radius: 999px;
-  background: rgba(148,163,184,0.3);
-}
-
   </style>
 </head>
 <body>
-  <div class="app-shell">
+  <div id="app">
     <header>
-      <div class="brand">
-        <div class="logo-circle">FS</div>
-        <div class="brand-text">
-          <h1 id="appTitle">Future-Ready Skills</h1>
-          <p id="appSubtitle">Class 1–12 • Skills + AI • Job-ready from day one</p>
+      <div class="logo">
+        <div class="logo-badge">IL</div>
+        <div>
+          <div class="logo-text-main">IndiaLearn</div>
+          <div class="logo-text-sub">
+            Class 1–12 • CBSE / State • Future-Ready Skills
+          </div>
         </div>
       </div>
-      <div class="top-actions">
-        <div class="chip">
-          <span>📴</span><span id="offlineLabel">Offline-ready</span>
+      <div>
+        <div class="chip-row">
+          <div class="chip">🧠 AI Tutor</div>
+          <div class="chip">📱 Mobile First</div>
+          <div class="chip">🇮🇳 Made for Indian Students</div>
         </div>
-        <div class="chip" id="onlineChip" style="display:none;">
-          <span>🌐</span><span>Online AI & web tools</span>
-        </div>
-        <select id="languageSelect" class="lang-select">
-          <option value="en">English UI</option>
-          <option value="hi">हिन्दी UI</option>
-          <option value="te">తెలుగు UI</option>
-        </select>
       </div>
     </header>
 
-    <!-- LEFT PANEL -->
-    <section class="panel panel-left">
-      <div>
-        <h2 id="classHeading">Choose your Class</h2>
-        <p class="subtitle" id="classSubtitle">Start skills journey from Class 1. Tap a class below.</p>
-        <div class="grid-classes" id="classGrid"></div>
-      </div>
-
-      <div>
-        <h2 id="subjectHeading">Skill Tracks & Subjects</h2>
-        <p class="subtitle" id="subjectSubtitle">Academic + skills + AI tracks for your chosen class.</p>
-        <div class="subjects-row" id="subjectsRow"></div>
-      </div>
-
-      <div>
-        <div class="progress-bar">
-          <div id="overallProgressFill" class="progress-fill"></div>
+    <main>
+      <!-- LEFT SIDE: Welcome, Class & Subject, Quiz -->
+      <section class="card" id="welcomeSection">
+        <div class="card-header">
+          <div>
+            <div class="card-title">
+              <span class="emoji">🎓</span>
+              <span>Welcome, Super Student!</span>
+            </div>
+            <div class="card-subtitle">Choose your class & subject to start learning.</div>
+          </div>
+          <div class="pill">Step 1 → 2 → 3</div>
         </div>
-        <div class="progress-row">
-          <span id="overallProgressLabel">No lessons completed yet.</span>
-          <span id="overallScoreLabel">Average score: 0%</span>
-        </div>
-      </div>
-    </section>
+        <div class="section-body">
+          <div class="welcome-banner">
+            <div class="welcome-title">One App for School + Future Skills 🚀</div>
+            <div class="welcome-sub">
+              Learn Maths, Science, English & Hindi along with
+              <strong>AI, coding, money skills, climate, mental health & safety</strong>.
+            </div>
+            <div class="badge-row">
+              <div class="badge">📚 Class 1–12 Syllabus</div>
+              <div class="badge">🧮 Math Quiz</div>
+              <div class="badge">🤖 AI Study Partner</div>
+            </div>
+          </div>
 
-    <!-- RIGHT PANEL -->
-    <section class="panel panel-right">
-      <div>
-        <h2 id="topicHeading">Topics, Skills & AI</h2>
-        <p class="subtitle" id="topicSubtitle">
-          Each topic blends concepts + AI tools + real-world application + money skills.
-        </p>
-      </div>
+          <!-- Class Selection -->
+          <div>
+            <div class="row-between">
+              <div class="card-title" style="font-size:13px;">
+                <span class="emoji">🏫</span>
+                <span>Select Your Class</span>
+              </div>
+              <div class="hint">Tap one: 1–12</div>
+            </div>
+            <div id="classButtons" class="grid grid-classes" aria-label="Class selection buttons">
+              <!-- Filled by JS -->
+            </div>
+          </div>
 
-      <div class="lesson-meta">
-        <span id="metaClass">Class –</span>
-        <span id="metaSubject">Track –</span>
-        <span id="metaTopicCount">0 topics</span>
-      </div>
+          <!-- Subject Selection -->
+          <div>
+            <div class="row-between">
+              <div class="card-title" style="font-size:13px;">
+                <span class="emoji">📘</span>
+                <span>Select Subject</span>
+              </div>
+              <div class="hint">Core subjects (+ future skills)</div>
+            </div>
+            <div id="subjectButtons" class="grid grid-subjects" aria-label="Subject selection buttons">
+              <!-- Filled by JS -->
+            </div>
+          </div>
 
-      <!-- World Languages controls -->
-      <div class="lesson-meta" id="langPairControls" style="display:none; margin-top:-4px;">
-        <span style="font-size:11px;">I know:</span>
-        <select id="knownLangSelect" style="font-size:11px; padding:3px 6px; border-radius:999px; border:1px solid #e5e7eb;"></select>
-        <span style="font-size:11px;">I want to learn:</span>
-        <select id="targetLangSelect" style="font-size:11px; padding:3px 6px; border-radius:999px; border:1px solid #e5e7eb;"></select>
-      </div>
+          <div class="inline-info">
+            <div class="dot"></div>
+            <span id="currentSelectionLabel">No class/subject selected.</span>
+          </div>
 
-      <div class="topic-list" id="topicList"></div>
+          <div class="divider"></div>
 
-      <div id="lessonArea">
-        <div class="lesson-title" id="lessonTitle">Start by choosing a skill track.</div>
-        <div class="lesson-body" id="lessonBody">
-          Once you pick a track and topic, you’ll see:
-          • Concept in simple words
-          • How AI/LLMs connect
-          • Real-world application
-          • Project idea that can earn or help others
-        </div>
+          <!-- Quiz Area -->
+          <div id="quizSection">
+            <div class="card-header" style="padding:0; margin-bottom:2px;">
+              <div class="card-title" style="font-size:13px;">
+                <span class="emoji">🧮</span>
+                <span>Quick Math Quiz – Class 1 (Sample)</span>
+              </div>
+              <div class="pill-soft">10 tiny questions</div>
+            </div>
 
-        <div class="qa-section" id="qaSection" style="display:none;">
-          <div class="quiz-question" id="quizQuestion"></div>
-          <div class="options" id="optionsContainer"></div>
-
-          <div class="controls-row">
-            <button class="btn-secondary" id="speakLessonBtn">🔊 Speak</button>
-            <button class="btn-secondary" id="speakQuestionBtn">🔊 Speak Q</button>
-            <button class="btn-main" id="nextQuestionBtn">Next Checkpoint ➜</button>
+            <div class="section-body">
+              <div class="hint">
+                Works best when <strong>Class 1 + Maths</strong> is selected. For other classes,
+                this acts as a demo quiz.
+              </div>
+              <div id="quizContent">
+                <button class="btn-primary" id="startQuizBtn">▶ Start Sample Quiz</button>
+              </div>
+              <div class="status-text" id="quizStatus"></div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="status-row">
-        <div class="status-pill">
-          <div class="dot-online" id="dotOnline"></div>
-          <span id="progressPillText">0 lessons • 0 quizzes • 0% avg</span>
-        </div>
-        <span class="tiny" id="storageNote">All progress is stored only on this device. No login needed.</span>
-      </div>
-    </section>
-  </div>
-
-  <!-- AI Assistant Floating Button -->
-  <div class="ai-fab">
-    <button id="openAiBtn">
-      <span class="icon">🤖</span>
-      <span>AI Helper</span>
-    </button>
-  </div>
-
-  <!-- AI Assistant Modal -->
-  <div class="ai-modal-backdrop" id="aiBackdrop">
-    <div class="ai-modal">
-      <div class="ai-modal-header">
-        <div class="ai-modal-left">
-          <div class="ai-avatar">💡</div>
-          <div class="ai-meta">
-            <h3>Comet AI Tutor</h3>
-            <p id="aiStatusLine">Hybrid: offline knowledge + online AI when available</p>
+      <!-- RIGHT SIDE: Syllabus, AI Tutor, Progress -->
+      <section class="card">
+        <!-- Syllabus -->
+        <div id="syllabusSection">
+          <div class="card-header">
+            <div>
+              <div class="card-title">
+                <span class="emoji">📚</span>
+                <span>Smart Syllabus + Future-Proof Skills</span>
+              </div>
+              <div class="card-subtitle">
+                Based on your class & subject, plus essential <strong>life skills</strong>.
+              </div>
+            </div>
+            <div class="pill">Auto-generated</div>
+          </div>
+          <div class="section-body">
+            <div class="small-label">SYLLABUS SNAPSHOT</div>
+            <div id="syllabusContent" class="syllabus-list">
+              Select a class & subject to see your smart syllabus here.
+            </div>
           </div>
         </div>
-        <div class="ai-modal-right">
-          <div class="ai-status-dot" id="aiStatusDot"></div>
-          <span id="aiOnlineStatusText">Online</span>
-          <button class="ai-btn-ghost" id="closeAiBtn" title="Close">✖</button>
+
+        <div class="divider"></div>
+
+        <!-- AI Tutor -->
+        <div id="aiSection">
+          <div class="card-header">
+            <div>
+              <div class="card-title">
+                <span class="emoji">🤖</span>
+                <span>AI Study Partner (Hugging Face)</span>
+              </div>
+              <div class="card-subtitle">
+                Ask doubts, get explanations or new practice questions.
+              </div>
+            </div>
+            <div class="pill-soft">Online • Text</div>
+          </div>
+          <div class="section-body">
+            <label for="aiQuestion" class="small-label">YOUR QUESTION / TOPIC</label>
+            <textarea id="aiQuestion" placeholder="Example: 'Explain place value for Class 3' or 'Give 5 word problems on addition for Class 1'"></textarea>
+
+            <div class="row-between">
+              <div class="hint">
+                AI is tuned for <strong>Indian school style</strong> answers – short, simple, and exam-friendly.
+              </div>
+              <button class="btn-primary" id="askAiBtn">⚡ Ask AI</button>
+            </div>
+
+            <div class="ai-output">
+              <div class="small-label">AI RESPONSE</div>
+              <div id="aiStatus" class="status-text">AI not used yet.</div>
+              <div class="ai-output-box" id="aiAnswerBox">
+                Your AI explanation will appear here.
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="ai-modal-body">
-        <div class="ai-toolbar">
-          <label class="ai-chip-btn">
-            📎 File
-            <input type="file" id="aiFileInput" multiple />
-          </label>
+        <div class="divider"></div>
 
-          <input type="text" id="aiUrlInput" class="ai-url-input" placeholder="Paste YouTube / website URL..." />
-
-          <button class="ai-url-button" id="aiUrlAnalyzeBtn">Analyze URL</button>
+        <!-- Progress -->
+        <div id="progressSection">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="emoji">📈</span>
+              <span>Your Learning Progress (This Session)</span>
+            </div>
+            <div class="pill">Local only</div>
+          </div>
+          <div class="section-body">
+            <div class="progress-row" id="progressRow">
+              <div class="progress-pill" id="progressQuizzes">🧮 Quizzes taken: 0</div>
+              <div class="progress-pill" id="progressCorrect">✅ Correct answers: 0</div>
+              <div class="progress-pill" id="progressAi">🤖 AI questions: 0</div>
+            </div>
+            <div class="hint">
+              This data is stored <strong>only in this browser tab</strong>. Closing the tab will reset it.
+            </div>
+          </div>
         </div>
+      </section>
+    </main>
 
-        <div class="ai-chat" id="aiChat"></div>
-
-        <div class="ai-input-row">
-          <textarea id="aiTextInput" class="ai-textarea" placeholder="Ask anything: skills, AI, projects, money, life..."></textarea>
-          <button class="ai-send-btn" id="aiSendBtn">Send ➜</button>
-        </div>
-        <div class="ai-helper-note">
-          Offline: uses built-in skills syllabus. Online: uses a free OpenRouter AI model (after you add API key in code).
-        </div>
-      </div>
-    </div>
+    <footer>
+      v1.0 • Frontend-only demo • Hugging Face Space integration with visual debug console.
+    </footer>
   </div>
 
-
-    <!-- Inspiring Wisdom Sidebar -->
-  <div class="wisdom-toggle" id="wisdomToggle">
-    <span class="icon">🌟</span>
-    <span>Wisdom</span>
-  </div>
-
-  <div class="wisdom-panel" id="wisdomPanel">
-    <div class="wisdom-header">
-      <div class="wisdom-header-left">
-        <div class="wisdom-title-main" id="wisdomTitleMain">Inspiring Wisdom</div>
-        <div class="wisdom-title-sub" id="wisdomTitleSub">
-          Leaders + scriptures • Unity • Character
-        </div>
-      </div>
-      <div class="wisdom-header-right">
-        <select id="wisdomLangSelect" class="wisdom-lang-select">
-          <option value="en">English</option>
-          <option value="hi">हिन्दी</option>
-          <option value="te">తెలుగు</option>
-          <option value="ar">العربية</option>
-          <option value="es">Español</option>
-          <option value="fr">Français</option>
-        </select>
-        <button class="wisdom-close-btn" id="wisdomCloseBtn" title="Close">✖</button>
-      </div>
+  <!-- DEBUG OVERLAY -->
+  <div id="debugToggle" title="Toggle debug console">🐞</div>
+  <div id="debugPanel">
+    <div id="debugPanelHeader">
+      <span>
+        <strong>Visual Debugger</strong>
+        <span style="opacity:0.8;">• UI & API logs</span>
+      </span>
+      <button id="debugCloseBtn" title="Close debug panel">✕</button>
     </div>
-
-    <div class="wisdom-body">
-      <div class="wisdom-list" id="wisdomList"></div>
-
-      <div class="wisdom-content">
-        <div class="wisdom-story-title" id="wisdomStoryTitle">
-          Choose a story on the left.
-        </div>
-        <div class="wisdom-story-meta" id="wisdomStoryMeta"></div>
-
-        <div class="wisdom-section-label" id="wisdomStoryLabel">Story</div>
-        <div class="wisdom-story-text" id="wisdomStoryText">
-          You’ll see short stories of how leaders and everyday people used
-          inner values, courage and wisdom from different traditions to
-          handle real-life challenges.
-        </div>
-
-        <div class="wisdom-section-label" id="wisdomReflectionLabel">Reflection</div>
-        <div class="wisdom-reflection" id="wisdomReflectionText">
-          After reading, pause and ask: “What would I do in this situation?”
-        </div>
-
-        <div class="wisdom-section-label" id="wisdomChallengeLabel">Action Challenge</div>
-        <div class="wisdom-challenge" id="wisdomChallengeText">
-          Pick one small action today that shows kindness, honesty or courage.
-        </div>
-
-        <div class="wisdom-footer">
-          <button class="wisdom-audio-btn" id="wisdomAudioBtn">
-            🔊 Listen to story
-          </button>
-          <span class="wisdom-theme-pill" id="wisdomThemePill">
-            Compassion • Duty • Resilience
-          </span>
-        </div>
+    <pre id="debugLog"></pre>
+    <div id="debugPanelFooter">
+      <div style="display:flex; align-items:center; gap:6px;">
+        <div id="debugStatusDot"></div>
+        <span style="opacity:0.8;">LIVE</span>
       </div>
+      <div class="debug-tag">UI • Buttons • HF API</div>
     </div>
   </div>
 
   <script>
-    // ---------- UI Language Text ----------
-    var uiText = {
-      en: {
-        title: "Future-Ready Skills",
-        subtitle: "Class 1–12 • Skills + AI • Job-ready from day one",
-        classHeading: "Choose your Class",
-        classSubtitle: "Start your skill journey from Class 1.",
-        subjectHeading: "Skill Tracks & Subjects",
-        subjectSubtitle: "Academic + power skills + AI in every topic.",
-        topicHeading: "Topics, Skills & AI",
-        topicSubtitle: "Each topic links to AI, real work and projects.",
-        offlineReady: "Offline-ready",
-        noLessons: "No lessons completed yet.",
-        avgScore: function (s) { return "Average score: " + s + "%"; },
-        progressPill: function (l, q, a) { return l + " lessons \u2022 " + q + " quizzes \u2022 " + a + "% avg"; },
-        storageNote: "All progress is stored only on this device. No login needed.",
-        startTitle: "Start by choosing a skill track.",
-        startBody:
-"Once you pick a track and topic, you’ll see:\n• Concept in simple words\n• How AI/LLMs connect\n• Real-world application\n• Project idea that can earn or help others"
-      },
-      hi: {
-        title: "भविष्य-प्रधान कौशल",
-        subtitle: "कक्षा 1–12 • कौशल + एआई • जॉब-रेडी विद्यार्थी",
-        classHeading: "अपनी कक्षा चुनें",
-        classSubtitle: "कक्षा 1 से ही कौशल यात्रा शुरू करें।",
-        subjectHeading: "स्किल ट्रैक्स और विषय",
-        subjectSubtitle: "शैक्षणिक + पावर स्किल + हर टॉपिक में एआई।",
-        topicHeading: "टॉपिक, स्किल और एआई",
-        topicSubtitle: "हर टॉपिक को एआई, वास्तविक जीवन और प्रोजेक्ट से जोड़ते हैं।",
-        offlineReady: "ऑफ़लाइन तैयार",
-        noLessons: "अभी कोई पाठ पूरा नहीं हुआ।",
-        avgScore: function (s) { return "औसत अंक: " + s + "%"; },
-        progressPill: function (l, q, a) { return l + " पाठ \u2022 " + q + " क्विज़ \u2022 " + a + "% औसत"; },
-        storageNote: "सारी प्रगति केवल इस डिवाइस पर सेव होती है। किसी लॉगिन की ज़रूरत नहीं।",
-        startTitle: "पहले कोई स्किल ट्रैक चुनें।",
-        startBody:
-"जैसे ही आप ट्रैक और टॉपिक चुनेंगे, आपको मिलेगा:\n• सरल भाषा में कॉन्सेप्ट\n• एआई/एलएलएम से संबंध\n• वास्तविक जीवन में उपयोग\n• ऐसा प्रोजेक्ट जो कमाई या मदद कर सके"
-      },
-      te: {
-        title: "ఫ్యూచర్ రెడీ స్కిల్స్",
-        subtitle: "1–12 తరగతులు • స్కిల్స్ + ఏఐ • జాబ్-రెడీ స్టూడెంట్స్",
-        classHeading: "మీ క్లాస్ ఎంచుకోండి",
-        classSubtitle: "1వ తరగతి నుంచే స్కిల్ జర్నీ ప్రారంభించండి.",
-        subjectHeading: "స్కిల్ ట్రాక్స్ & సబ్జెక్ట్స్",
-        subjectSubtitle: "అకాడెమిక్ + పవర్ స్కిల్స్ + ప్రతి టాపిక్‌లో ఏఐ.",
-        topicHeading: "టాపిక్స్, స్కిల్స్ & ఏఐ",
-        topicSubtitle: "ప్రతి టాపిక్‌ను ఏఐ, రియల్ లైఫ్, ప్రాజెక్ట్‌తో కలుపుతాం.",
-        offlineReady: "ఆఫ్లైన్ సిద్ధంగా",
-        noLessons: "ఇంకా ఏ పాఠం పూర్తికాలేదు.",
-        avgScore: function (s) { return "సగటు స్కోర్: " + s + "%"; },
-        progressPill: function (l, q, a) { return l + " పాఠాలు \u2022 " + q + " క్విజ్‌లు \u2022 " + a + "% సగటు"; },
-        storageNote: "ప్రోగ్రెస్ ఈ డివైస్‌లో మాత్రమే సేవ్ అవుతుంది. లాగిన్ అవసరం లేదు.",
-        startTitle: "మొదట ఒక స్కిల్ ట్రాక్ ఎంచుకోండి.",
-        startBody:
-"మీరు ట్రాక్, టాపిక్ ఎంచుకున్న తరువాత మీరు చూస్తారు:\n• సింపుల్‌గా కాన్సెప్ట్\n• ఏఐ/ఎల్ఎల్ఎమ్‌తో లింక్\n• రియల్ వరల్డ్ యూజ్\n• డబ్బు సంపాదించగలిగే లేదా హెల్ప్ చేసే ప్రాజెక్ట్ ఐడియా"
+    /************************************************************
+     *  HUGGING FACE FRONTEND CONFIG (SAMPLE DEMO SPACE)
+     ************************************************************/
+    // ❗ You can replace this later with your own Space or backend.
+    // Example format (Gradio Space): POST to /api/predict with body { data: [prompt] }
+    const HF_BACKEND_URL = "https://yuntian-deng-llama-2-7b-chat.hf.space/api/predict";
+
+    /************************************************************
+     *  GLOBAL STATE
+     ************************************************************/
+    const state = {
+      selectedClass: null,
+      selectedSubject: null,
+      quizIndex: 0,
+      quizQuestions: [],
+      quizScore: 0,
+      progress: {
+        quizzesTaken: 0,
+        correctAnswers: 0,
+        aiQueries: 0,
       }
     };
 
-    var currentLang = localStorage.getItem("fs_lang") || "en";
+    /************************************************************
+     *  VISUAL DEBUGGER
+     ************************************************************/
+    const debugLogEl = document.getElementById("debugLog");
+    let debugPanelVisible = false;
+    const debugPanel = document.getElementById("debugPanel");
+    const debugToggle = document.getElementById("debugToggle");
+    const debugCloseBtn = document.getElementById("debugCloseBtn");
 
-    // ---------- Supported Languages for World Languages Subject ----------
-    var supportedLanguages = [
-      { code: "en", name: "English", native: "English" },
-      { code: "zh", name: "Mandarin Chinese", native: "中文" },
-      { code: "hi", name: "Hindi", native: "हिन्दी" },
-      { code: "es", name: "Spanish", native: "Español" },
-      { code: "ar", name: "Arabic", native: "العربية" },
-      { code: "fr", name: "French", native: "Français" },
-      { code: "pt", name: "Portuguese (Brazil)", native: "Português (BR)" },
-      { code: "ru", name: "Russian", native: "Русский" },
-      { code: "ja", name: "Japanese", native: "日本語" },
-      { code: "de", name: "German", native: "Deutsch" },
-      { code: "te", name: "Telugu", native: "తెలుగు" }
-    ];
-
-       // ---------- Inspiring Wisdom (leaders + scriptures) ----------
-
-// Simple multi-language UI labels (content stays in simple English, TTS can use different voices)
-var wisdomUILang = localStorage.getItem("fs_wisdomLang") || "en";
-
-var wisdomUIText = {
-  en: {
-    panelTitle: "Inspiring Wisdom",
-    panelSub: "Leaders + scriptures • Unity • Character",
-    storyLabel: "Story",
-    reflectionLabel: "Reflection",
-    challengeLabel: "Action Challenge",
-    defaultReflection: "After reading, pause and ask: “What would I do in this situation?”",
-    defaultChallenge: "Pick one small action today that shows kindness, honesty or courage.",
-    themeDefault: "Compassion • Duty • Resilience"
-  },
-  hi: {
-    panelTitle: "प्रेरणादायी ज्ञान",
-    panelSub: "नेता + शास्त्र • एकता • चरित्र",
-    storyLabel: "कहानी",
-    reflectionLabel: "विचार",
-    challengeLabel: "कार्य चुनौती",
-    defaultReflection: "कहानी के बाद सोचें: “ऐसी स्थिति में मैं क्या करता/करती?”",
-    defaultChallenge: "आज एक छोटा काम चुनें जो दया, ईमानदारी या साहस दिखाए।",
-    themeDefault: "करुणा • कर्तव्य • धैर्य"
-  },
-  te: {
-    panelTitle: "ప్రేరణాత్మక జ్ఞానం",
-    panelSub: "నాయకులు + శాస్త్రాలు • ఏకత్వం • స్వభావం",
-    storyLabel: "కథ",
-    reflectionLabel: "ఆలోచన",
-    challengeLabel: "చర్య సవాలు",
-    defaultReflection: "కథ తరువాత ఆలోచించండి: “ఇలాంటి పరిస్థితిలో నేను ఏమి చేసేవాడిని?”",
-    defaultChallenge: "ఈ రోజు దయ, నిజాయితీ లేదా ధైర్యం చూపే ఒక చిన్న చర్యను ఎంచుకోండి.",
-    themeDefault: "కరుణ • కర్తవ్య • ధైర్యం"
-  },
-  ar: {
-    panelTitle: "حكمة ملهمة",
-    panelSub: "قادة + كتب سماوية • وحدة • أخلاق",
-    storyLabel: "قصة",
-    reflectionLabel: "تأمل",
-    challengeLabel: "تحدي عملي",
-    defaultReflection: "بعد القراءة اسأل نفسك: \"ماذا سأفعل لو كنت في هذا الموقف؟\"",
-    defaultChallenge: "اختر عملًا صغيرًا اليوم يظهر اللطف أو الصدق أو الشجاعة.",
-    themeDefault: "رحمة • واجب • صبر"
-  },
-  es: {
-    panelTitle: "Sabiduría Inspiradora",
-    panelSub: "Líderes + escrituras • Unidad • Carácter",
-    storyLabel: "Historia",
-    reflectionLabel: "Reflexión",
-    challengeLabel: "Desafío de acción",
-    defaultReflection: "Después de leer, pregúntate: “¿Qué haría yo en esta situación?”",
-    defaultChallenge: "Elige hoy una pequeña acción que muestre amabilidad, honestidad o valentía.",
-    themeDefault: "Compasión • Deber • Resiliencia"
-  },
-  fr: {
-    panelTitle: "Sagesse Inspirante",
-    panelSub: "Leaders + écritures • Unité • Caractère",
-    storyLabel: "Histoire",
-    reflectionLabel: "Réflexion",
-    challengeLabel: "Défi d’action",
-    defaultReflection: "Après la lecture, demande-toi : « Que ferais-je dans cette situation ? »",
-    defaultChallenge: "Choisis aujourd’hui une petite action qui montre la gentillesse, l’honnêteté ou le courage.",
-    themeDefault: "Compassion • Devoir • Résilience"
-  }
-};
-
-// NOTE: Stories are written in simple English and described as teachings,
-// not literal word-for-word quotes from scriptures.
-
-var wisdomStories = [
-  {
-    id: "kalam-dreams",
-    sourceType: "Leader",
-    name: "Dr. APJ Abdul Kalam",
-    title: "Dreams + Discipline in Difficult Times",
-    ageRange: "10+",
-    theme: "Dreams • Hard work • Service",
-    context:
-      "Young Kalam grew up in a simple home in Rameswaram. Money was limited, but his curiosity about rockets, science and the sky was limitless.",
-    story:
-      "Instead of feeling angry about what he did not have, Kalam focused on what he could control: reading extra, asking questions, helping others and staying disciplined.\n\nWhen college or work did not go exactly as planned, he did not stop. He used every failure as feedback. Later, as a scientist and President of India, he kept telling students that big dreams start in small rooms.",
-    teaching:
-      "Real success is not instant. It is daily discipline: study a little better, think a little deeper and serve a little more. Inner character matters more than outer comfort.",
-    reflection:
-      "• What is one big dream you quietly carry?\n• Are you letting your situation stop you, or using it as fuel to grow?\n• Which daily habit can you improve by just 1%?",
-    challenge:
-      "Tonight, write one dream in a notebook. Under it, write one tiny daily action you can start from tomorrow (reading, practice, helping someone) and follow it for 7 days."
-  },
-  {
-    id: "modi-service",
-    sourceType: "Leader",
-    name: "Shri Narendra Modi (Prime Minister of India)",
-    title: "Service Mindset: Small Steps for People Around You",
-    ageRange: "10+",
-    theme: "Service • Discipline • Simplicity",
-    context:
-      "Many leaders speak about development in big words. But meaningful change starts with noticing small needs of real people around us.",
-    story:
-      "Stories shared about Narendra Modi’s early years describe him helping at a small tea stall, interacting with travellers and listening to many kinds of people.\n\nWhether or not we focus on politics, one useful lesson is: ordinary work can become a training ground for understanding people, learning discipline and serving with consistency.",
-    teaching:
-      "Any small responsibility — in home, school or community — can become a place to practice discipline, respect and service.",
-    reflection:
-      "• What small responsibilities do you have every day?\n• How can you turn one of them into a chance to serve better?\n• How does listening carefully to people change your decisions?",
-    challenge:
-      "For one week, pick a simple duty (helping at home, keeping a class corner clean, guiding a younger student) and do it with extra care, without waiting for praise."
-  },
-  {
-    id: "murmu-resilience",
-    sourceType: "Leader",
-    name: "President Droupadi Murmu",
-    title: "Quiet Strength in the Face of Loss",
-    ageRange: "12+",
-    theme: "Resilience • Humility • Education",
-    context:
-      "President Murmu’s journey includes deep personal losses and many challenges, yet she continued to serve and learn.",
-    story:
-      "Coming from a tribal community and facing family tragedies, she still kept faith in education, public service and inner strength.\n\nInstead of letting grief close her heart, she allowed it to deepen her compassion for others who suffer silently.",
-    teaching:
-      "Resilience is not about never feeling pain. It is about allowing pain to make you more gentle, not more bitter.",
-    reflection:
-      "• Have you seen someone stay kind even after difficulty?\n• What helps you continue when life feels unfair?\n• Who can you gently support today?",
-    challenge:
-      "Write the name of one person who is struggling (classmate, neighbour, relative). Do one small act of support: a message, a smile, helping with work or simply listening."
-  },
-  {
-    id: "gita-duty",
-    sourceType: "Scripture",
-    name: "Bhagavad Gita (summarised idea)",
-    title: "Doing Your Duty with a Calm Mind",
-    ageRange: "12+",
-    theme: "Duty • Clarity • Detachment",
-    context:
-      "In the Gita, Arjuna is confused and afraid on the battlefield of life, not sure how to act.",
-    story:
-      "The teaching often summarised from the Gita is: focus on the right action, not on controlling every result. When the mind is full of fear about success or failure, we avoid doing what is right.\n\nBy remembering your role and values, you act with sincerity and accept results with balance.",
-    teaching:
-      "Do your best work with honesty and courage, and let go of the obsession to control every outcome.",
-    reflection:
-      "• Is there a decision you are avoiding because you fear failure?\n• What would it look like to do the right thing, even if the result is not guaranteed?",
-    challenge:
-      "Choose one task you have been postponing (study, conversation, project). Do a 25-minute focused sprint today, just giving your best without worrying about the final mark."
-  },
-  {
-    id: "upanishads-self",
-    sourceType: "Scripture",
-    name: "Upanishads (summarised idea)",
-    title: "Seeing the Same Light in All",
-    ageRange: "12+",
-    theme: "Unity • Respect • Inner calm",
-    context:
-      "The Upanishads often speak about the deeper Self that is beyond labels like caste, country or role.",
-    story:
-      "One simple way to understand this is: there is a quiet light of awareness inside you that watches thoughts, emotions and roles. That same light exists in others.\n\nWhen we remember this, it becomes harder to hate and easier to listen.",
-    teaching:
-      "Real education is not only about information, but about seeing the shared humanity in everyone.",
-    reflection:
-      "• When you are angry at someone, can you still remember they also feel pain and fear?\n• How would your words change if you saw the same inner light in them?",
-    challenge:
-      "Pick one person you usually judge (online or offline). For one day, speak and act as if they carry the same inner light and dignity as you."
-  },
-  {
-    id: "bible-good-samaritan",
-    sourceType: "Scripture",
-    name: "Bible (Good Samaritan – summarised idea)",
-    title: "Helping Beyond Labels",
-    ageRange: "8+",
-    theme: "Compassion • Service • Breaking prejudice",
-    context:
-      "In a famous teaching, a traveller is hurt on the road. Some people who are expected to help walk past him.",
-    story:
-      "A person from a group that was looked down upon chooses to stop, care and spend his own time and resources to help the stranger.\n\nThe idea is simple: real neighbourliness is shown not in words but in compassion across boundaries.",
-    teaching:
-      "Kindness that crosses labels (religion, caste, language, country) is a powerful form of spirituality.",
-    reflection:
-      "• Have you ever ignored someone in need because they were 'not your group'?\n• Who has been a hidden helper in your life?",
-    challenge:
-      "Today, look for one small chance to quietly help someone without expecting thanks — maybe at school, on the road or at home."
-  },
-  {
-    id: "quran-mercy",
-    sourceType: "Scripture",
-    name: "Quran (mercy and justice – summarised idea)",
-    title: "Balancing Mercy and Fairness",
-    ageRange: "12+",
-    theme: "Mercy • Justice • Self-control",
-    context:
-      "Many verses in the Quran emphasise compassion, justice and accountability before God.",
-    story:
-      "One practical takeaway: when you have some power — even small, like being older or stronger — you are invited to use it with fairness and mercy.\n\nAnger is natural, but guidance is to control it and choose what is just, not what is impulsive.",
-    teaching:
-      "True strength is shown by those who can control their anger and act fairly, especially when it would be easy to misuse power.",
-    reflection:
-      "• When was the last time you reacted in anger and later regretted it?\n• How could pausing for a few breaths have changed the situation?",
-    challenge:
-      "For the next 3 days, whenever you feel anger rising, pause for 5 slow breaths before speaking. Notice how your choice of words changes."
-  }
-];
-
-
-    var languagePhrases = [
-      {
-        key: "hello",
-        concept: "Basic greeting: Hello",
-        translations: {
-          en: "Hello",
-          zh: "你好",
-          hi: "नमस्ते",
-          es: "Hola",
-          ar: "مرحبا",
-          fr: "Bonjour",
-          pt: "Olá",
-          ru: "Здравствуйте",
-          ja: "こんにちは",
-          de: "Hallo",
-          te: "నమస్తే"
-        }
-      },
-      {
-        key: "thank_you",
-        concept: "Polite phrase: Thank you",
-        translations: {
-          en: "Thank you",
-          zh: "谢谢",
-          hi: "धन्यवाद",
-          es: "Gracias",
-          ar: "شكرا",
-          fr: "Merci",
-          pt: "Obrigado / Obrigada",
-          ru: "Спасибо",
-          ja: "ありがとうございます",
-          de: "Danke",
-          te: "ధన్యవాదాలు"
-        }
-      },
-      {
-        key: "please",
-        concept: "Polite phrase: Please",
-        translations: {
-          en: "Please",
-          zh: "请",
-          hi: "कृपया",
-          es: "Por favor",
-          ar: "من فضلك",
-          fr: "S'il vous plaît",
-          pt: "Por favor",
-          ru: "Пожалуйста",
-          ja: "お願いします",
-          de: "Bitte",
-          te: "దయచేసి"
-        }
-      },
-      {
-        key: "how_are_you",
-        concept: "Common question: How are you?",
-        translations: {
-          en: "How are you?",
-          zh: "你好吗？",
-          hi: "आप कैसे हैं?",
-          es: "¿Cómo estás?",
-          ar: "كيف حالك؟",
-          fr: "Comment ça va ?",
-          pt: "Como vai você?",
-          ru: "Как дела?",
-          ja: "お元気ですか？",
-          de: "Wie geht es dir?",
-          te: "మీరు ఎలా ఉన్నారు?"
+    function debugLog(message, extra) {
+      const timestamp = new Date().toISOString().split("T")[1].replace("Z", "");
+      let line = "[" + timestamp + "] " + message;
+      if (extra !== undefined) {
+        try {
+          line += " → " + JSON.stringify(extra);
+        } catch (e) {
+          line += " → [unserializable extra]";
         }
       }
-    ];
-
-    // ---------- Shared Tracks ----------
-    var superLearning = {
-      subjectLabel: "Super Learning & Brain Skills",
-      level: "All classes",
-      topics: [
-        {
-          id: "sl-active-recall",
-          title: "Active Recall + AI: Study Faster",
-          level: "Core skill",
-          body:
-"Concept:\nActive recall means closing the book and testing yourself instead of only re-reading.\n\nAI Connection:\n• Class 1–5: Ask Comet: “Explain this in simple words, then hide it and let me recall.”\n• Class 6–8: Use an AI tool to generate practice questions and answer them without looking.\n• Class 9–12: Ask AI to create exam-style questions and try to answer before looking at suggestions.\n\nReal-World Application:\nYou learn faster than others, clear exams with less time, and free up time to build skills / projects.\n\nMini Project:\nPick any chapter, ask Comet AI to generate 5 questions, write answers in a notebook from memory, then compare.",
-          quiz: {
-            question: "What is the main idea of active recall?",
-            options: [
-              "Reading the same page 10 times",
-              "Testing yourself without seeing the book",
-              "Only watching videos",
-              "Highlighting with 5 colours"
-            ],
-            answerIndex: 1
-          }
-        },
-        {
-          id: "sl-ai-mindset",
-          title: "AI Mindset: Human + AI > AI alone",
-          level: "Core skill",
-          body:
-"Concept:\nAI is a powerful assistant, not a replacement for your brain. You ask good questions, AI gives ideas, you decide.\n\nAI/LLM Connection:\n• A Large Language Model (LLM) like ChatGPT or Comet reads huge amounts of text and predicts the “next best word”.\n• It does NOT truly understand life like a human. You provide direction, values and judgement.\n\nReal-World Application:\n• You can work faster than people who don’t know AI.\n• You can earn by combining your thinking + AI speed (content, code, design, marketing).\n\nMini Project:\nWrite one problem you have (study, money, time). Ask Comet AI for 3 solutions. Choose the best one and implement it today.",
-          quiz: {
-            question: "Which is more powerful?",
-            options: [
-              "AI alone",
-              "Human alone",
-              "Human + AI working together",
-              "Neither"
-            ],
-            answerIndex: 2
-          }
-        }
-      ]
-    };
-
-    var worldLanguages = {
-      subjectLabel: "World Languages (10+)",
-      level: "Any class",
-      topics: [
-        {
-          id: "lang-5-phrases",
-          title: "5 Magic Phrases (Any Language Pair)",
-          level: "Easy",
-          body:
-"Concept:\nLearning any language becomes easier when you master a few daily phrases first.\n\nAI/LLM Connection:\n• Ask Comet: “Translate these 5 phrases between [my language] and [target language] with pronunciation.”\n• Use AI to get example sentences and practice aloud.\n\nReal-World Application:\n• Talk to people from other countries.\n• Open remote work, freelancing, customer support, global teams.\n\nMini Project:\nChoose ‘I know’ and ‘I want to learn’ languages in the controls above. Practice saying all 5 phrases 10 times each using both languages.",
-          quiz: {
-            question: "What is a good first step in any language?",
-            options: [
-              "Memorise full dictionary",
-              "Learn 5 daily phrases and use them",
-              "Only read grammar rules",
-              "Wait for school to teach everything"
-            ],
-            answerIndex: 1
-          }
-        },
-        {
-          id: "lang-listen-copy",
-          title: "Listen + Copy: Sound First, Spelling Later",
-          level: "Core",
-          body:
-"Concept:\nChildren learn language by listening and copying, not by reading grammar first.\n\nAI/LLM Connection:\n• Use AI to get slow audio sentences (text-to-speech) and repeat after it.\n• Ask Comet: “Give me 10 simple sentences in [target language] with meaning in [my language].”\n\nReal-World Application:\n• You sound more natural when speaking.\n• Helps in interviews, customer calls, remote jobs.\n\nMini Project:\nPick 3 phrases from the table below. Use device TTS or Comet AI to speak them. Record yourself and compare.",
-          quiz: {
-            question: "For fast language learning, what usually comes first?",
-            options: [
-              "Spelling and writing",
-              "Listening and copying sounds",
-              "Memorising exam answers",
-              "Translating big essays"
-            ],
-            answerIndex: 1
-          }
-        }
-      ]
-    };
-
-    // ---------- Future-Ready Skill Tracks per Class ----------
-    var syllabus = {};
-
-    function buildClassSyllabus(levelLabel) {
-      return {
-        MathSkills: {
-          subjectLabel: "Math + Money & Data",
-          level: levelLabel,
-          topics: [
-            {
-              id: "math-money-basics",
-              title: "Numbers + Money Sense",
-              level: "Starter",
-              body:
-"Concept:\nMath is not only for exams; it is for money, shopping, saving and business.\n\nAI/LLM Connection:\n• Ask Comet: “Explain profit, loss, discount in very simple steps with real examples.”\n• Use AI to generate small word problems about pocket money.\n\nReal-World Application:\n• You can check if someone overcharged you.\n• You understand savings, interest and small business ideas.\n\nMini Project:\nTrack every rupee you spend today (snacks, travel, recharge). At night, ask Comet to help you make a simple daily budget from that list.",
-              quiz: {
-                question: "Why is math important in real life here?",
-                options: [
-                  "Only for passing exams",
-                  "For checking money, prices and savings",
-                  "Only for scientists",
-                  "It has no real use"
-                ],
-                answerIndex: 1
-              }
-            }
-          ]
-        },
-
-        ScienceThinking: {
-          subjectLabel: "Science + Problem Solving",
-          level: levelLabel,
-          topics: [
-            {
-              id: "sci-curiosity-ai",
-              title: "Curiosity, Experiments & AI",
-              level: "Starter",
-              body:
-"Concept:\nScience starts with curiosity: “Why?” “How?” “What if?”. Experiments test ideas.\n\nAI/LLM Connection:\n• Ask Comet: “Give me 3 simple experiments I can do at home with safety.”\n• Use AI to predict and then test the result.\n\nReal-World Application:\n• You become better at troubleshooting (devices, code, daily problems).\n• Companies pay problem-solvers, not memorisers.\n\nMini Project:\nPick a daily problem (slow phone, messy bag, late homework). Ask Comet for 3 scientific-style solutions. Test one and write what changed.",
-              quiz: {
-                question: "Science mainly starts with:",
-                options: [
-                  "Memorising definitions",
-                  "Curiosity and questions",
-                  "Copying notes",
-                  "Ignoring problems"
-                ],
-                answerIndex: 1
-              }
-            }
-          ]
-        },
-
-        EnglishCommunication: {
-          subjectLabel: "English + Communication & Content",
-          level: levelLabel,
-          topics: [
-            {
-              id: "eng-clear-ideas",
-              title: "Clear Communication in Simple Words",
-              level: "Starter",
-              body:
-"Concept:\nGood communication = simple, clear, honest words that others understand easily.\n\nAI/LLM Connection:\n• Ask Comet: “Rewrite my sentence in simple, friendly English.”\n• Ask: “Give me 3 better subject lines for this message.”\n\nReal-World Application:\n• Email to clients, messages to teachers, job applications, freelancing profiles.\n\nMini Project:\nWrite a message to a friend explaining your dream skill or job. Ask Comet to improve it for clarity and politeness, then compare versions.",
-              quiz: {
-                question: "Good communication is mainly about:",
-                options: [
-                  "Using very difficult words",
-                  "Being confusing and long",
-                  "Being simple, clear and honest",
-                  "Copying others’ style without thinking"
-                ],
-                answerIndex: 2
-              }
-            }
-          ]
-        },
-
-        Hindi: {
-          subjectLabel: "Hindi Language",
-          level: levelLabel,
-          topics: [
-            {
-              id: "hin-basic-express",
-              title: "स्पष्ट अभिव्यक्ति (Clear Expression)",
-              level: "Starter",
-              body:
-"संकल्पना:\nसाफ़ और सरल भाषा में अपने विचार लिखना और बोलना एक महत्वपूर्ण कौशल है।\n\nएआई संबंध:\n• Comet से कहें: “मेरे वाक्य को सरल हिन्दी में सुधारो।”\n• एआई से छोटे संदेश, आवेदन-पत्र या रिपोर्ट तैयार करवाकर खुद भी लिखने की कोशिश करें।\n\nवास्तविक उपयोग:\n• आवेदन-पत्र, पत्र, व्हाट्सऐप संदेश, नोटिस आदि में मदद।\n\nमिनी प्रोजेक्ट:\nकिसी एक समस्या पर 4–5 वाक्य हिन्दी में लिखें, फिर Comet से उसे सुधारने को कहें और दोनों की तुलना करें।",
-              quiz: {
-                question: "स्पष्ट अभिव्यक्ति में क्या ज़रूरी है?",
-                options: [
-                  "बहुत कठिन शब्द",
-                  "लंबे-लंबे वाक्य",
-                  "साफ़ और सरल भाषा",
-                  "केवल अंग्रेज़ी शब्द"
-                ],
-                answerIndex: 2
-              }
-            }
-          ]
-        },
-
-        SuperLearning: superLearning,
-        Languages: worldLanguages,
-
-        DigitalMarketing: {
-          subjectLabel: "Digital Marketing & Social Media",
-          level: levelLabel,
-          topics: [
-            {
-              id: "dm-storytelling-basic",
-              title: "Story Posts vs. Plain Posts",
-              level: "Starter",
-              body:
-"Concept:\nOn social media, stories (before/after, problem/solution) work better than random posts.\n\nAI/LLM Connection:\n• Ask Comet: “Turn this boring sentence into a short story for Instagram or YouTube community.”\n• Ask: “Give 5 hook lines for a reel about [topic].”\n\nReal-World Application:\n• You can promote school events, projects, small businesses.\n• Later, you can earn by handling social media for clients.\n\nMini Project:\nPick one topic you love (cricket, drawing, coding, food). Ask Comet for 3 reel hook ideas. Write them down and choose your favourite.",
-              quiz: {
-                question: "What works better in social media content?",
-                options: [
-                  "Random plain statements",
-                  "Copy-pasting others’ posts",
-                  "Story-based posts with hook and solution",
-                  "Long textbook paragraphs"
-                ],
-                answerIndex: 2
-              }
-            }
-          ]
-        },
-
-        CodingNoCode: {
-          subjectLabel: "Coding & No-Code Apps",
-          level: levelLabel,
-          topics: [
-            {
-              id: "code-think-like-computer",
-              title: "Think Like a Computer (Logic Blocks)",
-              level: "Starter",
-              body:
-"Concept:\nCoding = giving step-by-step instructions a computer can follow.\n\nAI/LLM Connection:\n• Ask Comet: “Explain if/else and loops with simple daily life examples.”\n• Ask: “Generate a simple pseudo-code to remind me to drink water every hour.”\n\nReal-World Application:\n• You can build tools that save time (timers, calculators, trackers).\n• Connect no-code tools with AI to make mini-automations.\n\nMini Project:\nDescribe a daily routine (wake up, school, study, play). Ask Comet to convert it to step-by-step pseudo-code. See how close coding is to your real day.",
-              quiz: {
-                question: "Coding mainly means:",
-                options: [
-                  "Memorising many languages",
-                  "Giving step-by-step instructions to a computer",
-                  "Only designing screens",
-                  "Playing video games"
-                ],
-                answerIndex: 1
-              }
-            }
-          ]
-        },
-
-        DesignVideo: {
-          subjectLabel: "Graphic Design & Video Editing",
-          level: levelLabel,
-          topics: [
-            {
-              id: "design-simple-layout",
-              title: "Simple Layout > Too Many Effects",
-              level: "Starter",
-              body:
-"Concept:\nGood design is clear and focused: few colours, readable text, one main message.\n\nAI/LLM Connection:\n• Ask Comet: “Give me a layout idea for a poster about [topic] with headings and subpoints.”\n• Ask: “Give title ideas for a YouTube thumbnail that are short and powerful.”\n\nReal-World Application:\n• Posters for school, NGO, fundraising, local business.\n• Thumbnails and shorts that get more clicks.\n\nMini Project:\nChoose one cause (save water, help strays, fundraiser). Ask Comet to suggest a poster structure. Then design it using any free tool (Canva, etc.).",
-              quiz: {
-                question: "Which is usually better in design?",
-                options: [
-                  "Too many colours and fonts",
-                  "Clear layout with one main message",
-                  "Tiny text everywhere",
-                  "Maximum animations"
-                ],
-                answerIndex: 1
-              }
-            }
-          ]
-        },
-
-        BusinessEntrepreneurship: {
-          subjectLabel: "Business & Entrepreneurship",
-          level: levelLabel,
-          topics: [
-            {
-              id: "biz-problem-solution",
-              title: "Business = Solving Problems",
-              level: "Starter",
-              body:
-"Concept:\nA business is simply: find a problem, solve it, get paid fairly for the solution.\n\nAI/LLM Connection:\n• Ask Comet: “List 10 problems students/parents/teachers face daily. Turn them into simple business ideas.”\n• Ask: “Help me create a one-line pitch for this idea.”\n\nReal-World Application:\n• You can start tiny services: notes summarising, poster design, local delivery coordination, etc.\n\nMini Project:\nWrite down 3 problems you or your friends face at school or home. Ask Comet to turn each into a small service idea and first paying customer type.",
-              quiz: {
-                question: "According to this lesson, business mainly starts from:",
-                options: [
-                  "Having lots of money",
-                  "Solving real problems",
-                  "Copying big companies",
-                  "Creating an app first"
-                ],
-                answerIndex: 1
-              }
-            }
-          ]
-        },
-
-        AITools: {
-          subjectLabel: "AI Tools, LLMs & Automation",
-          level: levelLabel,
-          topics: [
-            {
-              id: "ai-basics-llm",
-              title: "What is an LLM? (Class 1–5 version)",
-              level: "Core",
-              body:
-"Concept:\nLLM = Large Language Model. It is a computer program that learned from many texts and predicts the next word.\n\nFor Small Classes:\n• Think of it as a super-fast reader that suggests sentences, stories, answers.\n• It doesn’t “know everything”, but can help think faster.\n\nReal-World Application:\n• Homework help, idea generation, content creation, research.\n• Later: code, marketing, customer support, automation.\n\nMini Project:\nAsk Comet: “Explain what you are in 3 lines to a 10-year-old.” Read and show it to a friend or parent.",
-              quiz: {
-                question: "An LLM mainly does what?",
-                options: [
-                  "Predicts the next word based on patterns",
-                  "Controls robots directly",
-                  "Prints money",
-                  "Reads minds"
-                ],
-                answerIndex: 0
-              }
-            }
-          ]
-        },
-
-        ContentWriting: {
-          subjectLabel: "Content Writing & Copywriting",
-          level: levelLabel,
-          topics: [
-            {
-              id: "cw-hook-body-cta",
-              title: "Hook + Body + CTA (Simple Copywriting)",
-              level: "Starter",
-              body:
-"Concept:\nGood content often follows: Hook (grab attention) → Body (explain) → CTA (what next?).\n\nAI/LLM Connection:\n• Ask Comet: “Turn this paragraph into Hook + Body + CTA for [Instagram / LinkedIn / Email].”\n• Ask: “Give 3 different hooks for the same topic.”\n\nReal-World Application:\n• Posts, emails, landing pages, sales pages, fundraiser messages.\n\nMini Project:\nChoose any topic (fundraiser, school event, your skill). Write a rough paragraph. Ask Comet to convert it to Hook + Body + CTA. Compare with your version.",
-              quiz: {
-                question: "In this lesson, CTA stands for:",
-                options: [
-                  "Call to Action",
-                  "Code to Apply",
-                  "Copy Text Area",
-                  "Class Test Answer"
-                ],
-                answerIndex: 0
-              }
-            }
-          ]
-        },
-
-        FreelancingIncome: {
-          subjectLabel: "Freelancing & Online Income",
-          level: levelLabel,
-          topics: [
-            {
-              id: "free-skill-portfolio",
-              title: "Skills + Portfolio > Certificates",
-              level: "Starter",
-              body:
-"Concept:\nClients mostly care about what you can DO and SHOW, not just certificates.\n\nAI/LLM Connection:\n• Ask Comet: “List 5 simple online services I can offer as a student using AI (content, research, design, etc.).”\n• Ask: “Help me write a mini profile for my first freelancing gig.”\n\nReal-World Application:\n• Fiverr, Upwork, direct clients, local businesses.\n\nMini Project:\nPick one skill track you like (design, content, coding). With Comet’s help, write a 3-line profile and 3 sample service descriptions for a future gig.",
-              quiz: {
-                question: "For freelancing, what is usually more important?",
-                options: [
-                  "Only certificates",
-                  "Real skills and portfolio",
-                  "Fancy job title",
-                  "Having many apps installed"
-                ],
-                answerIndex: 1
-              }
-            }
-          ]
-        },
-
-        ProjectSkills: {
-          subjectLabel: "Projects, Management & Public Speaking",
-          level: levelLabel,
-          topics: [
-            {
-              id: "proj-small-start",
-              title: "Micro Projects: Start Tiny, Learn Fast",
-              level: "Starter",
-              body:
-"Concept:\nInstead of dreaming of a huge startup, start with tiny “micro projects” that finish in 1–7 days.\n\nAI/LLM Connection:\n• Ask Comet: “Suggest 5 micro projects for my age in [topic: design / AI / coding / marketing].”\n• Ask: “Create a 2-minute speech to present my project to my class.”\n\nReal-World Application:\n• Builds your portfolio and confidence.\n• Ready for hackathons, internships, real jobs later.\n\nMini Project:\nAsk Comet for 3 micro project ideas related to your favourite skill track. Choose one and plan 3 simple steps to finish it this week.",
-              quiz: {
-                question: "Micro projects are:",
-                options: [
-                  "Huge startups only",
-                  "Small, quickly finished projects to learn fast",
-                  "Only for toppers",
-                  "Only for adults"
-                ],
-                answerIndex: 1
-              }
-            }
-          ]
-        }
-      };
+      if (debugLogEl) {
+        debugLogEl.textContent += line + "\n";
+        debugLogEl.scrollTop = debugLogEl.scrollHeight;
+      }
+      // Also log to console for dev tools
+      console.log("[DEBUG]", message, extra || "");
     }
 
-    // Build syllabus for all classes
-    for (var c = 1; c <= 12; c++) {
-      var levelLabel =
-        c <= 5 ? "Foundations (Classes 1–5)" :
-        c <= 8 ? "Builders (Classes 6–8)" :
-        "Launchpad (Classes 9–12)";
-      syllabus[String(c)] = buildClassSyllabus(levelLabel);
+    function toggleDebugPanel(forceState) {
+      debugPanelVisible = typeof forceState === "boolean" ? forceState : !debugPanelVisible;
+      if (debugPanelVisible) {
+        debugPanel.style.display = "flex";
+        debugLog("Debug panel opened");
+      } else {
+        debugPanel.style.display = "none";
+        debugLog("Debug panel closed");
+      }
     }
 
-    // ---------- Progress Storage ----------
-    var STORAGE_KEY = "fs_progress_v1";
-    var progress = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
-    if (!progress) {
-      progress = {
-        lessons: {},
-        quizAttempts: 0,
-        quizCorrect: 0
-      };
-    }
+    debugToggle.addEventListener("click", () => toggleDebugPanel());
+    debugCloseBtn.addEventListener("click", () => toggleDebugPanel(false));
 
-    function saveProgress() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
-      updateGlobalProgressUI();
-    }
-
-    // ---------- DOM References ----------
-    var classGrid;
-    var subjectsRow;
-    var topicList;
-    var lessonTitle;
-    var lessonBody;
-    var qaSection;
-    var quizQuestionEl;
-    var optionsContainer;
-    var nextQuestionBtn;
-    var speakLessonBtn;
-    var speakQuestionBtn;
-
-    var overallProgressFill;
-    var overallProgressLabel;
-    var overallScoreLabel;
-    var progressPillText;
-    var offlineLabel;
-    var onlineChip;
-    var storageNote;
-
-    var languageSelect;
-    var appTitle;
-    var appSubtitle;
-    var classHeading;
-    var classSubtitle;
-    var subjectHeading;
-    var subjectSubtitle;
-    var topicHeading;
-    var topicSubtitle;
-    var metaClass;
-    var metaSubject;
-    var metaTopicCount;
-
-    var knownLangSelect;
-    var targetLangSelect;
-    var langPairControls;
-
-    // AI elements
-    var aiBackdrop;
-    var openAiBtn;
-    var closeAiBtn;
-    var aiChat;
-    var aiTextInput;
-    var aiSendBtn;
-    var aiFileInput;
-    var aiUrlInput;
-    var aiUrlAnalyzeBtn;
-    var aiStatusDot;
-    var aiOnlineStatusText;
-    var aiStatusLine;
-
-    // Wisdom DOM elements
-var wisdomToggle = document.getElementById("wisdomToggle");
-var wisdomPanel = document.getElementById("wisdomPanel");
-var wisdomCloseBtn = document.getElementById("wisdomCloseBtn");
-var wisdomLangSelect = document.getElementById("wisdomLangSelect");
-
-var wisdomList = document.getElementById("wisdomList");
-var wisdomStoryTitle = document.getElementById("wisdomStoryTitle");
-var wisdomStoryMeta = document.getElementById("wisdomStoryMeta");
-var wisdomStoryText = document.getElementById("wisdomStoryText");
-var wisdomReflectionText = document.getElementById("wisdomReflectionText");
-var wisdomChallengeText = document.getElementById("wisdomChallengeText");
-var wisdomAudioBtn = document.getElementById("wisdomAudioBtn");
-var wisdomThemePill = document.getElementById("wisdomThemePill");
-var wisdomStoryLabelEl = document.getElementById("wisdomStoryLabel");
-var wisdomReflectionLabelEl = document.getElementById("wisdomReflectionLabel");
-var wisdomChallengeLabelEl = document.getElementById("wisdomChallengeLabel");
-var wisdomTitleMainEl = document.getElementById("wisdomTitleMain");
-var wisdomTitleSubEl = document.getElementById("wisdomTitleSub");
-
-var currentWisdomId = null;
-
-    function renderWisdomUIStrings() {
-  var t = wisdomUIText[wisdomUILang] || wisdomUIText.en;
-  if (wisdomTitleMainEl) wisdomTitleMainEl.textContent = t.panelTitle;
-  if (wisdomTitleSubEl) wisdomTitleSubEl.textContent = t.panelSub;
-  if (wisdomStoryLabelEl) wisdomStoryLabelEl.textContent = t.storyLabel;
-  if (wisdomReflectionLabelEl) wisdomReflectionLabelEl.textContent = t.reflectionLabel;
-  if (wisdomChallengeLabelEl) wisdomChallengeLabelEl.textContent = t.challengeLabel;
-  if (wisdomReflectionText && (!currentWisdomId)) {
-    wisdomReflectionText.textContent = t.defaultReflection;
-  }
-  if (wisdomChallengeText && (!currentWisdomId)) {
-    wisdomChallengeText.textContent = t.defaultChallenge;
-  }
-  if (wisdomThemePill) wisdomThemePill.textContent = t.themeDefault;
-}
-
-function renderWisdomList() {
-  if (!wisdomList) return;
-  wisdomList.innerHTML = "";
-
-  wisdomStories.forEach(function (item) {
-    var div = document.createElement("div");
-    div.className = "wisdom-item";
-    div.dataset.id = item.id;
-
-    div.innerHTML =
-      '<div class="wisdom-item-title">' + item.title + '</div>' +
-      '<div class="wisdom-item-meta">' +
-        item.name + " • " + item.theme +
-      "</div>";
-
-    div.addEventListener("click", function () {
-      currentWisdomId = item.id;
-      var all = wisdomList.querySelectorAll(".wisdom-item");
-      for (var i = 0; i < all.length; i++) all[i].classList.remove("active");
-      div.classList.add("active");
-      loadWisdomStory(item);
+    window.addEventListener("error", (event) => {
+      debugLog("Window error captured", {
+        message: event.message,
+        filename: event.filename,
+        lineno: event.lineno,
+        colno: event.colno
+      });
     });
 
-    wisdomList.appendChild(div);
-  });
-}
+    /************************************************************
+     *  APP INIT – CLASS & SUBJECT BUTTONS
+     ************************************************************/
+    const classes = Array.from({ length: 12 }, (_, i) => i + 1);
 
-function loadWisdomStory(item) {
-  var t = wisdomUIText[wisdomUILang] || wisdomUIText.en;
-  if (wisdomStoryTitle) wisdomStoryTitle.textContent = item.title;
-  if (wisdomStoryMeta) {
-    wisdomStoryMeta.textContent =
-      item.sourceType + " • " + item.name + " • Age " + item.ageRange;
-  }
-  if (wisdomStoryText) {
-    wisdomStoryText.textContent =
-      item.context + "\n\n" + item.story + "\n\nTeaching (summary): " + item.teaching;
-  }
-  if (wisdomReflectionText) {
-    wisdomReflectionText.textContent = item.reflection || t.defaultReflection;
-  }
-  if (wisdomChallengeText) {
-    wisdomChallengeText.textContent = item.challenge || t.defaultChallenge;
-  }
-  if (wisdomThemePill) {
-    wisdomThemePill.textContent = item.theme || t.themeDefault;
-  }
-}
+    const subjects = [
+      { id: "maths", label: "Maths", emoji: "🧮" },
+      { id: "science", label: "Science", emoji: "🔬" },
+      { id: "english", label: "English", emoji: "📖" },
+      { id: "hindi", label: "Hindi", emoji: "📝" }
+    ];
 
-function speakWisdomStory() {
-  if (!currentWisdomId) {
-    // no specific story selected: read panel intro
-    var intro =
-      (wisdomStoryTitle ? wisdomStoryTitle.textContent + ". " : "") +
-      (wisdomStoryText ? wisdomStoryText.textContent : "");
-    speak(intro, wisdomUILang);
-    return;
-  }
-  var item = null;
-  for (var i = 0; i < wisdomStories.length; i++) {
-    if (wisdomStories[i].id === currentWisdomId) {
-      item = wisdomStories[i];
-      break;
-    }
-  }
-  if (!item) return;
-  var text =
-    item.title + ". " +
-    item.context + ". " +
-    item.story + ". Reflection: " +
-    item.reflection + ". Action: " +
-    item.challenge;
-  speak(text, wisdomUILang);
-}
-
-
-
-    var currentClass = null;
-    var currentSubject = null;
-    var currentTopicIndex = 0;
-
-    // ---------- UI Language Handling ----------
-    function renderLanguage() {
-      var t = uiText[currentLang];
-      appTitle.textContent = t.title;
-      appSubtitle.textContent = t.subtitle;
-      classHeading.textContent = t.classHeading;
-      classSubtitle.textContent = t.classSubtitle;
-      subjectHeading.textContent = t.subjectHeading;
-      subjectSubtitle.textContent = t.subjectSubtitle;
-      topicHeading.textContent = t.topicHeading;
-      topicSubtitle.textContent = t.topicSubtitle;
-      offlineLabel.textContent = t.offlineReady;
-      storageNote.textContent = t.storageNote;
-
-      if (!currentClass || !currentSubject) {
-        lessonTitle.textContent = t.startTitle;
-        lessonBody.textContent = t.startBody;
+    function buildClassButtons() {
+      const container = document.getElementById("classButtons");
+      if (!container) {
+        debugLog("Class buttons container NOT found", { id: "classButtons" });
+        return;
       }
-
-      updateGlobalProgressUI();
+      container.innerHTML = "";
+      classes.forEach((cls) => {
+        const btn = document.createElement("button");
+        btn.className = "btn";
+        btn.textContent = "Class " + cls;
+        btn.dataset.value = cls;
+        btn.addEventListener("click", () => handleClassClick(cls, btn));
+        container.appendChild(btn);
+      });
+      debugLog("Class buttons built", { count: classes.length });
     }
 
-    // ---------- Helpers ----------
-    function getClassData(classId) {
-      return syllabus[classId] || null;
-    }
-
-    function getSubjectData(classId, subjectKey) {
-      var cls = getClassData(classId);
-      if (!cls) return null;
-      var subj = cls[subjectKey];
-      return subj || null;
-    }
-
-    function getTopicKey(classId, subjectKey, topicId) {
-      return classId + "-" + subjectKey + "-" + topicId;
-    }
-
-    // ---------- Class & Subject ----------
-    function initClassGrid() {
-      classGrid.innerHTML = "";
-      for (var c = 1; c <= 12; c++) {
-        (function (cVal) {
-          var btn = document.createElement("button");
-          btn.className = "pill-btn";
-          btn.textContent = "Class " + cVal;
-          btn.dataset.classValue = String(cVal);
-          btn.addEventListener("click", function () {
-            var all = document.querySelectorAll("#classGrid .pill-btn");
-            for (var i = 0; i < all.length; i++) {
-              all[i].classList.remove("active");
-            }
-            btn.classList.add("active");
-            currentClass = String(cVal);
-            currentSubject = null;
-            renderSubjects();
-            renderTopics();
-            metaClass.textContent = "Class " + currentClass;
-            metaSubject.textContent = "Track \u2013";
-          });
-          classGrid.appendChild(btn);
-        })(c);
+    function buildSubjectButtons() {
+      const container = document.getElementById("subjectButtons");
+      if (!container) {
+        debugLog("Subject buttons container NOT found", { id: "subjectButtons" });
+        return;
       }
+      container.innerHTML = "";
+      subjects.forEach((sub) => {
+        const btn = document.createElement("button");
+        btn.className = "btn";
+        btn.textContent = sub.emoji + " " + sub.label;
+        btn.dataset.value = sub.id;
+        btn.addEventListener("click", () => handleSubjectClick(sub.id, btn));
+        container.appendChild(btn);
+      });
+      debugLog("Subject buttons built", { count: subjects.length });
     }
 
-    function renderSubjects() {
-      subjectsRow.innerHTML = "";
-      var data = getClassData(currentClass);
-      if (!data) {
-        subjectsRow.innerHTML =
-          '<span style="font-size:12px;opacity:0.7;">Syllabus for this class will be added soon.</span>';
-        metaTopicCount.textContent = "0 topics";
-        langPairControls.style.display = "none";
+    function handleClassClick(cls, clickedBtn) {
+      state.selectedClass = cls;
+      debugLog("Class selected", { class: cls });
+
+      // Visual selection
+      document.querySelectorAll("#classButtons .btn").forEach((btn) => {
+        btn.classList.toggle("selected", btn === clickedBtn);
+      });
+
+      updateSelectionLabel();
+      buildClassSyllabus();
+    }
+
+    function handleSubjectClick(subjectId, clickedBtn) {
+      state.selectedSubject = subjectId;
+      debugLog("Subject selected", { subject: subjectId });
+
+      document.querySelectorAll("#subjectButtons .btn").forEach((btn) => {
+        btn.classList.toggle("selected", btn === clickedBtn);
+      });
+
+      updateSelectionLabel();
+      buildClassSyllabus();
+    }
+
+    function updateSelectionLabel() {
+      const el = document.getElementById("currentSelectionLabel");
+      if (!el) return;
+
+      if (!state.selectedClass && !state.selectedSubject) {
+        el.textContent = "No class/subject selected.";
         return;
       }
 
-      for (var subjectKey in data) {
-        if (!data.hasOwnProperty(subjectKey)) continue;
-        var subject = data[subjectKey];
-        var card = document.createElement("div");
-        card.className = "subject-card";
-        if (currentSubject === subjectKey) card.classList.add("active");
-
-        var icon =
-          subjectKey === "MathSkills" ? "🧮" :
-          subjectKey === "ScienceThinking" ? "🔬" :
-          subjectKey === "EnglishCommunication" ? "🗣️" :
-          subjectKey === "Hindi" ? "📝" :
-          subjectKey === "SuperLearning" ? "⚡" :
-          subjectKey === "Languages" ? "🌍" :
-          subjectKey === "DigitalMarketing" ? "📊" :
-          subjectKey === "CodingNoCode" ? "💻" :
-          subjectKey === "DesignVideo" ? "🎨" :
-          subjectKey === "BusinessEntrepreneurship" ? "💼" :
-          subjectKey === "AITools" ? "🤖" :
-          subjectKey === "ContentWriting" ? "📝" :
-          subjectKey === "FreelancingIncome" ? "💰" :
-          subjectKey === "ProjectSkills" ? "🎯" :
-          "📘";
-
-        card.innerHTML =
-          '<div class="subject-pill">' + icon + " " + subject.subjectLabel + '</div>' +
-          '<div class="subject-main">' + subject.subjectLabel + '</div>' +
-          '<div class="subject-sub">' + subject.level + '</div>' +
-          '<div class="tag-row">' +
-            '<span class="tiny-tag">' + subject.topics.length + ' topics</span>' +
-            '<span class="tiny-tag">Skills + AI</span>' +
-          '</div>';
-
-        (function (subjectKey) {
-          card.addEventListener("click", function () {
-            var allCards = document.querySelectorAll(".subject-card");
-            for (var i = 0; i < allCards.length; i++) {
-              allCards[i].classList.remove("active");
-            }
-            card.classList.add("active");
-            currentSubject = subjectKey;
-            renderTopics();
-            metaSubject.textContent = subject.subjectLabel;
-          });
-        })(subjectKey);
-
-        subjectsRow.appendChild(card);
-      }
+      const subjectObj = subjects.find((s) => s.id === state.selectedSubject);
+      const subjectLabel = subjectObj ? subjectObj.label : "No subject";
+      const classLabel = state.selectedClass ? "Class " + state.selectedClass : "No class";
+      el.textContent = classLabel + " • " + subjectLabel;
     }
 
-    function renderTopics() {
-      var t = uiText[currentLang];
-      topicList.innerHTML = "";
+    /************************************************************
+     *  FUTURE-PROOF SYLLABUS BUILDER
+     ************************************************************/
+    function buildClassSyllabus() {
+      const container = document.getElementById("syllabusContent");
+      if (!container) return;
 
-      if (!currentClass || !currentSubject) {
-        metaTopicCount.textContent = "0 topics";
-        lessonTitle.textContent = t.startTitle;
-        lessonBody.textContent = t.startBody;
-        qaSection.style.display = "none";
-        langPairControls.style.display = "none";
+      const cls = state.selectedClass;
+      const subjectId = state.selectedSubject;
+      if (!cls || !subjectId) {
+        container.innerHTML = "Please select a <strong>class</strong> and a <strong>subject</strong> to view syllabus.";
+        debugLog("Syllabus not built – missing selection", { class: cls, subject: subjectId });
         return;
       }
 
-      var subjectData = getSubjectData(currentClass, currentSubject);
-      if (!subjectData) {
-        metaTopicCount.textContent = "0 topics";
-        topicList.innerHTML =
-          '<span style="font-size:12px;opacity:0.7;">Topics for this track will be added soon.</span>';
-        langPairControls.style.display = "none";
-        return;
-      }
+      // Base topics per subject (simple demo; can be replaced by real syllabus)
+      const baseTopicsBySubject = {
+        maths: [
+          "Numbers and counting (0–100, later bigger numbers)",
+          "Basic operations: addition, subtraction, multiplication, division",
+          "Word problems from real life (money, time, distance)",
+          "Geometry basics: shapes, patterns, measurement"
+        ],
+        science: [
+          "Living and non-living things",
+          "Plants, animals & human body basics",
+          "Matter, water, air, and weather",
+          "Simple experiments and observation"
+        ],
+        english: [
+          "Reading short stories and passages",
+          "Grammar: nouns, verbs, adjectives, tenses (as per class level)",
+          "Vocabulary building with everyday words",
+          "Writing: sentences, paragraphs, letters"
+        ],
+        hindi: [
+          "Varnamala and basic pronunciation",
+          "Reading short passages and poems",
+          "Grammar: sangya, kriya, visheshan (as per class level)",
+          "Writing: anuchhed, patra, rachnatmak lekhan"
+        ]
+      };
 
-      metaTopicCount.textContent = subjectData.topics.length + " topics";
+      const subjectName = subjects.find((s) => s.id === subjectId)?.label || "Subject";
+      const baseTopics = baseTopicsBySubject[subjectId] || ["Core textbook topics as per board syllabus."];
 
-      subjectData.topics.forEach(function (topic, index) {
-        var row = document.createElement("div");
-        row.className = "topic-item";
-        row.dataset.index = index;
-        row.innerHTML =
-          "<span>" + topic.title + "</span>" +
-          '<span style="font-size:11px;opacity:0.7;">' + topic.level + "</span>";
-        row.addEventListener("click", function () {
-          var all = document.querySelectorAll(".topic-item");
-          for (var i = 0; i < all.length; i++) {
-            all[i].classList.remove("active");
-          }
-          row.classList.add("active");
-          currentTopicIndex = index;
-          loadLessonAndQuiz();
-        });
-        topicList.appendChild(row);
-      });
-
-      if (currentSubject === "Languages") {
-        langPairControls.style.display = "flex";
-      } else {
-        langPairControls.style.display = "none";
-      }
-    }
-
-    function loadLessonAndQuiz() {
-      if (!currentClass || !currentSubject) return;
-      var subjectData = getSubjectData(currentClass, currentSubject);
-      if (!subjectData) return;
-
-      var topic = subjectData.topics[currentTopicIndex];
-      if (!topic) return;
-
-      if (currentSubject === "Languages") {
-        renderLanguagePhraseView(topic);
-      } else {
-        lessonTitle.textContent = topic.title;
-        lessonBody.textContent = topic.body;
-      }
-
-      qaSection.style.display = "block";
-      renderQuiz(topic);
-      markLessonCompleted(topic);
-    }
-
-    function markLessonCompleted(topic) {
-      var key = getTopicKey(currentClass, currentSubject, topic.id);
-      if (!progress.lessons[key]) {
-        progress.lessons[key] = { completed: true, bestScore: 0 };
-      } else if (!progress.lessons[key].completed) {
-        progress.lessons[key].completed = true;
-      }
-      saveProgress();
-    }
-
-    // ---------- Language Pair Controls ----------
-    function initLanguagePairSelectors() {
-      knownLangSelect.innerHTML = "";
-      targetLangSelect.innerHTML = "";
-
-      supportedLanguages.forEach(function (lang) {
-        var opt1 = document.createElement("option");
-        opt1.value = lang.code;
-        opt1.textContent = lang.native + " (" + lang.name + ")";
-        knownLangSelect.appendChild(opt1);
-
-        var opt2 = document.createElement("option");
-        opt2.value = lang.code;
-        opt2.textContent = lang.native + " (" + lang.name + ")";
-        targetLangSelect.appendChild(opt2);
-      });
-
-      var savedKnown = localStorage.getItem("fs_knownLang") || "en";
-      var savedTarget = localStorage.getItem("fs_targetLang") || "hi";
-
-      var hasKnown = supportedLanguages.some(function (l) { return l.code === savedKnown; });
-      var hasTarget = supportedLanguages.some(function (l) { return l.code === savedTarget; });
-
-      if (hasKnown) knownLangSelect.value = savedKnown;
-      if (hasTarget) targetLangSelect.value = savedTarget;
-
-      knownLangSelect.addEventListener("change", function () {
-        localStorage.setItem("fs_knownLang", knownLangSelect.value);
-        if (currentSubject === "Languages") renderLanguagePhraseView();
-      });
-
-      targetLangSelect.addEventListener("change", function () {
-        localStorage.setItem("fs_targetLang", targetLangSelect.value);
-        if (currentSubject === "Languages") renderLanguagePhraseView();
-      });
-    }
-
-    function renderLanguagePhraseView(topicParam) {
-      if (currentSubject !== "Languages") return;
-
-      var subjectData = getSubjectData(currentClass, currentSubject);
-      if (!subjectData) return;
-
-      var topic = topicParam || subjectData.topics[currentTopicIndex];
-      if (!topic) return;
-
-      var knownCode = knownLangSelect.value;
-      var targetCode = targetLangSelect.value;
-
-      lessonTitle.textContent = topic.title;
-
-      var explanationHtml = topic.body.replace(/\n/g, "<br>");
-
-      var tableHtml =
-        '<div style="margin-top:6px; font-size:12px;">' +
-          '<div style="display:flex; font-weight:600; margin-bottom:4px;">' +
-            '<div style="flex:1;">Concept</div>' +
-            '<div style="flex:1;">Known (' + knownCode + ')</div>' +
-            '<div style="flex:1;">Target (' + targetCode + ')</div>' +
-          '</div>';
-
-      languagePhrases.forEach(function (p) {
-        var knownPhrase = p.translations[knownCode] || "—";
-        var targetPhrase = p.translations[targetCode] || "—";
-        tableHtml +=
-          '<div style="display:flex; margin-bottom:3px;">' +
-            '<div style="flex:1;">' + p.concept + '</div>' +
-            '<div style="flex:1;">' + knownPhrase + '</div>' +
-            '<div style="flex:1;">' + targetPhrase + '</div>' +
-          '</div>';
-      });
-
-      tableHtml += "</div>";
-
-      lessonBody.innerHTML = explanationHtml + tableHtml;
-    }
-
-    // ---------- Quiz ----------
-    function renderQuiz(topic) {
-      var quiz = topic.quiz;
-      quizQuestionEl.textContent = quiz.question;
-      optionsContainer.innerHTML = "";
-
-      quiz.options.forEach(function (opt, index) {
-        var btn = document.createElement("button");
-        btn.className = "option-btn";
-        btn.textContent = String.fromCharCode(65 + index) + ". " + opt;
-        btn.dataset.index = index;
-        btn.addEventListener("click", function () {
-          handleAnswerClick(btn, index, quiz.answerIndex, topic);
-        });
-        optionsContainer.appendChild(btn);
-      });
-    }
-
-    function handleAnswerClick(btn, chosenIndex, correctIndex, topic) {
-      var optionButtons = optionsContainer.querySelectorAll(".option-btn");
-      for (var i = 0; i < optionButtons.length; i++) {
-        optionButtons[i].disabled = true;
-      }
-
-      progress.quizAttempts++;
-
-      if (chosenIndex === correctIndex) {
-        btn.classList.add("correct");
-        progress.quizCorrect++;
-      } else {
-        btn.classList.add("wrong");
-        if (optionButtons[correctIndex]) {
-          optionButtons[correctIndex].classList.add("correct");
-        }
-      }
-
-      var key = getTopicKey(currentClass, currentSubject, topic.id);
-      var lessonEntry = progress.lessons[key];
-      var currentBest = 0;
-      if (lessonEntry && typeof lessonEntry.bestScore === "number") {
-        currentBest = lessonEntry.bestScore;
-      }
-      var newScore = chosenIndex === correctIndex ? 100 : 0;
-      if (!lessonEntry) {
-        progress.lessons[key] = { completed: true, bestScore: newScore };
-      } else if (newScore > currentBest) {
-        progress.lessons[key].bestScore = newScore;
-      }
-
-      saveProgress();
-    }
-
-    // ---------- Text-to-Speech ----------
-    function speak(text, langOverride) {
-      if (!("speechSynthesis" in window)) {
-        alert("Text-to-speech not supported on this device.");
-        return;
-      }
-      var msg = new SpeechSynthesisUtterance(text);
-      var langCode = langOverride || currentLang;
-      msg.lang =
-        langCode === "hi" ? "hi-IN" :
-        langCode === "te" ? "te-IN" :
-        langCode === "es" ? "es-ES" :
-        langCode === "zh" ? "zh-CN" :
-        langCode === "ar" ? "ar-SA" :
-        langCode === "fr" ? "fr-FR" :
-        langCode === "pt" ? "pt-BR" :
-        langCode === "ru" ? "ru-RU" :
-        langCode === "ja" ? "ja-JP" :
-        langCode === "de" ? "de-DE" :
-        "en-IN";
-      window.speechSynthesis.cancel();
-      window.speechSynthesis.speak(msg);
-    }
-
-    // ---------- Progress UI ----------
-    function calculateTotalLessons() {
-      var count = 0;
-      for (var classId in syllabus) {
-        if (!syllabus.hasOwnProperty(classId)) continue;
-        var classObj = syllabus[classId];
-        for (var subjectKey in classObj) {
-          if (!classObj.hasOwnProperty(subjectKey)) continue;
-          count += classObj[subjectKey].topics.length;
-        }
-      }
-      return count;
-    }
-
-    function updateGlobalProgressUI() {
-      var t = uiText[currentLang];
-
-      var lessonKeys = Object.keys(progress.lessons || {});
-      var completedLessons = lessonKeys.filter(function (k) {
-        return progress.lessons[k].completed;
-      }).length;
-
-      var totalLessons = calculateTotalLessons();
-      var completionPercent = totalLessons === 0
-        ? 0
-        : Math.round((completedLessons / totalLessons) * 100);
-
-      var avgScore =
-        progress.quizAttempts === 0
-          ? 0
-          : Math.round((progress.quizCorrect / progress.quizAttempts) * 100);
-
-      overallProgressFill.style.width = completionPercent + "%";
-      overallProgressLabel.textContent =
-        completedLessons === 0
-          ? t.noLessons
-          : completedLessons + "/" + totalLessons + " lessons completed";
-      overallScoreLabel.textContent = t.avgScore(avgScore);
-      progressPillText.textContent =
-        t.progressPill(completedLessons, progress.quizAttempts, avgScore);
-    }
-
-    // ---------- Connectivity ----------
-    function updateOnlineStatus() {
-      var isOnline = navigator.onLine;
-      onlineChip.style.display = isOnline ? "inline-flex" : "none";
-
-      if (isOnline) {
-        aiStatusDot.style.background = "#22c55e";
-        aiOnlineStatusText.textContent = "Online AI";
-        aiStatusLine.textContent = "Using online AI model + offline syllabus";
-      } else {
-        aiStatusDot.style.background = "#f97316";
-        aiOnlineStatusText.textContent = "Offline mode";
-        aiStatusLine.textContent = "Using offline knowledge base only";
-      }
-    }
-
-    // ---------- Service Worker ----------
-    function registerServiceWorker() {
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker
-          .register("service-worker.js")
-          .then(function () { console.log("Service worker registered."); })
-          .catch(function (err) { console.error("Service worker registration failed:", err); });
-      }
-    }
-
-    // ---------- AI Assistant (Hybrid) ----------
-    var OPENROUTER_API_KEY = ""; // Put your key here when ready.
-
-    function addAiMessage(role, text) {
-      var row = document.createElement("div");
-      row.className = "ai-message-row " + (role === "user" ? "user" : "assistant");
-
-      var bubble = document.createElement("div");
-      bubble.className = "ai-message-bubble";
-      bubble.textContent = text;
-      row.appendChild(bubble);
-
-      aiChat.appendChild(row);
-      aiChat.scrollTop = aiChat.scrollHeight;
-    }
-
-    function addAiSystemNote(text) {
-      addAiMessage("assistant", text);
-    }
-
-    function getLocalContextSnippet() {
-      var snippet = "";
-      if (lessonTitle && lessonTitle.textContent && lessonTitle.textContent.trim().length > 0) {
-        snippet += "Current lesson title: " + lessonTitle.textContent + ". ";
-      }
-      if (lessonBody && lessonBody.textContent && lessonBody.textContent.trim().length > 0) {
-        snippet += "Lesson content: " + lessonBody.textContent.slice(0, 600);
-      }
-      return snippet;
-    }
-
-    function offlineAnswer(prompt) {
-      var lower = prompt.toLowerCase();
-      if (/freelanc|income|online money|earn/.test(lower)) {
-        return "Offline mode: Start small. Pick one skill (writing, design, research). Use AI to help you produce better work, then show 2–3 samples as your mini portfolio.";
-      }
-      if (/ai|llm|chatgpt|comet/.test(lower)) {
-        return "Offline mode: An LLM like Comet or ChatGPT is a language model that predicts the next word. Your power comes from asking smart questions and checking answers carefully.";
-      }
-      if (/project|startup|business/.test(lower)) {
-        return "Offline mode: Start with micro projects that solve a real problem around you. Keep them 1–7 days long, learn, then grow.";
-      }
-      return "Offline mode: Ask me about skills, AI, projects, business, language learning or any topic visible in this app. I’ll answer using the built-in syllabus and simple reasoning.";
-    }
-
-    function callOpenRouter(prompt, extraContext, callback) {
-      if (!OPENROUTER_API_KEY) {
-        callback("Online AI is not configured yet. Add your OpenRouter API key in index.html (OPENROUTER_API_KEY) to enable full AI answers.");
-        return;
-      }
-
-      var messages = [
-        {
-          role: "system",
-          content:
-"You are Comet, a kind, concise AI tutor for students (Class 1–12) learning future-ready skills, AI, freelancing and business. Explain step-by-step in simple language."
-        },
-        {
-          role: "user",
-          content: (extraContext ? ("Context:\n" + extraContext + "\n\n") : "") +
-            "Question:\n" + prompt
-        }
+      // Future-proof universal skills (always shown)
+      const futureSkillsUniversal = [
+        { tag: "🌍 Climate & Sustainability", description: "Understanding pollution, water saving, recycling, clean energy and how daily actions affect Earth." },
+        { tag: "🧠 Mental Health & Well-being", description: "Recognising feelings, stress basics, kindness, gratitude, simple breathing and calm-down techniques." },
+        { tag: "🔐 Digital Safety & Cyber Hygiene", description: "Safe passwords, not sharing OTP, avoiding strangers online, basic cyberbullying awareness." },
+        { tag: "🧠 Critical Thinking & Problem Solving", description: "Asking 'why', comparing information, spotting patterns, solving puzzles and real-life problems." },
+        { tag: "💰 Financial Literacy & Money Basics", description: "Saving vs spending, needs vs wants, simple budgeting and importance of not taking random loans." }
       ];
 
-      fetch("https://openrouter.ai/api/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Authorization": "Bearer " + OPENROUTER_API_KEY,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          model: "meta-llama/llama-3-8b-instruct:free",
-          messages: messages,
-          max_tokens: 512,
-          temperature: 0.6
-        })
-      })
-      .then(function (res) {
-        if (!res.ok) {
-          callback("Error from online AI (" + res.status + "). I’ll fall back to offline thinking. Check your OpenRouter key and network.");
-          return null;
-        }
-        return res.json();
-      })
-      .then(function (data) {
-        if (!data) return;
-        var text = data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content ? data.choices[0].message.content : "";
-        callback(text.trim() || "Online AI returned an empty answer. Please try again.");
-      })
-      .catch(function (e) {
-        console.error("OpenRouter error", e);
-        callback("Online AI call failed (network or CORS). I’ll answer using offline knowledge instead.");
+      // Age-appropriate coding / AI skills (light for lower classes)
+      const codingAndAiSkills = [];
+      if (cls <= 5) {
+        codingAndAiSkills.push(
+          { tag: "🐍 Coding Foundations (Blocks / Logic)", description: "Understanding sequences, patterns and logic through games and visual coding." },
+          { tag: "🤖 AI Awareness (Very Basic)", description: "Knowing that some apps are 'smart', ask questions, and must be used respectfully." }
+        );
+      } else if (cls <= 8) {
+        codingAndAiSkills.push(
+          { tag: "🐍 Python Basics", description: "Print, variables, basic maths, if-else, loops with small, fun programs." },
+          { tag: "🌐 JavaScript & Web", description: "Understanding how web pages work; writing simple scripts for interaction." },
+          { tag: "📊 Data Literacy", description: "Reading simple charts and tables; understanding averages and trends." },
+          { tag: "🤖 AI & Chatbots", description: "Using AI responsibly for homework help; understanding bias and limitations." }
+        );
+      } else {
+        codingAndAiSkills.push(
+          { tag: "🐍 Python (Intermediate)", description: "Functions, lists, dictionaries, simple projects like calculators or quiz apps." },
+          { tag: "🌐 JavaScript & Frontend", description: "DOM basics, events, simple interactive web pages." },
+          { tag: "📊 Data Analysis & AI Literacy", description: "Collecting data, using spreadsheets, basic charts, intro to ML ideas." },
+          { tag: "💸 Entrepreneurship & Side Projects", description: "Project planning, digital products, ethical earning using skills + AI." }
+        );
+      }
+
+      // Render syllabus
+      let html = "";
+      html += `<div><strong>${"Class " + cls} • ${subjectName}</strong></div>`;
+      html += `<div class="syllabus-tag-row">`;
+      html += `<div class="syllabus-tag">📖 Textbook + NCERT/Board aligned</div>`;
+      html += `<div class="syllabus-tag">🧩 Concept + Application</div>`;
+      html += `<div class="syllabus-tag">🇮🇳 India context examples</div>`;
+      html += `</div>`;
+
+      html += `<ul style="margin-top:6px; padding-left:18px;">`;
+      baseTopics.forEach((topic) => {
+        html += `<li>${topic}</li>`;
       });
+      html += `</ul>`;
+
+      html += `<div style="margin-top:6px; font-size:11px; color:#666;"><strong>Future-Proof Life Skills</strong> (taught through stories, discussions and activities):</div>`;
+      html += `<ul style="margin-top:4px; padding-left:18px;">`;
+      futureSkillsUniversal.forEach((skill) => {
+        html += `<li><strong>${skill.tag}:</strong> ${skill.description}</li>`;
+      });
+      html += `</ul>`;
+
+      html += `<div style="margin-top:6px; font-size:11px; color:#666;"><strong>Coding, AI & Data Skills</strong> (age-appropriate, gradual):</div>`;
+      html += `<ul style="margin-top:4px; padding-left:18px;">`;
+      codingAndAiSkills.forEach((skill) => {
+        html += `<li><strong>${skill.tag}:</strong> ${skill.description}</li>`;
+      });
+      html += `</ul>`;
+
+      html += `<div class="syllabus-tag-row" style="margin-top:4px;">`;
+      html += `<div class="skill-chip">🧠 Critical thinking in every subject</div>`;
+      html += `<div class="skill-chip">👥 Group work & projects</div>`;
+      html += `<div class="skill-chip">🗣️ Speaking & presentation practice</div>`;
+      html += `</div>`;
+
+      container.innerHTML = html;
+      debugLog("Syllabus built", { class: cls, subject: subjectId });
     }
 
-    function answerWithHybridAI(prompt, extraContext) {
-      addAiMessage("user", prompt);
-      addAiSystemNote(navigator.onLine
-        ? "Thinking with online AI + skills syllabus..."
-        : "Thinking with offline skills syllabus...");
+    /************************************************************
+     *  SAMPLE MATH QUIZ – CLASS 1
+     ************************************************************/
+    const sampleQuizQuestions = [
+      { q: "What is 2 + 3?", options: [4, 5, 6], answer: 5 },
+      { q: "What is 1 + 7?", options: [7, 8, 9], answer: 8 },
+      { q: "What is 4 + 4?", options: [6, 8, 9], answer: 8 },
+      { q: "What is 5 + 1?", options: [5, 6, 7], answer: 6 },
+      { q: "What is 3 + 2?", options: [4, 5, 6], answer: 5 },
+      { q: "What is 0 + 9?", options: [8, 9, 10], answer: 9 },
+      { q: "What is 6 + 3?", options: [8, 9, 10], answer: 9 },
+      { q: "What is 2 + 2?", options: [3, 4, 5], answer: 4 },
+      { q: "What is 7 + 1?", options: [7, 8, 9], answer: 8 },
+      { q: "What is 9 + 0?", options: [8, 9, 10], answer: 9 }
+    ];
 
-      var ctx = extraContext || getLocalContextSnippet();
-      if (!navigator.onLine) {
-        var answer = offlineAnswer(prompt + " " + ctx);
-        addAiMessage("assistant", answer);
-        return;
-      }
+    function startQuiz() {
+      state.quizQuestions = sampleQuizQuestions;
+      state.quizIndex = 0;
+      state.quizScore = 0;
+      debugLog("Quiz started", { totalQuestions: state.quizQuestions.length });
 
-      callOpenRouter(prompt, ctx, function (answer) {
-        addAiMessage("assistant", answer);
-      });
+      renderQuizQuestion();
     }
 
-    function analyzeUrl(url) {
-      if (!navigator.onLine) {
-        addAiSystemNote("You are offline. I cannot fetch URLs, but you can paste text from the page and I’ll help you.");
-        return;
-      }
-      if (!url) {
-        addAiSystemNote("Please paste a URL first.");
-        return;
-      }
-      addAiSystemNote("Trying to fetch and analyze URL…");
+    function renderQuizQuestion() {
+      const quizContent = document.getElementById("quizContent");
+      const quizStatus = document.getElementById("quizStatus");
+      if (!quizContent || !quizStatus) return;
 
-      fetch(url)
-        .then(function (res) { return res.text(); })
-        .then(function (text) {
-          var snippet = text.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").slice(0, 3000);
-          answerWithHybridAI(
-            "Summarize this webpage or video transcript in simple bullet points for a student. Focus on skills, AI, money or practical use.",
-            snippet
-          );
-        })
-        .catch(function (e) {
-          console.error("URL fetch error", e);
-          addAiSystemNote("I couldn't fetch that URL directly (CORS or network issue). Please copy-paste important text from the page, and I’ll summarize it.");
+      if (state.quizIndex >= state.quizQuestions.length) {
+        // End of quiz
+        state.progress.quizzesTaken += 1;
+        state.progress.correctAnswers += state.quizScore;
+        updateProgressUI();
+
+        quizContent.innerHTML = `
+          <div class="quiz-question">
+            <strong>Great job!</strong> You answered ${state.quizScore} out of ${state.quizQuestions.length} correctly.
+            <button class="btn-primary" style="margin-top:6px;" id="restartQuizBtn">🔁 Try Again</button>
+          </div>
+        `;
+        quizStatus.textContent = "Quiz finished. You can try again to improve your score.";
+        document.getElementById("restartQuizBtn").addEventListener("click", startQuiz);
+        debugLog("Quiz completed", {
+          score: state.quizScore,
+          total: state.quizQuestions.length
         });
+        return;
+      }
+
+      const current = state.quizQuestions[state.quizIndex];
+      quizStatus.textContent = `Question ${state.quizIndex + 1} of ${state.quizQuestions.length}`;
+
+      let html = "";
+      html += `<div class="quiz-question"><strong>${current.q}</strong></div>`;
+      html += `<div class="quiz-options">`;
+      current.options.forEach((opt, idx) => {
+        const inputId = `q${state.quizIndex}_opt${idx}`;
+        html += `
+          <label for="${inputId}">
+            <input type="radio" name="quizOption" id="${inputId}" value="${opt}" />
+            ${opt}
+          </label>
+        `;
+      });
+      html += `</div>`;
+      html += `<button class="btn-primary" style="margin-top:6px;" id="nextQuestionBtn">Next</button>`;
+
+      quizContent.innerHTML = html;
+
+      document.getElementById("nextQuestionBtn").addEventListener("click", () => {
+        const selected = document.querySelector('input[name="quizOption"]:checked');
+        if (!selected) {
+          alert("Please choose an answer before going to next question.");
+          return;
+        }
+        const selectedValue = Number(selected.value);
+        const correct = state.quizQuestions[state.quizIndex].answer;
+        if (selectedValue === correct) {
+          state.quizScore += 1;
+          debugLog("Quiz question answered correctly", {
+            index: state.quizIndex,
+            answer: selectedValue
+          });
+        } else {
+          debugLog("Quiz question answered incorrectly", {
+            index: state.quizIndex,
+            chosen: selectedValue,
+            correct
+          });
+        }
+
+        state.quizIndex += 1;
+        renderQuizQuestion();
+      });
     }
 
-    function handleFiles() {
-      var files = Array.from(aiFileInput.files || []);
-      if (!files.length) return;
+    /************************************************************
+     *  HUGGING FACE AI TUTOR – FRONTEND CALL
+     ************************************************************/
+    async function askAi() {
+      const questionEl = document.getElementById("aiQuestion");
+      const statusEl = document.getElementById("aiStatus");
+      const answerBox = document.getElementById("aiAnswerBox");
+      const btn = document.getElementById("askAiBtn");
 
-      addAiSys
+      if (!questionEl || !statusEl || !answerBox || !btn) {
+        debugLog("AI UI elements missing");
+        return;
+      }
 
-              // Wisdom sidebar events
-if (wisdomLangSelect) {
-  wisdomLangSelect.value = wisdomUILang;
-  wisdomLangSelect.addEventListener("change", function () {
-    wisdomUILang = wisdomLangSelect.value;
-    localStorage.setItem("fs_wisdomLang", wisdomUILang);
-    renderWisdomUIStrings();
-  });
-}
-if (wisdomToggle && wisdomPanel) {
-  wisdomToggle.addEventListener("click", function () {
-    wisdomPanel.classList.add("open");
-  });
-}
-if (wisdomCloseBtn && wisdomPanel) {
-  wisdomCloseBtn.addEventListener("click", function () {
-    wisdomPanel.classList.remove("open");
-  });
-}
-if (wisdomAudioBtn) {
-  wisdomAudioBtn.addEventListener("click", speakWisdomStory);
-}
+      const userQuestion = questionEl.value.trim();
+      if (!userQuestion) {
+        alert("Please type a question or topic for the AI to help with.");
+        return;
+      }
 
-// Initial render for wisdom
-renderWisdomUIStrings();
-renderWisdomList();
+      const subjectObj = subjects.find((s) => s.id === state.selectedSubject);
+      const contextClass = state.selectedClass ? "Class " + state.selectedClass : "Class unknown";
+      const contextSubject = subjectObj ? subjectObj.label : "Subject unknown";
 
+      // We wrap the question with a prompt for school-style answers
+      const fullPrompt =
+        `You are a helpful tutor for Indian school students.\n` +
+        `Board: CBSE/State. ${contextClass}, ${contextSubject}.\n` +
+        `Explain step by step in simple English (and use small examples). ` +
+        `Avoid very advanced topics unless necessary.\n\n` +
+        `Student question: ${userQuestion}`;
+
+      statusEl.textContent = "Contacting AI via Hugging Face Space...";
+      btn.disabled = true;
+      btn.textContent = "⏳ Asking AI...";
+
+      debugLog("AI request starting", {
+        backend: HF_BACKEND_URL,
+        class: state.selectedClass,
+        subject: state.selectedSubject
+      });
+
+      try {
+        const response = await fetch(HF_BACKEND_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          // Typical Gradio Space: { data: [prompt] }
+          body: JSON.stringify({ data: [fullPrompt] })
+        });
+
+        if (!response.ok) {
+          throw new Error("HF API status " + response.status);
+        }
+
+        const result = await response.json();
+
+        // Many Gradio Spaces return { data: [ "text..." ] } or [ { generated_text: "..."} ]
+        let aiText = "";
+        if (Array.isArray(result.data)) {
+          // Common format: data[0] is the text
+          aiText = String(result.data[0]);
+        } else if (Array.isArray(result) && result[0].generated_text) {
+          aiText = result[0].generated_text;
+        } else if (result.generated_text) {
+          aiText = result.generated_text;
+        } else {
+          aiText = "AI responded, but the format was unexpected. Please adjust JSON parsing in code.";
+        }
+
+        statusEl.textContent = "AI answer received.";
+        answerBox.textContent = aiText;
+        state.progress.aiQueries += 1;
+        updateProgressUI();
+
+        debugLog("AI response received", {
+          length: aiText.length
+        });
+      } catch (error) {
+        console.error(error);
+        statusEl.textContent =
+          "There was an error connecting to the Hugging Face Space. Check HF_BACKEND_URL or network connection.";
+        answerBox.textContent = error.message;
+        debugLog("AI request error", { error: String(error) });
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "⚡ Ask AI";
+      }
+    }
+
+    /************************************************************
+     *  PROGRESS UI
+     ************************************************************/
+    function updateProgressUI() {
+      document.getElementById("progressQuizzes").textContent =
+        "🧮 Quizzes taken: " + state.progress.quizzesTaken;
+      document.getElementById("progressCorrect").textContent =
+        "✅ Correct answers: " + state.progress.correctAnswers;
+      document.getElementById("progressAi").textContent =
+        "🤖 AI questions: " + state.progress.aiQueries;
+    }
+
+    /************************************************************
+     *  DOM READY – INITIALISE EVERYTHING
+     ************************************************************/
+    document.addEventListener("DOMContentLoaded", () => {
+      debugLog("DOM fully loaded, initialising app...");
+
+      try {
+        buildClassButtons();
+        buildSubjectButtons();
+
+        const startQuizBtn = document.getElementById("startQuizBtn");
+        if (startQuizBtn) {
+          startQuizBtn.addEventListener("click", startQuiz);
+        } else {
+          debugLog("startQuizBtn not found");
+        }
+
+        const askAiBtn = document.getElementById("askAiBtn");
+        if (askAiBtn) {
+          askAiBtn.addEventListener("click", askAi);
+        } else {
+          debugLog("askAiBtn not found");
+        }
+
+        updateProgressUI();
+        debugLog("App initialised successfully");
+      } catch (err) {
+        debugLog("App initialisation error", { error: String(err) });
+      }
+    });
+  </script>
+</body>
+</html>
