@@ -723,6 +723,204 @@
         max-width: 96vw;
       }
     }
+
+    /* --- Inspiring Wisdom Sidebar --- */
+
+.wisdom-toggle {
+  position: fixed;
+  top: 50%;
+  left: 4px;
+  transform: translateY(-50%);
+  z-index: 9998;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.3);
+}
+
+.wisdom-toggle span.icon {
+  font-size: 16px;
+}
+
+.wisdom-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 320px;
+  max-width: 88vw;
+  background: #0f172a;
+  color: #e5e7eb;
+  z-index: 9997;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.5);
+  transform: translateX(-100%);
+  transition: transform 0.25s ease-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.wisdom-panel.open {
+  transform: translateX(0);
+}
+
+.wisdom-header {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(148,163,184,0.4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.wisdom-header-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.wisdom-title-main {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.wisdom-title-sub {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.wisdom-header-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.wisdom-lang-select {
+  font-size: 11px;
+  padding: 3px 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(148,163,184,0.8);
+  background: #020617;
+  color: #e5e7eb;
+}
+
+.wisdom-close-btn {
+  border: none;
+  background: transparent;
+  color: #e5e7eb;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.wisdom-body {
+  flex: 1;
+  display: grid;
+  grid-template-rows: minmax(0, 1.3fr) minmax(0, 2fr);
+  gap: 6px;
+  padding: 8px 10px 10px;
+  font-size: 12px;
+}
+
+.wisdom-list {
+  overflow-y: auto;
+  border-radius: 10px;
+  background: rgba(15,23,42,0.9);
+  border: 1px solid rgba(148,163,184,0.4);
+}
+
+.wisdom-item {
+  padding: 6px 8px;
+  border-bottom: 1px solid rgba(30,41,59,0.9);
+  cursor: pointer;
+}
+
+.wisdom-item:last-child {
+  border-bottom: none;
+}
+
+.wisdom-item-title {
+  font-weight: 600;
+}
+
+.wisdom-item-meta {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.wisdom-item.active {
+  background: linear-gradient(90deg, rgba(129,140,248,0.4), rgba(56,189,248,0.25));
+}
+
+.wisdom-content {
+  overflow-y: auto;
+  border-radius: 10px;
+  background: rgba(15,23,42,0.95);
+  border: 1px solid rgba(148,163,184,0.5);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wisdom-story-title {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.wisdom-story-meta {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.wisdom-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0.8;
+  margin-top: 4px;
+}
+
+.wisdom-story-text,
+.wisdom-reflection,
+.wisdom-challenge {
+  font-size: 12px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+}
+
+.wisdom-footer {
+  margin-top: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.wisdom-audio-btn {
+  border-radius: 999px;
+  border: 1px solid rgba(248,250,252,0.7);
+  background: #111827;
+  color: #f9fafb;
+  font-size: 11px;
+  padding: 5px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.wisdom-theme-pill {
+  font-size: 10px;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: rgba(148,163,184,0.3);
+}
+
   </style>
 </head>
 <body>
@@ -883,6 +1081,72 @@
     </div>
   </div>
 
+
+    <!-- Inspiring Wisdom Sidebar -->
+  <div class="wisdom-toggle" id="wisdomToggle">
+    <span class="icon">🌟</span>
+    <span>Wisdom</span>
+  </div>
+
+  <div class="wisdom-panel" id="wisdomPanel">
+    <div class="wisdom-header">
+      <div class="wisdom-header-left">
+        <div class="wisdom-title-main" id="wisdomTitleMain">Inspiring Wisdom</div>
+        <div class="wisdom-title-sub" id="wisdomTitleSub">
+          Leaders + scriptures • Unity • Character
+        </div>
+      </div>
+      <div class="wisdom-header-right">
+        <select id="wisdomLangSelect" class="wisdom-lang-select">
+          <option value="en">English</option>
+          <option value="hi">हिन्दी</option>
+          <option value="te">తెలుగు</option>
+          <option value="ar">العربية</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+        </select>
+        <button class="wisdom-close-btn" id="wisdomCloseBtn" title="Close">✖</button>
+      </div>
+    </div>
+
+    <div class="wisdom-body">
+      <div class="wisdom-list" id="wisdomList"></div>
+
+      <div class="wisdom-content">
+        <div class="wisdom-story-title" id="wisdomStoryTitle">
+          Choose a story on the left.
+        </div>
+        <div class="wisdom-story-meta" id="wisdomStoryMeta"></div>
+
+        <div class="wisdom-section-label" id="wisdomStoryLabel">Story</div>
+        <div class="wisdom-story-text" id="wisdomStoryText">
+          You’ll see short stories of how leaders and everyday people used
+          inner values, courage and wisdom from different traditions to
+          handle real-life challenges.
+        </div>
+
+        <div class="wisdom-section-label" id="wisdomReflectionLabel">Reflection</div>
+        <div class="wisdom-reflection" id="wisdomReflectionText">
+          After reading, pause and ask: “What would I do in this situation?”
+        </div>
+
+        <div class="wisdom-section-label" id="wisdomChallengeLabel">Action Challenge</div>
+        <div class="wisdom-challenge" id="wisdomChallengeText">
+          Pick one small action today that shows kindness, honesty or courage.
+        </div>
+
+        <div class="wisdom-footer">
+          <button class="wisdom-audio-btn" id="wisdomAudioBtn">
+            🔊 Listen to story
+          </button>
+          <span class="wisdom-theme-pill" id="wisdomThemePill">
+            Compassion • Duty • Resilience
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     // ---------- UI Language Text ----------
     var uiText = {
@@ -958,6 +1222,207 @@
       { code: "de", name: "German", native: "Deutsch" },
       { code: "te", name: "Telugu", native: "తెలుగు" }
     ];
+
+       // ---------- Inspiring Wisdom (leaders + scriptures) ----------
+
+// Simple multi-language UI labels (content stays in simple English, TTS can use different voices)
+var wisdomUILang = localStorage.getItem("fs_wisdomLang") || "en";
+
+var wisdomUIText = {
+  en: {
+    panelTitle: "Inspiring Wisdom",
+    panelSub: "Leaders + scriptures • Unity • Character",
+    storyLabel: "Story",
+    reflectionLabel: "Reflection",
+    challengeLabel: "Action Challenge",
+    defaultReflection: "After reading, pause and ask: “What would I do in this situation?”",
+    defaultChallenge: "Pick one small action today that shows kindness, honesty or courage.",
+    themeDefault: "Compassion • Duty • Resilience"
+  },
+  hi: {
+    panelTitle: "प्रेरणादायी ज्ञान",
+    panelSub: "नेता + शास्त्र • एकता • चरित्र",
+    storyLabel: "कहानी",
+    reflectionLabel: "विचार",
+    challengeLabel: "कार्य चुनौती",
+    defaultReflection: "कहानी के बाद सोचें: “ऐसी स्थिति में मैं क्या करता/करती?”",
+    defaultChallenge: "आज एक छोटा काम चुनें जो दया, ईमानदारी या साहस दिखाए।",
+    themeDefault: "करुणा • कर्तव्य • धैर्य"
+  },
+  te: {
+    panelTitle: "ప్రేరణాత్మక జ్ఞానం",
+    panelSub: "నాయకులు + శాస్త్రాలు • ఏకత్వం • స్వభావం",
+    storyLabel: "కథ",
+    reflectionLabel: "ఆలోచన",
+    challengeLabel: "చర్య సవాలు",
+    defaultReflection: "కథ తరువాత ఆలోచించండి: “ఇలాంటి పరిస్థితిలో నేను ఏమి చేసేవాడిని?”",
+    defaultChallenge: "ఈ రోజు దయ, నిజాయితీ లేదా ధైర్యం చూపే ఒక చిన్న చర్యను ఎంచుకోండి.",
+    themeDefault: "కరుణ • కర్తవ్య • ధైర్యం"
+  },
+  ar: {
+    panelTitle: "حكمة ملهمة",
+    panelSub: "قادة + كتب سماوية • وحدة • أخلاق",
+    storyLabel: "قصة",
+    reflectionLabel: "تأمل",
+    challengeLabel: "تحدي عملي",
+    defaultReflection: "بعد القراءة اسأل نفسك: \"ماذا سأفعل لو كنت في هذا الموقف؟\"",
+    defaultChallenge: "اختر عملًا صغيرًا اليوم يظهر اللطف أو الصدق أو الشجاعة.",
+    themeDefault: "رحمة • واجب • صبر"
+  },
+  es: {
+    panelTitle: "Sabiduría Inspiradora",
+    panelSub: "Líderes + escrituras • Unidad • Carácter",
+    storyLabel: "Historia",
+    reflectionLabel: "Reflexión",
+    challengeLabel: "Desafío de acción",
+    defaultReflection: "Después de leer, pregúntate: “¿Qué haría yo en esta situación?”",
+    defaultChallenge: "Elige hoy una pequeña acción que muestre amabilidad, honestidad o valentía.",
+    themeDefault: "Compasión • Deber • Resiliencia"
+  },
+  fr: {
+    panelTitle: "Sagesse Inspirante",
+    panelSub: "Leaders + écritures • Unité • Caractère",
+    storyLabel: "Histoire",
+    reflectionLabel: "Réflexion",
+    challengeLabel: "Défi d’action",
+    defaultReflection: "Après la lecture, demande-toi : « Que ferais-je dans cette situation ? »",
+    defaultChallenge: "Choisis aujourd’hui une petite action qui montre la gentillesse, l’honnêteté ou le courage.",
+    themeDefault: "Compassion • Devoir • Résilience"
+  }
+};
+
+// NOTE: Stories are written in simple English and described as teachings,
+// not literal word-for-word quotes from scriptures.
+
+var wisdomStories = [
+  {
+    id: "kalam-dreams",
+    sourceType: "Leader",
+    name: "Dr. APJ Abdul Kalam",
+    title: "Dreams + Discipline in Difficult Times",
+    ageRange: "10+",
+    theme: "Dreams • Hard work • Service",
+    context:
+      "Young Kalam grew up in a simple home in Rameswaram. Money was limited, but his curiosity about rockets, science and the sky was limitless.",
+    story:
+      "Instead of feeling angry about what he did not have, Kalam focused on what he could control: reading extra, asking questions, helping others and staying disciplined.\n\nWhen college or work did not go exactly as planned, he did not stop. He used every failure as feedback. Later, as a scientist and President of India, he kept telling students that big dreams start in small rooms.",
+    teaching:
+      "Real success is not instant. It is daily discipline: study a little better, think a little deeper and serve a little more. Inner character matters more than outer comfort.",
+    reflection:
+      "• What is one big dream you quietly carry?\n• Are you letting your situation stop you, or using it as fuel to grow?\n• Which daily habit can you improve by just 1%?",
+    challenge:
+      "Tonight, write one dream in a notebook. Under it, write one tiny daily action you can start from tomorrow (reading, practice, helping someone) and follow it for 7 days."
+  },
+  {
+    id: "modi-service",
+    sourceType: "Leader",
+    name: "Shri Narendra Modi (Prime Minister of India)",
+    title: "Service Mindset: Small Steps for People Around You",
+    ageRange: "10+",
+    theme: "Service • Discipline • Simplicity",
+    context:
+      "Many leaders speak about development in big words. But meaningful change starts with noticing small needs of real people around us.",
+    story:
+      "Stories shared about Narendra Modi’s early years describe him helping at a small tea stall, interacting with travellers and listening to many kinds of people.\n\nWhether or not we focus on politics, one useful lesson is: ordinary work can become a training ground for understanding people, learning discipline and serving with consistency.",
+    teaching:
+      "Any small responsibility — in home, school or community — can become a place to practice discipline, respect and service.",
+    reflection:
+      "• What small responsibilities do you have every day?\n• How can you turn one of them into a chance to serve better?\n• How does listening carefully to people change your decisions?",
+    challenge:
+      "For one week, pick a simple duty (helping at home, keeping a class corner clean, guiding a younger student) and do it with extra care, without waiting for praise."
+  },
+  {
+    id: "murmu-resilience",
+    sourceType: "Leader",
+    name: "President Droupadi Murmu",
+    title: "Quiet Strength in the Face of Loss",
+    ageRange: "12+",
+    theme: "Resilience • Humility • Education",
+    context:
+      "President Murmu’s journey includes deep personal losses and many challenges, yet she continued to serve and learn.",
+    story:
+      "Coming from a tribal community and facing family tragedies, she still kept faith in education, public service and inner strength.\n\nInstead of letting grief close her heart, she allowed it to deepen her compassion for others who suffer silently.",
+    teaching:
+      "Resilience is not about never feeling pain. It is about allowing pain to make you more gentle, not more bitter.",
+    reflection:
+      "• Have you seen someone stay kind even after difficulty?\n• What helps you continue when life feels unfair?\n• Who can you gently support today?",
+    challenge:
+      "Write the name of one person who is struggling (classmate, neighbour, relative). Do one small act of support: a message, a smile, helping with work or simply listening."
+  },
+  {
+    id: "gita-duty",
+    sourceType: "Scripture",
+    name: "Bhagavad Gita (summarised idea)",
+    title: "Doing Your Duty with a Calm Mind",
+    ageRange: "12+",
+    theme: "Duty • Clarity • Detachment",
+    context:
+      "In the Gita, Arjuna is confused and afraid on the battlefield of life, not sure how to act.",
+    story:
+      "The teaching often summarised from the Gita is: focus on the right action, not on controlling every result. When the mind is full of fear about success or failure, we avoid doing what is right.\n\nBy remembering your role and values, you act with sincerity and accept results with balance.",
+    teaching:
+      "Do your best work with honesty and courage, and let go of the obsession to control every outcome.",
+    reflection:
+      "• Is there a decision you are avoiding because you fear failure?\n• What would it look like to do the right thing, even if the result is not guaranteed?",
+    challenge:
+      "Choose one task you have been postponing (study, conversation, project). Do a 25-minute focused sprint today, just giving your best without worrying about the final mark."
+  },
+  {
+    id: "upanishads-self",
+    sourceType: "Scripture",
+    name: "Upanishads (summarised idea)",
+    title: "Seeing the Same Light in All",
+    ageRange: "12+",
+    theme: "Unity • Respect • Inner calm",
+    context:
+      "The Upanishads often speak about the deeper Self that is beyond labels like caste, country or role.",
+    story:
+      "One simple way to understand this is: there is a quiet light of awareness inside you that watches thoughts, emotions and roles. That same light exists in others.\n\nWhen we remember this, it becomes harder to hate and easier to listen.",
+    teaching:
+      "Real education is not only about information, but about seeing the shared humanity in everyone.",
+    reflection:
+      "• When you are angry at someone, can you still remember they also feel pain and fear?\n• How would your words change if you saw the same inner light in them?",
+    challenge:
+      "Pick one person you usually judge (online or offline). For one day, speak and act as if they carry the same inner light and dignity as you."
+  },
+  {
+    id: "bible-good-samaritan",
+    sourceType: "Scripture",
+    name: "Bible (Good Samaritan – summarised idea)",
+    title: "Helping Beyond Labels",
+    ageRange: "8+",
+    theme: "Compassion • Service • Breaking prejudice",
+    context:
+      "In a famous teaching, a traveller is hurt on the road. Some people who are expected to help walk past him.",
+    story:
+      "A person from a group that was looked down upon chooses to stop, care and spend his own time and resources to help the stranger.\n\nThe idea is simple: real neighbourliness is shown not in words but in compassion across boundaries.",
+    teaching:
+      "Kindness that crosses labels (religion, caste, language, country) is a powerful form of spirituality.",
+    reflection:
+      "• Have you ever ignored someone in need because they were 'not your group'?\n• Who has been a hidden helper in your life?",
+    challenge:
+      "Today, look for one small chance to quietly help someone without expecting thanks — maybe at school, on the road or at home."
+  },
+  {
+    id: "quran-mercy",
+    sourceType: "Scripture",
+    name: "Quran (mercy and justice – summarised idea)",
+    title: "Balancing Mercy and Fairness",
+    ageRange: "12+",
+    theme: "Mercy • Justice • Self-control",
+    context:
+      "Many verses in the Quran emphasise compassion, justice and accountability before God.",
+    story:
+      "One practical takeaway: when you have some power — even small, like being older or stronger — you are invited to use it with fairness and mercy.\n\nAnger is natural, but guidance is to control it and choose what is just, not what is impulsive.",
+    teaching:
+      "True strength is shown by those who can control their anger and act fairly, especially when it would be easy to misuse power.",
+    reflection:
+      "• When was the last time you reacted in anger and later regretted it?\n• How could pausing for a few breaths have changed the situation?",
+    challenge:
+      "For the next 3 days, whenever you feel anger rising, pause for 5 slow breaths before speaking. Notice how your choice of words changes."
+  }
+];
+
 
     var languagePhrases = [
       {
@@ -1487,6 +1952,121 @@
     var aiStatusDot;
     var aiOnlineStatusText;
     var aiStatusLine;
+
+    // Wisdom DOM elements
+var wisdomToggle = document.getElementById("wisdomToggle");
+var wisdomPanel = document.getElementById("wisdomPanel");
+var wisdomCloseBtn = document.getElementById("wisdomCloseBtn");
+var wisdomLangSelect = document.getElementById("wisdomLangSelect");
+
+var wisdomList = document.getElementById("wisdomList");
+var wisdomStoryTitle = document.getElementById("wisdomStoryTitle");
+var wisdomStoryMeta = document.getElementById("wisdomStoryMeta");
+var wisdomStoryText = document.getElementById("wisdomStoryText");
+var wisdomReflectionText = document.getElementById("wisdomReflectionText");
+var wisdomChallengeText = document.getElementById("wisdomChallengeText");
+var wisdomAudioBtn = document.getElementById("wisdomAudioBtn");
+var wisdomThemePill = document.getElementById("wisdomThemePill");
+var wisdomStoryLabelEl = document.getElementById("wisdomStoryLabel");
+var wisdomReflectionLabelEl = document.getElementById("wisdomReflectionLabel");
+var wisdomChallengeLabelEl = document.getElementById("wisdomChallengeLabel");
+var wisdomTitleMainEl = document.getElementById("wisdomTitleMain");
+var wisdomTitleSubEl = document.getElementById("wisdomTitleSub");
+
+var currentWisdomId = null;
+
+    function renderWisdomUIStrings() {
+  var t = wisdomUIText[wisdomUILang] || wisdomUIText.en;
+  if (wisdomTitleMainEl) wisdomTitleMainEl.textContent = t.panelTitle;
+  if (wisdomTitleSubEl) wisdomTitleSubEl.textContent = t.panelSub;
+  if (wisdomStoryLabelEl) wisdomStoryLabelEl.textContent = t.storyLabel;
+  if (wisdomReflectionLabelEl) wisdomReflectionLabelEl.textContent = t.reflectionLabel;
+  if (wisdomChallengeLabelEl) wisdomChallengeLabelEl.textContent = t.challengeLabel;
+  if (wisdomReflectionText && (!currentWisdomId)) {
+    wisdomReflectionText.textContent = t.defaultReflection;
+  }
+  if (wisdomChallengeText && (!currentWisdomId)) {
+    wisdomChallengeText.textContent = t.defaultChallenge;
+  }
+  if (wisdomThemePill) wisdomThemePill.textContent = t.themeDefault;
+}
+
+function renderWisdomList() {
+  if (!wisdomList) return;
+  wisdomList.innerHTML = "";
+
+  wisdomStories.forEach(function (item) {
+    var div = document.createElement("div");
+    div.className = "wisdom-item";
+    div.dataset.id = item.id;
+
+    div.innerHTML =
+      '<div class="wisdom-item-title">' + item.title + '</div>' +
+      '<div class="wisdom-item-meta">' +
+        item.name + " • " + item.theme +
+      "</div>";
+
+    div.addEventListener("click", function () {
+      currentWisdomId = item.id;
+      var all = wisdomList.querySelectorAll(".wisdom-item");
+      for (var i = 0; i < all.length; i++) all[i].classList.remove("active");
+      div.classList.add("active");
+      loadWisdomStory(item);
+    });
+
+    wisdomList.appendChild(div);
+  });
+}
+
+function loadWisdomStory(item) {
+  var t = wisdomUIText[wisdomUILang] || wisdomUIText.en;
+  if (wisdomStoryTitle) wisdomStoryTitle.textContent = item.title;
+  if (wisdomStoryMeta) {
+    wisdomStoryMeta.textContent =
+      item.sourceType + " • " + item.name + " • Age " + item.ageRange;
+  }
+  if (wisdomStoryText) {
+    wisdomStoryText.textContent =
+      item.context + "\n\n" + item.story + "\n\nTeaching (summary): " + item.teaching;
+  }
+  if (wisdomReflectionText) {
+    wisdomReflectionText.textContent = item.reflection || t.defaultReflection;
+  }
+  if (wisdomChallengeText) {
+    wisdomChallengeText.textContent = item.challenge || t.defaultChallenge;
+  }
+  if (wisdomThemePill) {
+    wisdomThemePill.textContent = item.theme || t.themeDefault;
+  }
+}
+
+function speakWisdomStory() {
+  if (!currentWisdomId) {
+    // no specific story selected: read panel intro
+    var intro =
+      (wisdomStoryTitle ? wisdomStoryTitle.textContent + ". " : "") +
+      (wisdomStoryText ? wisdomStoryText.textContent : "");
+    speak(intro, wisdomUILang);
+    return;
+  }
+  var item = null;
+  for (var i = 0; i < wisdomStories.length; i++) {
+    if (wisdomStories[i].id === currentWisdomId) {
+      item = wisdomStories[i];
+      break;
+    }
+  }
+  if (!item) return;
+  var text =
+    item.title + ". " +
+    item.context + ". " +
+    item.story + ". Reflection: " +
+    item.reflection + ". Action: " +
+    item.challenge;
+  speak(text, wisdomUILang);
+}
+
+
 
     var currentClass = null;
     var currentSubject = null;
@@ -2063,3 +2643,31 @@
       if (!files.length) return;
 
       addAiSys
+
+              // Wisdom sidebar events
+if (wisdomLangSelect) {
+  wisdomLangSelect.value = wisdomUILang;
+  wisdomLangSelect.addEventListener("change", function () {
+    wisdomUILang = wisdomLangSelect.value;
+    localStorage.setItem("fs_wisdomLang", wisdomUILang);
+    renderWisdomUIStrings();
+  });
+}
+if (wisdomToggle && wisdomPanel) {
+  wisdomToggle.addEventListener("click", function () {
+    wisdomPanel.classList.add("open");
+  });
+}
+if (wisdomCloseBtn && wisdomPanel) {
+  wisdomCloseBtn.addEventListener("click", function () {
+    wisdomPanel.classList.remove("open");
+  });
+}
+if (wisdomAudioBtn) {
+  wisdomAudioBtn.addEventListener("click", speakWisdomStory);
+}
+
+// Initial render for wisdom
+renderWisdomUIStrings();
+renderWisdomList();
+
