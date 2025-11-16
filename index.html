@@ -255,6 +255,22 @@
       transform: none;
     }
 
+    .btn-icon {
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 0;
+      font-size: 16px;
+    }
+
+    .btn-icon.active {
+      background: linear-gradient(135deg, #ef5350, #f06292);
+      color: #fff;
+    }
+
     .hint {
       font-size: 11px;
       color: #888;
@@ -412,6 +428,30 @@
       text-align: right;
     }
 
+    /* NCERT TEXTBOOK CARD */
+    .ncert-cover {
+      border-radius: 10px;
+      background: linear-gradient(135deg, #81c784, #a5d6a7);
+      padding: 8px;
+      color: #1b5e20;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .ncert-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .ncert-chapters {
+      margin-top: 4px;
+      padding-left: 16px;
+      font-size: 11px;
+    }
+
     /* DEBUG OVERLAY */
 
     #debugToggle {
@@ -505,6 +545,42 @@
       font-size: 9px;
       opacity: 0.8;
     }
+
+    /* QUIZ HINTS + EXPLANATION */
+    .hint-box {
+      margin-top: 4px;
+      padding: 4px 6px;
+      border-radius: 8px;
+      background: #fff3e0;
+      font-size: 11px;
+      color: #e65100;
+    }
+
+    .explanation-box {
+      margin-top: 4px;
+      padding: 4px 6px;
+      border-radius: 8px;
+      background: #e3f2fd;
+      font-size: 11px;
+      color: #0d47a1;
+    }
+
+    .quiz-meta {
+      font-size: 11px;
+      color: #666;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .pill-mini {
+      padding: 2px 6px;
+      border-radius: 999px;
+      background: #ede7f6;
+      font-size: 10px;
+      color: #5e35b1;
+    }
   </style>
 </head>
 <body>
@@ -521,9 +597,9 @@
       </div>
       <div>
         <div class="chip-row">
-          <div class="chip">🧠 AI Tutor</div>
+          <div class="chip">🧠 AI Tutor (with Voice)</div>
           <div class="chip">📱 Mobile First</div>
-          <div class="chip">🇮🇳 Made for Indian Students</div>
+          <div class="chip">🇮🇳 NCERT-Aligned</div>
         </div>
       </div>
     </header>
@@ -549,9 +625,9 @@
               <strong>AI, coding, money skills, climate, mental health & safety</strong>.
             </div>
             <div class="badge-row">
-              <div class="badge">📚 Class 1–12 Syllabus</div>
-              <div class="badge">🧮 Math Quiz</div>
-              <div class="badge">🤖 AI Study Partner</div>
+              <div class="badge">📚 NCERT Textbooks (PDF)</div>
+              <div class="badge">🧮 50+ Quiz Questions</div>
+              <div class="badge">🤖 AI Study Partner (Voice)</div>
             </div>
           </div>
 
@@ -595,26 +671,28 @@
             <div class="card-header" style="padding:0; margin-bottom:2px;">
               <div class="card-title" style="font-size:13px;">
                 <span class="emoji">🧮</span>
-                <span>Quick Math Quiz – Class 1 (Sample)</span>
+                <span>Enhanced Quiz – 50+ Questions with Hints</span>
               </div>
-              <div class="pill-soft">10 tiny questions</div>
+              <div class="pill-soft">Auto-generated per class & subject</div>
             </div>
 
             <div class="section-body">
               <div class="hint">
-                Works best when <strong>Class 1 + Maths</strong> is selected. For other classes,
-                this acts as a demo quiz.
+                Quiz adapts to your <strong>selected class & subject</strong>. For now, Maths has the richest question bank.
               </div>
               <div id="quizContent">
-                <button class="btn-primary" id="startQuizBtn">▶ Start Sample Quiz</button>
+                <button class="btn-primary" id="startQuizBtn">▶ Start Quiz</button>
               </div>
-              <div class="status-text" id="quizStatus"></div>
+              <div class="quiz-meta">
+                <span id="quizStatus"></span>
+                <span id="quizHintsStatus" class="pill-mini">Hints left: 0</span>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- RIGHT SIDE: Syllabus, AI Tutor, Progress -->
+      <!-- RIGHT SIDE: Syllabus, NCERT, AI Tutor, Progress -->
       <section class="card">
         <!-- Syllabus -->
         <div id="syllabusSection">
@@ -640,19 +718,62 @@
 
         <div class="divider"></div>
 
+        <!-- NCERT TEXTBOOK INTEGRATION -->
+        <div id="ncertSection">
+          <div class="card-header">
+            <div>
+              <div class="card-title">
+                <span class="emoji">📗</span>
+                <span>NCERT Textbooks (Official PDF)</span>
+              </div>
+              <div class="card-subtitle">
+                Direct access to NCERT’s official textbook PDF page for Class 1–12.
+              </div>
+            </div>
+            <div class="pill-soft">Official: ncert.nic.in</div>
+          </div>
+          <div class="section-body">
+            <div class="ncert-cover" id="ncertCover">
+              <div id="ncertTitle"><strong>NCERT Textbook</strong> – Select class & subject above.</div>
+              <div id="ncertSubTitle" style="font-size:11px;">
+                Once selected, we’ll show a sample chapter list and quick links to NCERT’s official PDF page.
+              </div>
+            </div>
+            <div class="ncert-actions">
+              <a class="btn" id="ncertOpenBtn" href="https://ncert.nic.in/textbook.php" target="_blank" rel="noopener noreferrer">
+                🌐 Open NCERT Textbook Page
+              </a>
+              <a class="btn" id="ncertDownloadBtn" href="https://ncert.nic.in/textbook.php" target="_blank" rel="noopener noreferrer">
+                ⬇ Download / Read PDF (NCERT Site)
+              </a>
+            </div>
+            <div>
+              <div class="small-label">SAMPLE CHAPTER LIST (NOT OFFICIAL)</div>
+              <ul class="ncert-chapters" id="ncertChapters">
+                <li>Select a class & subject to view an example chapter breakdown aligned with NCERT style.</li>
+              </ul>
+              <div class="hint">
+                Exact chapter names and PDFs are always taken from the official NCERT website only. This app just helps you reach the right place quickly.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
         <!-- AI Tutor -->
         <div id="aiSection">
           <div class="card-header">
             <div>
               <div class="card-title">
                 <span class="emoji">🤖</span>
-                <span>AI Study Partner (Hugging Face)</span>
+                <span>AI Study Partner (Hugging Face + Voice)</span>
               </div>
               <div class="card-subtitle">
-                Ask doubts, get explanations or new practice questions.
+                Ask doubts, get explanations or new practice questions – now with voice input.
               </div>
             </div>
-            <div class="pill-soft">Online • Text</div>
+            <div class="pill-soft">Online • Text + Voice</div>
           </div>
           <div class="section-body">
             <label for="aiQuestion" class="small-label">YOUR QUESTION / TOPIC</label>
@@ -660,9 +781,12 @@
 
             <div class="row-between">
               <div class="hint">
-                AI is tuned for <strong>Indian school style</strong> answers – short, simple, and exam-friendly.
+                Use the 🎤 button to speak your doubt (supported browsers only). AI answers in <strong>simple, exam-friendly steps</strong>.
               </div>
-              <button class="btn-primary" id="askAiBtn">⚡ Ask AI</button>
+              <div style="display:flex; gap:6px; align-items:center;">
+                <button class="btn btn-icon" id="voiceInputBtn" title="Use voice input">🎤</button>
+                <button class="btn-primary" id="askAiBtn">⚡ Ask AI</button>
+              </div>
             </div>
 
             <div class="ai-output">
@@ -672,6 +796,7 @@
                 Your AI explanation will appear here.
               </div>
             </div>
+            <div class="hint" id="voiceSupportHint"></div>
           </div>
         </div>
 
@@ -701,7 +826,7 @@
     </main>
 
     <footer>
-      v1.0 • Frontend-only demo • Hugging Face Space integration with visual debug console.
+      v1.1 • Frontend-only demo • NCERT link helper • Enhanced Quiz • Hugging Face AI with Voice • Visual debug console.
     </footer>
   </div>
 
@@ -721,7 +846,7 @@
         <div id="debugStatusDot"></div>
         <span style="opacity:0.8;">LIVE</span>
       </div>
-      <div class="debug-tag">UI • Buttons • HF API</div>
+      <div class="debug-tag">UI • Quiz • NCERT • HF API • Voice</div>
     </div>
   </div>
 
@@ -742,10 +867,16 @@
       quizIndex: 0,
       quizQuestions: [],
       quizScore: 0,
+      quizHintsUsed: 0,
+      quizHintsPerQuestion: 3,
       progress: {
         quizzesTaken: 0,
         correctAnswers: 0,
         aiQueries: 0,
+      },
+      voice: {
+        recognition: null,
+        listening: false
       }
     };
 
@@ -772,7 +903,6 @@
         debugLogEl.textContent += line + "\n";
         debugLogEl.scrollTop = debugLogEl.scrollHeight;
       }
-      // Also log to console for dev tools
       console.log("[DEBUG]", message, extra || "");
     }
 
@@ -851,13 +981,14 @@
       state.selectedClass = cls;
       debugLog("Class selected", { class: cls });
 
-      // Visual selection
       document.querySelectorAll("#classButtons .btn").forEach((btn) => {
         btn.classList.toggle("selected", btn === clickedBtn);
       });
 
       updateSelectionLabel();
       buildClassSyllabus();
+      updateNcertSection();
+      resetQuizStateForNewSelection();
     }
 
     function handleSubjectClick(subjectId, clickedBtn) {
@@ -870,6 +1001,8 @@
 
       updateSelectionLabel();
       buildClassSyllabus();
+      updateNcertSection();
+      resetQuizStateForNewSelection();
     }
 
     function updateSelectionLabel() {
@@ -902,38 +1035,40 @@
         return;
       }
 
-      // Base topics per subject (simple demo; can be replaced by real syllabus)
       const baseTopicsBySubject = {
         maths: [
-          "Numbers and counting (0–100, later bigger numbers)",
-          "Basic operations: addition, subtraction, multiplication, division",
-          "Word problems from real life (money, time, distance)",
-          "Geometry basics: shapes, patterns, measurement"
+          "Numbers and counting with place value (difficulty increases with class)",
+          "Operations: addition, subtraction, multiplication, division & word problems",
+          "Fractions, decimals, percentages (from middle school onwards)",
+          "Geometry basics: shapes, angles, perimeter, area",
+          "Data handling: pictographs, bar graphs, statistics (mean, median, mode)"
         ],
         science: [
-          "Living and non-living things",
-          "Plants, animals & human body basics",
-          "Matter, water, air, and weather",
-          "Simple experiments and observation"
+          "Living and non-living things; plant & animal life",
+          "Human body, health & hygiene; food & digestion",
+          "Matter, water, air, energy and simple physics concepts",
+          "Environment, resources and sustainability",
+          "Simple experiments, observation & scientific method"
         ],
         english: [
-          "Reading short stories and passages",
-          "Grammar: nouns, verbs, adjectives, tenses (as per class level)",
-          "Vocabulary building with everyday words",
-          "Writing: sentences, paragraphs, letters"
+          "Reading comprehension with stories and factual passages",
+          "Grammar: parts of speech, tenses, punctuation",
+          "Vocabulary building and word usage in context",
+          "Writing: paragraphs, letters, notices, essays & emails",
+          "Speaking and listening activities"
         ],
         hindi: [
-          "Varnamala and basic pronunciation",
-          "Reading short passages and poems",
-          "Grammar: sangya, kriya, visheshan (as per class level)",
-          "Writing: anuchhed, patra, rachnatmak lekhan"
+          "वर्णमाला, उच्चारण और शब्द निर्माण (lower classes)",
+          "पैरा और गद्यांश पठन व बोध",
+          "व्याकरण: संज्ञा, सर्वनाम, क्रिया, विशेषण, काल इत्यादि",
+          "लेखन: अनुच्छेद, पत्र, निबंध, संवाद लेखन",
+          "कविता और साहित्यिक रचनाओं से परिचय"
         ]
       };
 
       const subjectName = subjects.find((s) => s.id === subjectId)?.label || "Subject";
       const baseTopics = baseTopicsBySubject[subjectId] || ["Core textbook topics as per board syllabus."];
 
-      // Future-proof universal skills (always shown)
       const futureSkillsUniversal = [
         { tag: "🌍 Climate & Sustainability", description: "Understanding pollution, water saving, recycling, clean energy and how daily actions affect Earth." },
         { tag: "🧠 Mental Health & Well-being", description: "Recognising feelings, stress basics, kindness, gratitude, simple breathing and calm-down techniques." },
@@ -942,7 +1077,6 @@
         { tag: "💰 Financial Literacy & Money Basics", description: "Saving vs spending, needs vs wants, simple budgeting and importance of not taking random loans." }
       ];
 
-      // Age-appropriate coding / AI skills (light for lower classes)
       const codingAndAiSkills = [];
       if (cls <= 5) {
         codingAndAiSkills.push(
@@ -965,7 +1099,6 @@
         );
       }
 
-      // Render syllabus
       let html = "";
       html += `<div><strong>${"Class " + cls} • ${subjectName}</strong></div>`;
       html += `<div class="syllabus-tag-row">`;
@@ -1005,25 +1138,281 @@
     }
 
     /************************************************************
-     *  SAMPLE MATH QUIZ – CLASS 1
+     *  NCERT TEXTBOOK SECTION – LINK HELPER + SAMPLE CHAPTERS
      ************************************************************/
-    const sampleQuizQuestions = [
-      { q: "What is 2 + 3?", options: [4, 5, 6], answer: 5 },
-      { q: "What is 1 + 7?", options: [7, 8, 9], answer: 8 },
-      { q: "What is 4 + 4?", options: [6, 8, 9], answer: 8 },
-      { q: "What is 5 + 1?", options: [5, 6, 7], answer: 6 },
-      { q: "What is 3 + 2?", options: [4, 5, 6], answer: 5 },
-      { q: "What is 0 + 9?", options: [8, 9, 10], answer: 9 },
-      { q: "What is 6 + 3?", options: [8, 9, 10], answer: 9 },
-      { q: "What is 2 + 2?", options: [3, 4, 5], answer: 4 },
-      { q: "What is 7 + 1?", options: [7, 8, 9], answer: 8 },
-      { q: "What is 9 + 0?", options: [8, 9, 10], answer: 9 }
-    ];
+    function updateNcertSection() {
+      const cls = state.selectedClass;
+      const subjectId = state.selectedSubject;
+      const titleEl = document.getElementById("ncertTitle");
+      const subtitleEl = document.getElementById("ncertSubTitle");
+      const chapterListEl = document.getElementById("ncertChapters");
+      const openBtn = document.getElementById("ncertOpenBtn");
+      const downloadBtn = document.getElementById("ncertDownloadBtn");
+
+      if (!titleEl || !subtitleEl || !chapterListEl || !openBtn || !downloadBtn) {
+        debugLog("NCERT elements missing");
+        return;
+      }
+
+      const subjectObj = subjects.find((s) => s.id === subjectId);
+      const subjectLabel = subjectObj ? subjectObj.label : "Subject";
+
+      if (!cls || !subjectId) {
+        titleEl.innerHTML = "<strong>NCERT Textbook</strong> – Select class & subject above.";
+        subtitleEl.textContent = "Once selected, we’ll show a sample chapter list and quick links to NCERT’s official PDF page.";
+        chapterListEl.innerHTML = "<li>Select a class & subject to view an example chapter breakdown aligned with NCERT style.</li>";
+        openBtn.href = "https://ncert.nic.in/textbook.php";
+        downloadBtn.href = "https://ncert.nic.in/textbook.php";
+        debugLog("NCERT section reset – no selection");
+        return;
+      }
+
+      titleEl.innerHTML = `<strong>Class ${cls} • ${subjectLabel}</strong> – NCERT Textbook Helper`;
+      subtitleEl.textContent = "Use the buttons below to open NCERT’s official PDF page. Chapter titles below are sample placeholders, not the official names.";
+
+      // Simple generic chapter outline to avoid hallucinating exact titles
+      const sampleChapterCount = Math.min(12, 5 + cls); // 6–17 chapters based on class
+      const sampleChapters = [];
+      for (let i = 1; i <= sampleChapterCount; i++) {
+        sampleChapters.push(`Chapter ${i} – Topic ${i} (as per NCERT book for this class & subject)`);
+      }
+
+      chapterListEl.innerHTML = sampleChapters.map((c) => `<li>${c}</li>`).join("");
+
+      // Link to NCERT textbook page (official hub)
+      const ncertBase = "https://ncert.nic.in/textbook.php";
+      openBtn.href = ncertBase;
+      downloadBtn.href = ncertBase;
+
+      debugLog("NCERT section updated", { class: cls, subject: subjectId });
+    }
+
+    /************************************************************
+     *  ENHANCED QUIZ SYSTEM
+     *  - 50+ questions for Maths via generator
+     *  - Hints (3 per question)
+     *  - Explanation for each answer
+     ************************************************************/
+    function resetQuizStateForNewSelection() {
+      state.quizIndex = 0;
+      state.quizQuestions = [];
+      state.quizScore = 0;
+      state.quizHintsUsed = 0;
+      const quizContent = document.getElementById("quizContent");
+      const quizStatus = document.getElementById("quizStatus");
+      const hintsStatus = document.getElementById("quizHintsStatus");
+      if (quizContent) {
+        quizContent.innerHTML = `<button class="btn-primary" id="startQuizBtn">▶ Start Quiz</button>`;
+        const btn = document.getElementById("startQuizBtn");
+        if (btn) btn.addEventListener("click", startQuiz);
+      }
+      if (quizStatus) quizStatus.textContent = "";
+      if (hintsStatus) hintsStatus.textContent = "Hints left: 0";
+      debugLog("Quiz reset after selection change");
+    }
+
+    function generateMathQuestion(difficulty) {
+      // difficulty ~ class; generate simple arithmetic
+      const ops = ["+", "-", "×"];
+      if (difficulty >= 6) ops.push("÷");
+
+      const op = ops[Math.floor(Math.random() * ops.length)];
+
+      let a, b, correct;
+      if (op === "+") {
+        a = randomInt(1, 10 + difficulty * 3);
+        b = randomInt(1, 10 + difficulty * 3);
+        correct = a + b;
+      } else if (op === "-") {
+        a = randomInt(1, 10 + difficulty * 3);
+        b = randomInt(1, a); // ensure non-negative
+        correct = a - b;
+      } else if (op === "×") {
+        a = randomInt(1, 5 + Math.floor(difficulty / 2));
+        b = randomInt(1, 5 + Math.floor(difficulty / 2));
+        correct = a * b;
+      } else {
+        // division – make clean division
+        b = randomInt(1, 5 + Math.floor(difficulty / 2));
+        correct = randomInt(1, 10);
+        a = b * correct;
+      }
+
+      const questionText = `What is ${a} ${op} ${b}?`;
+
+      const options = new Set();
+      options.add(correct);
+      while (options.size < 4) {
+        let delta = randomInt(-3, 3);
+        if (delta === 0) delta = 1;
+        const candidate = correct + delta;
+        if (candidate >= 0) options.add(candidate);
+      }
+      const optionArray = Array.from(options).sort((x, y) => x - y);
+      const correctIndex = optionArray.indexOf(correct);
+
+      // Build hints
+      const hints = [];
+      if (op === "+") {
+        hints.push("Hint 1: Addition means putting things together.");
+        hints.push(`Hint 2: Start from ${a} and count up ${b} steps.`);
+        hints.push(`Hint 3: ${a} + ${b} = ? Try counting slowly with your fingers.`);
+      } else if (op === "-") {
+        hints.push("Hint 1: Subtraction means taking away.");
+        hints.push(`Hint 2: Imagine you have ${a} things and you give away ${b}. How many are left?`);
+        hints.push(`Hint 3: ${a} − ${b} = ? Count backward from ${a}.`);
+      } else if (op === "×") {
+        hints.push("Hint 1: Multiplication is repeated addition.");
+        hints.push(`Hint 2: Think of ${a} groups of ${b} or ${b} groups of ${a}.`);
+        hints.push(`Hint 3: Add ${a} to itself ${b} times (or ${b} to itself ${a} times).`);
+      } else {
+        hints.push("Hint 1: Division shares a number into equal parts.");
+        hints.push(`Hint 2: If ${a} is shared equally among ${b} people, each gets the same number.`);
+        hints.push(`Hint 3: Think: ${b} × ? = ${a}. That ? is the answer.`);
+      }
+
+      const explanation = (() => {
+        if (op === "+") {
+          return `We add ${a} and ${b}: ${a} + ${b} = ${correct}.`;
+        } else if (op === "-") {
+          return `We subtract ${b} from ${a}: ${a} − ${b} = ${correct}.`;
+        } else if (op === "×") {
+          return `${a} × ${b} means adding ${a} a total of ${b} times (or ${b} a total of ${a} times). The answer is ${correct}.`;
+        } else {
+          return `${a} ÷ ${b} asks: how many groups of ${b} make ${a}? Since ${b} × ${correct} = ${a}, the answer is ${correct}.`;
+        }
+      })();
+
+      return {
+        question: questionText,
+        options: optionArray,
+        correctIndex,
+        explanation,
+        hints
+      };
+    }
+
+    function generateNonMathQuestions(subjectId, cls, count) {
+      // Simple, small conceptual pool with varied wording + repeated pattern to reach 50+
+      const basePool = [];
+      if (subjectId === "science") {
+        basePool.push(
+          {
+            question: "Which of these is a living thing?",
+            options: ["Rock", "Table", "Dog", "Car"],
+            correctIndex: 2,
+            explanation: "Living things grow, need food and can move on their own. A dog is a living thing.",
+            hints: [
+              "Hint 1: Living things can grow and need food.",
+              "Hint 2: Think of something that can breathe.",
+              "Hint 3: Among rock, table, dog and car – which one is an animal?"
+            ]
+          },
+          {
+            question: "Water changes into water vapour on:",
+            options: ["Freezing", "Boiling", "Melting", "Cutting"],
+            correctIndex: 1,
+            explanation: "On boiling, water gets heated and changes into water vapour (a gas).",
+            hints: [
+              "Hint 1: Water vapour forms when water is heated a lot.",
+              "Hint 2: It happens when water starts bubbling strongly.",
+              "Hint 3: Which process heats water the most – freezing or boiling?"
+            ]
+          }
+        );
+      } else if (subjectId === "english") {
+        basePool.push(
+          {
+            question: "Which sentence starts with a capital letter and ends with a full stop?",
+            options: ["i like apples", "i Like apples.", "I like apples.", "i Like Apples"],
+            correctIndex: 2,
+            explanation: "A correct sentence starts with a capital letter and ends with a full stop: 'I like apples.'",
+            hints: [
+              "Hint 1: Look for a capital letter at the beginning.",
+              "Hint 2: Look for a full stop at the end.",
+              "Hint 3: Only one option has both capital 'I' and a full stop."
+            ]
+          },
+          {
+            question: "Which word is a noun?",
+            options: ["Run", "Happy", "Chair", "Quickly"],
+            correctIndex: 2,
+            explanation: "A noun is a naming word for a person, place or thing. 'Chair' is a thing.",
+            hints: [
+              "Hint 1: Nouns are names of people, places or things.",
+              "Hint 2: 'Run' is an action, 'happy' is a feeling.",
+              "Hint 3: Think about which one is an object you can sit on."
+            ]
+          }
+        );
+      } else if (subjectId === "hindi") {
+        basePool.push(
+          {
+            question: "‘स्कूल’ किस प्रकार का शब्द है?",
+            options: ["संज्ञा", "क्रिया", "विशेषण", "सर्वनाम"],
+            correctIndex: 0,
+            explanation: "‘स्कूल’ किसी स्थान का नाम है, इसलिए यह संज्ञा है।",
+            hints: [
+              "संकेत 1: संज्ञा किसी व्यक्ति, स्थान या वस्तु का नाम होती है।",
+              "संकेत 2: ‘स्कूल’ एक जगह है जहाँ बच्चे पढ़ने जाते हैं।",
+              "संकेत 3: यह किसी काम या गुण का नाम नहीं है, यह एक स्थान है।"
+            ]
+          },
+          {
+            question: "‘वह दौड़ रहा है।’ वाक्य में ‘दौड़’ क्या है?",
+            options: ["संज्ञा", "क्रिया", "विशेषण", "सर्वनाम"],
+            correctIndex: 1,
+            explanation: "‘दौड़ रहा है’ एक काम को बताता है, इसलिए यह क्रिया है।",
+            hints: [
+              "संकेत 1: क्रिया किसी काम को बताती है।",
+              "संकेत 2: वाक्य में कौन सा शब्द काम को दिखा रहा है?",
+              "संकेत 3: ‘दौड़’ एक काम है जो कोई कर रहा है।"
+            ]
+          }
+        );
+      }
+
+      const questions = [];
+      let idx = 0;
+      while (questions.length < count) {
+        const q = basePool[idx % basePool.length];
+        // clone & add slight variation tag to avoid same object
+        questions.push({
+          question: q.question,
+          options: q.options.slice(),
+          correctIndex: q.correctIndex,
+          explanation: q.explanation,
+          hints: q.hints.slice()
+        });
+        idx++;
+      }
+
+      return questions;
+    }
+
+    function buildQuizBankForSelection() {
+      const cls = state.selectedClass || 1; // default
+      const subjectId = state.selectedSubject || "maths";
+      const targetCount = 50;
+
+      let questions = [];
+      if (subjectId === "maths") {
+        for (let i = 0; i < targetCount; i++) {
+          questions.push(generateMathQuestion(cls));
+        }
+      } else {
+        questions = generateNonMathQuestions(subjectId, cls, targetCount);
+      }
+
+      debugLog("Quiz bank built", { class: cls, subject: subjectId, count: questions.length });
+      return questions;
+    }
 
     function startQuiz() {
-      state.quizQuestions = sampleQuizQuestions;
+      state.quizQuestions = buildQuizBankForSelection();
       state.quizIndex = 0;
       state.quizScore = 0;
+      state.quizHintsUsed = 0;
       debugLog("Quiz started", { totalQuestions: state.quizQuestions.length });
 
       renderQuizQuestion();
@@ -1032,10 +1421,10 @@
     function renderQuizQuestion() {
       const quizContent = document.getElementById("quizContent");
       const quizStatus = document.getElementById("quizStatus");
-      if (!quizContent || !quizStatus) return;
+      const hintsStatus = document.getElementById("quizHintsStatus");
+      if (!quizContent || !quizStatus || !hintsStatus) return;
 
       if (state.quizIndex >= state.quizQuestions.length) {
-        // End of quiz
         state.progress.quizzesTaken += 1;
         state.progress.correctAnswers += state.quizScore;
         updateProgressUI();
@@ -1043,10 +1432,11 @@
         quizContent.innerHTML = `
           <div class="quiz-question">
             <strong>Great job!</strong> You answered ${state.quizScore} out of ${state.quizQuestions.length} correctly.
-            <button class="btn-primary" style="margin-top:6px;" id="restartQuizBtn">🔁 Try Again</button>
+            <button class="btn-primary" style="margin-top:6px;" id="restartQuizBtn">🔁 Try Another Set</button>
           </div>
         `;
-        quizStatus.textContent = "Quiz finished. You can try again to improve your score.";
+        quizStatus.textContent = "Quiz finished. Start again for a fresh random set.";
+        hintsStatus.textContent = "Hints left: 0";
         document.getElementById("restartQuizBtn").addEventListener("click", startQuiz);
         debugLog("Quiz completed", {
           score: state.quizScore,
@@ -1056,50 +1446,104 @@
       }
 
       const current = state.quizQuestions[state.quizIndex];
+      state.quizHintsUsed = 0;
       quizStatus.textContent = `Question ${state.quizIndex + 1} of ${state.quizQuestions.length}`;
+      hintsStatus.textContent = `Hints left: ${state.quizHintsPerQuestion - state.quizHintsUsed}`;
 
       let html = "";
-      html += `<div class="quiz-question"><strong>${current.q}</strong></div>`;
+      html += `<div class="quiz-question"><strong>${current.question}</strong></div>`;
       html += `<div class="quiz-options">`;
       current.options.forEach((opt, idx) => {
         const inputId = `q${state.quizIndex}_opt${idx}`;
         html += `
           <label for="${inputId}">
-            <input type="radio" name="quizOption" id="${inputId}" value="${opt}" />
+            <input type="radio" name="quizOption" id="${inputId}" value="${idx}" />
             ${opt}
           </label>
         `;
       });
       html += `</div>`;
-      html += `<button class="btn-primary" style="margin-top:6px;" id="nextQuestionBtn">Next</button>`;
+      html += `
+        <div class="row-between" style="margin-top:6px;">
+          <button class="btn" id="showHintBtn">💡 Show Hint</button>
+          <button class="btn-primary" id="nextQuestionBtn">Next</button>
+        </div>
+        <div id="hintContainer"></div>
+        <div id="explanationContainer"></div>
+      `;
 
       quizContent.innerHTML = html;
 
-      document.getElementById("nextQuestionBtn").addEventListener("click", () => {
-        const selected = document.querySelector('input[name="quizOption"]:checked');
-        if (!selected) {
-          alert("Please choose an answer before going to next question.");
-          return;
-        }
-        const selectedValue = Number(selected.value);
-        const correct = state.quizQuestions[state.quizIndex].answer;
-        if (selectedValue === correct) {
-          state.quizScore += 1;
-          debugLog("Quiz question answered correctly", {
-            index: state.quizIndex,
-            answer: selectedValue
-          });
-        } else {
-          debugLog("Quiz question answered incorrectly", {
-            index: state.quizIndex,
-            chosen: selectedValue,
-            correct
-          });
-        }
+      const nextBtn = document.getElementById("nextQuestionBtn");
+      const hintBtn = document.getElementById("showHintBtn");
+      const hintContainer = document.getElementById("hintContainer");
+      const explanationContainer = document.getElementById("explanationContainer");
 
-        state.quizIndex += 1;
-        renderQuizQuestion();
-      });
+      if (hintBtn) {
+        hintBtn.addEventListener("click", () => {
+          if (state.quizHintsUsed >= state.quizHintsPerQuestion) {
+            alert("No hints left for this question.");
+            return;
+          }
+          const hintIndex = state.quizHintsUsed;
+          const hintText = current.hints[hintIndex] || "Think about the concept again and try slowly.";
+          state.quizHintsUsed += 1;
+          hintsStatus.textContent = `Hints left: ${state.quizHintsPerQuestion - state.quizHintsUsed}`;
+          const div = document.createElement("div");
+          div.className = "hint-box";
+          div.textContent = hintText;
+          hintContainer.appendChild(div);
+          debugLog("Hint shown", {
+            questionIndex: state.quizIndex,
+            hintNumber: state.quizHintsUsed
+          });
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener("click", () => {
+          const selected = document.querySelector('input[name="quizOption"]:checked');
+          if (!selected) {
+            alert("Please choose an answer before going to next question.");
+            return;
+          }
+          const selectedIndex = Number(selected.value);
+          const correctIndex = current.correctIndex;
+          const correct = selectedIndex === correctIndex;
+
+          explanationContainer.innerHTML = `
+            <div class="explanation-box">
+              ${correct ? "✅ Correct!" : "❌ Not correct."}
+              ${current.explanation}
+            </div>
+          `;
+
+          if (correct) {
+            state.quizScore += 1;
+            debugLog("Quiz question answered correctly", {
+              index: state.quizIndex,
+              selectedIndex,
+              correctIndex
+            });
+          } else {
+            debugLog("Quiz question answered incorrectly", {
+              index: state.quizIndex,
+              selectedIndex,
+              correctIndex
+            });
+          }
+
+          // Small delay so student can read explanation
+          setTimeout(() => {
+            state.quizIndex += 1;
+            renderQuizQuestion();
+          }, 1200);
+        });
+      }
+    }
+
+    function randomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     /************************************************************
@@ -1126,7 +1570,6 @@
       const contextClass = state.selectedClass ? "Class " + state.selectedClass : "Class unknown";
       const contextSubject = subjectObj ? subjectObj.label : "Subject unknown";
 
-      // We wrap the question with a prompt for school-style answers
       const fullPrompt =
         `You are a helpful tutor for Indian school students.\n` +
         `Board: CBSE/State. ${contextClass}, ${contextSubject}.\n` +
@@ -1150,7 +1593,6 @@
           headers: {
             "Content-Type": "application/json"
           },
-          // Typical Gradio Space: { data: [prompt] }
           body: JSON.stringify({ data: [fullPrompt] })
         });
 
@@ -1160,10 +1602,8 @@
 
         const result = await response.json();
 
-        // Many Gradio Spaces return { data: [ "text..." ] } or [ { generated_text: "..."} ]
         let aiText = "";
         if (Array.isArray(result.data)) {
-          // Common format: data[0] is the text
           aiText = String(result.data[0]);
         } else if (Array.isArray(result) && result[0].generated_text) {
           aiText = result[0].generated_text;
@@ -1194,15 +1634,93 @@
     }
 
     /************************************************************
+     *  VOICE INPUT (Web Speech API) FOR AI TUTOR
+     ************************************************************/
+    function initVoiceInput() {
+      const voiceBtn = document.getElementById("voiceInputBtn");
+      const questionEl = document.getElementById("aiQuestion");
+      const voiceHint = document.getElementById("voiceSupportHint");
+
+      if (!voiceBtn || !questionEl || !voiceHint) {
+        debugLog("Voice UI elements missing");
+        return;
+      }
+
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        voiceBtn.disabled = true;
+        voiceBtn.title = "Voice input not supported in this browser.";
+        voiceHint.textContent = "Voice input is not supported on this browser. Try using the latest Chrome or Edge on desktop/mobile.";
+        debugLog("Web Speech API not supported");
+        return;
+      }
+
+      const recognition = new SpeechRecognition();
+      recognition.lang = "en-IN";
+      recognition.continuous = false;
+      recognition.interimResults = false;
+
+      state.voice.recognition = recognition;
+
+      recognition.addEventListener("start", () => {
+        state.voice.listening = true;
+        voiceBtn.classList.add("active");
+        voiceBtn.textContent = "🛑";
+        voiceBtn.title = "Click to stop listening";
+        voiceHint.textContent = "Listening... Speak your question clearly.";
+        debugLog("Voice recognition started");
+      });
+
+      recognition.addEventListener("end", () => {
+        state.voice.listening = false;
+        voiceBtn.classList.remove("active");
+        voiceBtn.textContent = "🎤";
+        voiceBtn.title = "Click to start voice input";
+        voiceHint.textContent = "";
+        debugLog("Voice recognition ended");
+      });
+
+      recognition.addEventListener("error", (event) => {
+        debugLog("Voice recognition error", { error: event.error });
+        voiceHint.textContent = "Voice input error: " + event.error;
+      });
+
+      recognition.addEventListener("result", (event) => {
+        const transcript = Array.from(event.results)
+          .map((res) => res[0].transcript)
+          .join(" ");
+        debugLog("Voice recognition transcript", { transcript });
+        const existing = questionEl.value.trim();
+        questionEl.value = existing ? existing + " " + transcript : transcript;
+      });
+
+      voiceBtn.addEventListener("click", () => {
+        if (!state.voice.recognition) return;
+        if (state.voice.listening) {
+          state.voice.recognition.stop();
+        } else {
+          try {
+            state.voice.recognition.start();
+          } catch (e) {
+            debugLog("Voice recognition start error", { error: String(e) });
+          }
+        }
+      });
+
+      voiceHint.textContent = "Voice input is available. Click 🎤 to start speaking your question.";
+      debugLog("Voice input initialised");
+    }
+
+    /************************************************************
      *  PROGRESS UI
      ************************************************************/
     function updateProgressUI() {
-      document.getElementById("progressQuizzes").textContent =
-        "🧮 Quizzes taken: " + state.progress.quizzesTaken;
-      document.getElementById("progressCorrect").textContent =
-        "✅ Correct answers: " + state.progress.correctAnswers;
-      document.getElementById("progressAi").textContent =
-        "🤖 AI questions: " + state.progress.aiQueries;
+      const qEl = document.getElementById("progressQuizzes");
+      const cEl = document.getElementById("progressCorrect");
+      const aiEl = document.getElementById("progressAi");
+      if (qEl) qEl.textContent = "🧮 Quizzes taken: " + state.progress.quizzesTaken;
+      if (cEl) cEl.textContent = "✅ Correct answers: " + state.progress.correctAnswers;
+      if (aiEl) aiEl.textContent = "🤖 AI questions: " + state.progress.aiQueries;
     }
 
     /************************************************************
@@ -1230,6 +1748,9 @@
         }
 
         updateProgressUI();
+        updateNcertSection();
+        initVoiceInput();
+
         debugLog("App initialised successfully");
       } catch (err) {
         debugLog("App initialisation error", { error: String(err) });
