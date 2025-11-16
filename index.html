@@ -885,7 +885,7 @@
 
   <script>
     // ---------- UI Language Text ----------
-    const uiText = {
+    var uiText = {
       en: {
         title: "Future-Ready Skills",
         subtitle: "Class 1–12 • Skills + AI • Job-ready from day one",
@@ -897,8 +897,8 @@
         topicSubtitle: "Each topic links to AI, real work and projects.",
         offlineReady: "Offline-ready",
         noLessons: "No lessons completed yet.",
-        avgScore: s => `Average score: ${s}%`,
-        progressPill: (l, q, a) => `${l} lessons • ${q} quizzes • ${a}% avg`,
+        avgScore: function (s) { return "Average score: " + s + "%"; },
+        progressPill: function (l, q, a) { return l + " lessons \u2022 " + q + " quizzes \u2022 " + a + "% avg"; },
         storageNote: "All progress is stored only on this device. No login needed.",
         startTitle: "Start by choosing a skill track.",
         startBody:
@@ -915,8 +915,8 @@
         topicSubtitle: "हर टॉपिक को एआई, वास्तविक जीवन और प्रोजेक्ट से जोड़ते हैं।",
         offlineReady: "ऑफ़लाइन तैयार",
         noLessons: "अभी कोई पाठ पूरा नहीं हुआ।",
-        avgScore: s => `औसत अंक: ${s}%`,
-        progressPill: (l, q, a) => `${l} पाठ • ${q} क्विज़ • ${a}% औसत`,
+        avgScore: function (s) { return "औसत अंक: " + s + "%"; },
+        progressPill: function (l, q, a) { return l + " पाठ \u2022 " + q + " क्विज़ \u2022 " + a + "% औसत"; },
         storageNote: "सारी प्रगति केवल इस डिवाइस पर सेव होती है। किसी लॉगिन की ज़रूरत नहीं।",
         startTitle: "पहले कोई स्किल ट्रैक चुनें।",
         startBody:
@@ -933,8 +933,8 @@
         topicSubtitle: "ప్రతి టాపిక్‌ను ఏఐ, రియల్ లైఫ్, ప్రాజెక్ట్‌తో కలుపుతాం.",
         offlineReady: "ఆఫ్లైన్ సిద్ధంగా",
         noLessons: "ఇంకా ఏ పాఠం పూర్తికాలేదు.",
-        avgScore: s => `సగటు స్కోర్: ${s}%`,
-        progressPill: (l, q, a) => `${l} పాఠాలు • ${q} క్విజ్‌లు • ${a}% సగటు`,
+        avgScore: function (s) { return "సగటు స్కోర్: " + s + "%"; },
+        progressPill: function (l, q, a) { return l + " పాఠాలు \u2022 " + q + " క్విజ్‌లు \u2022 " + a + "% సగటు"; },
         storageNote: "ప్రోగ్రెస్ ఈ డివైస్‌లో మాత్రమే సేవ్ అవుతుంది. లాగిన్ అవసరం లేదు.",
         startTitle: "మొదట ఒక స్కిల్ ట్రాక్ ఎంచుకోండి.",
         startBody:
@@ -942,10 +942,10 @@
       }
     };
 
-    let currentLang = localStorage.getItem("fs_lang") || "en";
+    var currentLang = localStorage.getItem("fs_lang") || "en";
 
     // ---------- Supported Languages for World Languages Subject ----------
-    const supportedLanguages = [
+    var supportedLanguages = [
       { code: "en", name: "English", native: "English" },
       { code: "zh", name: "Mandarin Chinese", native: "中文" },
       { code: "hi", name: "Hindi", native: "हिन्दी" },
@@ -959,7 +959,7 @@
       { code: "te", name: "Telugu", native: "తెలుగు" }
     ];
 
-    const languagePhrases = [
+    var languagePhrases = [
       {
         key: "hello",
         concept: "Basic greeting: Hello",
@@ -1030,9 +1030,8 @@
       }
     ];
 
-    // ---------- Shared Tracks (used across classes) ----------
-
-    const superLearning = {
+    // ---------- Shared Tracks ----------
+    var superLearning = {
       subjectLabel: "Super Learning & Brain Skills",
       level: "All classes",
       topics: [
@@ -1041,19 +1040,7 @@
           title: "Active Recall + AI: Study Faster",
           level: "Core skill",
           body:
-`Concept:
-Active recall means closing the book and testing yourself instead of only re-reading.
-
-AI Connection:
-• Class 1–5: Ask Comet: “Explain this in simple words, then hide it and let me recall.”
-• Class 6–8: Use an AI tool to generate practice questions and answer them without looking.
-• Class 9–12: Ask AI to create exam-style questions and try to answer before looking at suggestions.
-
-Real-World Application:
-You learn faster than others, clear exams with less time, and free up time to build skills / projects.
-
-Mini Project:
-Pick any chapter, ask Comet AI to generate 5 questions, write answers in a notebook from memory, then compare.`,
+"Concept:\nActive recall means closing the book and testing yourself instead of only re-reading.\n\nAI Connection:\n• Class 1–5: Ask Comet: “Explain this in simple words, then hide it and let me recall.”\n• Class 6–8: Use an AI tool to generate practice questions and answer them without looking.\n• Class 9–12: Ask AI to create exam-style questions and try to answer before looking at suggestions.\n\nReal-World Application:\nYou learn faster than others, clear exams with less time, and free up time to build skills / projects.\n\nMini Project:\nPick any chapter, ask Comet AI to generate 5 questions, write answers in a notebook from memory, then compare.",
           quiz: {
             question: "What is the main idea of active recall?",
             options: [
@@ -1070,19 +1057,7 @@ Pick any chapter, ask Comet AI to generate 5 questions, write answers in a noteb
           title: "AI Mindset: Human + AI > AI alone",
           level: "Core skill",
           body:
-`Concept:
-AI is a powerful assistant, not a replacement for your brain. You ask good questions, AI gives ideas, you decide.
-
-AI/LLM Connection:
-• A Large Language Model (LLM) like ChatGPT or Comet reads huge amounts of text and predicts the “next best word”.
-• It does NOT truly understand life like a human. You provide direction, values and judgement.
-
-Real-World Application:
-• You can work faster than people who don’t know AI.
-• You can earn by combining your thinking + AI speed (content, code, design, marketing).
-
-Mini Project:
-Write one problem you have (study, money, time). Ask Comet AI for 3 solutions. Choose the best one and implement it today.`,
+"Concept:\nAI is a powerful assistant, not a replacement for your brain. You ask good questions, AI gives ideas, you decide.\n\nAI/LLM Connection:\n• A Large Language Model (LLM) like ChatGPT or Comet reads huge amounts of text and predicts the “next best word”.\n• It does NOT truly understand life like a human. You provide direction, values and judgement.\n\nReal-World Application:\n• You can work faster than people who don’t know AI.\n• You can earn by combining your thinking + AI speed (content, code, design, marketing).\n\nMini Project:\nWrite one problem you have (study, money, time). Ask Comet AI for 3 solutions. Choose the best one and implement it today.",
           quiz: {
             question: "Which is more powerful?",
             options: [
@@ -1097,7 +1072,7 @@ Write one problem you have (study, money, time). Ask Comet AI for 3 solutions. C
       ]
     };
 
-    const worldLanguages = {
+    var worldLanguages = {
       subjectLabel: "World Languages (10+)",
       level: "Any class",
       topics: [
@@ -1106,19 +1081,7 @@ Write one problem you have (study, money, time). Ask Comet AI for 3 solutions. C
           title: "5 Magic Phrases (Any Language Pair)",
           level: "Easy",
           body:
-`Concept:
-Learning any language becomes easier when you master a few daily phrases first.
-
-AI/LLM Connection:
-• Ask Comet: “Translate these 5 phrases between [my language] and [target language] with pronunciation.”
-• Use AI to get example sentences and practice aloud.
-
-Real-World Application:
-• Talk to people from other countries.
-• Open remote work, freelancing, customer support, global teams.
-
-Mini Project:
-Choose ‘I know’ and ‘I want to learn’ languages in the controls above. Practice saying all 5 phrases 10 times each using both languages.`,
+"Concept:\nLearning any language becomes easier when you master a few daily phrases first.\n\nAI/LLM Connection:\n• Ask Comet: “Translate these 5 phrases between [my language] and [target language] with pronunciation.”\n• Use AI to get example sentences and practice aloud.\n\nReal-World Application:\n• Talk to people from other countries.\n• Open remote work, freelancing, customer support, global teams.\n\nMini Project:\nChoose ‘I know’ and ‘I want to learn’ languages in the controls above. Practice saying all 5 phrases 10 times each using both languages.",
           quiz: {
             question: "What is a good first step in any language?",
             options: [
@@ -1135,19 +1098,7 @@ Choose ‘I know’ and ‘I want to learn’ languages in the controls above. P
           title: "Listen + Copy: Sound First, Spelling Later",
           level: "Core",
           body:
-`Concept:
-Children learn language by listening and copying, not by reading grammar first.
-
-AI/LLM Connection:
-• Use AI to get slow audio sentences (text-to-speech) and repeat after it.
-• Ask Comet: “Give me 10 simple sentences in [target language] with meaning in [my language].”
-
-Real-World Application:
-• You sound more natural when speaking.
-• Helps in interviews, customer calls, remote jobs.
-
-Mini Project:
-Pick 3 phrases from the table below. Use device TTS or Comet AI to speak them. Record yourself and compare.`,
+"Concept:\nChildren learn language by listening and copying, not by reading grammar first.\n\nAI/LLM Connection:\n• Use AI to get slow audio sentences (text-to-speech) and repeat after it.\n• Ask Comet: “Give me 10 simple sentences in [target language] with meaning in [my language].”\n\nReal-World Application:\n• You sound more natural when speaking.\n• Helps in interviews, customer calls, remote jobs.\n\nMini Project:\nPick 3 phrases from the table below. Use device TTS or Comet AI to speak them. Record yourself and compare.",
           quiz: {
             question: "For fast language learning, what usually comes first?",
             options: [
@@ -1163,16 +1114,10 @@ Pick 3 phrases from the table below. Use device TTS or Comet AI to speak them. R
     };
 
     // ---------- Future-Ready Skill Tracks per Class ----------
+    var syllabus = {};
 
-    // For brevity, we give full detail for some classes and sample topics for others.
-    // You can keep adding more topics later following this structure.
-
-    const syllabus = {};
-
-    // Helper to attach common skill tracks to any class:
     function buildClassSyllabus(levelLabel) {
       return {
-        // Academic + Skills
         MathSkills: {
           subjectLabel: "Math + Money & Data",
           level: levelLabel,
@@ -1182,19 +1127,7 @@ Pick 3 phrases from the table below. Use device TTS or Comet AI to speak them. R
               title: "Numbers + Money Sense",
               level: "Starter",
               body:
-`Concept:
-Math is not only for exams; it is for money, shopping, saving and business.
-
-AI/LLM Connection:
-• Ask Comet: “Explain profit, loss, discount in very simple steps with real examples.”
-• Use AI to generate small word problems about pocket money.
-
-Real-World Application:
-• You can check if someone overcharged you.
-• You understand savings, interest and small business ideas.
-
-Mini Project:
-Track every rupee you spend today (snacks, travel, recharge). At night, ask Comet to help you make a simple daily budget from that list.`,
+"Concept:\nMath is not only for exams; it is for money, shopping, saving and business.\n\nAI/LLM Connection:\n• Ask Comet: “Explain profit, loss, discount in very simple steps with real examples.”\n• Use AI to generate small word problems about pocket money.\n\nReal-World Application:\n• You can check if someone overcharged you.\n• You understand savings, interest and small business ideas.\n\nMini Project:\nTrack every rupee you spend today (snacks, travel, recharge). At night, ask Comet to help you make a simple daily budget from that list.",
               quiz: {
                 question: "Why is math important in real life here?",
                 options: [
@@ -1218,19 +1151,7 @@ Track every rupee you spend today (snacks, travel, recharge). At night, ask Come
               title: "Curiosity, Experiments & AI",
               level: "Starter",
               body:
-`Concept:
-Science starts with curiosity: “Why?” “How?” “What if?”. Experiments test ideas.
-
-AI/LLM Connection:
-• Ask Comet: “Give me 3 simple experiments I can do at home with safety.”
-• Use AI to predict and then test the result.
-
-Real-World Application:
-• You become better at troubleshooting (devices, code, daily problems).
-• Companies pay problem-solvers, not memorisers.
-
-Mini Project:
-Pick a daily problem (slow phone, messy bag, late homework). Ask Comet for 3 scientific-style solutions. Test one and write what changed.`,
+"Concept:\nScience starts with curiosity: “Why?” “How?” “What if?”. Experiments test ideas.\n\nAI/LLM Connection:\n• Ask Comet: “Give me 3 simple experiments I can do at home with safety.”\n• Use AI to predict and then test the result.\n\nReal-World Application:\n• You become better at troubleshooting (devices, code, daily problems).\n• Companies pay problem-solvers, not memorisers.\n\nMini Project:\nPick a daily problem (slow phone, messy bag, late homework). Ask Comet for 3 scientific-style solutions. Test one and write what changed.",
               quiz: {
                 question: "Science mainly starts with:",
                 options: [
@@ -1254,18 +1175,7 @@ Pick a daily problem (slow phone, messy bag, late homework). Ask Comet for 3 sci
               title: "Clear Communication in Simple Words",
               level: "Starter",
               body:
-`Concept:
-Good communication = simple, clear, honest words that others understand easily.
-
-AI/LLM Connection:
-• Ask Comet: “Rewrite my sentence in simple, friendly English.”
-• Ask: “Give me 3 better subject lines for this message.”
-
-Real-World Application:
-• Email to clients, messages to teachers, job applications, freelancing profiles.
-
-Mini Project:
-Write a message to a friend explaining your dream skill or job. Ask Comet to improve it for clarity and politeness, then compare versions.`,
+"Concept:\nGood communication = simple, clear, honest words that others understand easily.\n\nAI/LLM Connection:\n• Ask Comet: “Rewrite my sentence in simple, friendly English.”\n• Ask: “Give me 3 better subject lines for this message.”\n\nReal-World Application:\n• Email to clients, messages to teachers, job applications, freelancing profiles.\n\nMini Project:\nWrite a message to a friend explaining your dream skill or job. Ask Comet to improve it for clarity and politeness, then compare versions.",
               quiz: {
                 question: "Good communication is mainly about:",
                 options: [
@@ -1289,18 +1199,7 @@ Write a message to a friend explaining your dream skill or job. Ask Comet to imp
               title: "स्पष्ट अभिव्यक्ति (Clear Expression)",
               level: "Starter",
               body:
-`संकल्पना:
-साफ़ और सरल भाषा में अपने विचार लिखना और बोलना एक महत्वपूर्ण कौशल है।
-
-एआई संबंध:
-• Comet से कहें: “मेरे वाक्य को सरल हिन्दी में सुधारो।”
-• एआई से छोटे संदेश, आवेदन-पत्र या रिपोर्ट तैयार करवाकर खुद भी लिखने की कोशिश करें।
-
-वास्तविक उपयोग:
-• आवेदन-पत्र, पत्र, व्हाट्सऐप संदेश, नोटिस आदि में मदद।
-
-मिनी प्रोजेक्ट:
-किसी एक समस्या पर 4–5 वाक्य हिन्दी में लिखें, फिर Comet से उसे सुधारने को कहें और दोनों की तुलना करें।`,
+"संकल्पना:\nसाफ़ और सरल भाषा में अपने विचार लिखना और बोलना एक महत्वपूर्ण कौशल है।\n\nएआई संबंध:\n• Comet से कहें: “मेरे वाक्य को सरल हिन्दी में सुधारो।”\n• एआई से छोटे संदेश, आवेदन-पत्र या रिपोर्ट तैयार करवाकर खुद भी लिखने की कोशिश करें।\n\nवास्तविक उपयोग:\n• आवेदन-पत्र, पत्र, व्हाट्सऐप संदेश, नोटिस आदि में मदद।\n\nमिनी प्रोजेक्ट:\nकिसी एक समस्या पर 4–5 वाक्य हिन्दी में लिखें, फिर Comet से उसे सुधारने को कहें और दोनों की तुलना करें।",
               quiz: {
                 question: "स्पष्ट अभिव्यक्ति में क्या ज़रूरी है?",
                 options: [
@@ -1318,7 +1217,6 @@ Write a message to a friend explaining your dream skill or job. Ask Comet to imp
         SuperLearning: superLearning,
         Languages: worldLanguages,
 
-        // New Skill Tracks
         DigitalMarketing: {
           subjectLabel: "Digital Marketing & Social Media",
           level: levelLabel,
@@ -1328,19 +1226,7 @@ Write a message to a friend explaining your dream skill or job. Ask Comet to imp
               title: "Story Posts vs. Plain Posts",
               level: "Starter",
               body:
-`Concept:
-On social media, stories (before/after, problem/solution) work better than random posts.
-
-AI/LLM Connection:
-• Ask Comet: “Turn this boring sentence into a short story for Instagram or YouTube community.”
-• Ask: “Give 5 hook lines for a reel about [topic].”
-
-Real-World Application:
-• You can promote school events, projects, small businesses.
-• Later, you can earn by handling social media for clients.
-
-Mini Project:
-Pick one topic you love (cricket, drawing, coding, food). Ask Comet for 3 reel hook ideas. Write them down and choose your favourite.`,
+"Concept:\nOn social media, stories (before/after, problem/solution) work better than random posts.\n\nAI/LLM Connection:\n• Ask Comet: “Turn this boring sentence into a short story for Instagram or YouTube community.”\n• Ask: “Give 5 hook lines for a reel about [topic].”\n\nReal-World Application:\n• You can promote school events, projects, small businesses.\n• Later, you can earn by handling social media for clients.\n\nMini Project:\nPick one topic you love (cricket, drawing, coding, food). Ask Comet for 3 reel hook ideas. Write them down and choose your favourite.",
               quiz: {
                 question: "What works better in social media content?",
                 options: [
@@ -1364,19 +1250,7 @@ Pick one topic you love (cricket, drawing, coding, food). Ask Comet for 3 reel h
               title: "Think Like a Computer (Logic Blocks)",
               level: "Starter",
               body:
-`Concept:
-Coding = giving step-by-step instructions a computer can follow.
-
-AI/LLM Connection:
-• Ask Comet: “Explain if/else and loops with simple daily life examples.”
-• Ask: “Generate a simple pseudo-code to remind me to drink water every hour.”
-
-Real-World Application:
-• You can build tools that save time (timers, calculators, trackers).
-• Connect no-code tools with AI to make mini-automations.
-
-Mini Project:
-Describe a daily routine (wake up, school, study, play). Ask Comet to convert it to step-by-step pseudo-code. See how close coding is to your real day.`,
+"Concept:\nCoding = giving step-by-step instructions a computer can follow.\n\nAI/LLM Connection:\n• Ask Comet: “Explain if/else and loops with simple daily life examples.”\n• Ask: “Generate a simple pseudo-code to remind me to drink water every hour.”\n\nReal-World Application:\n• You can build tools that save time (timers, calculators, trackers).\n• Connect no-code tools with AI to make mini-automations.\n\nMini Project:\nDescribe a daily routine (wake up, school, study, play). Ask Comet to convert it to step-by-step pseudo-code. See how close coding is to your real day.",
               quiz: {
                 question: "Coding mainly means:",
                 options: [
@@ -1400,19 +1274,7 @@ Describe a daily routine (wake up, school, study, play). Ask Comet to convert it
               title: "Simple Layout > Too Many Effects",
               level: "Starter",
               body:
-`Concept:
-Good design is clear and focused: few colours, readable text, one main message.
-
-AI/LLM Connection:
-• Ask Comet: “Give me a layout idea for a poster about [topic] with headings and subpoints.”
-• Ask: “Give title ideas for a YouTube thumbnail that are short and powerful.”
-
-Real-World Application:
-• Posters for school, NGO, fundraising, local business.
-• Thumbnails and shorts that get more clicks.
-
-Mini Project:
-Choose one cause (save water, help strays, fundraiser). Ask Comet to suggest a poster structure. Then design it using any free tool (Canva, etc.).`,
+"Concept:\nGood design is clear and focused: few colours, readable text, one main message.\n\nAI/LLM Connection:\n• Ask Comet: “Give me a layout idea for a poster about [topic] with headings and subpoints.”\n• Ask: “Give title ideas for a YouTube thumbnail that are short and powerful.”\n\nReal-World Application:\n• Posters for school, NGO, fundraising, local business.\n• Thumbnails and shorts that get more clicks.\n\nMini Project:\nChoose one cause (save water, help strays, fundraiser). Ask Comet to suggest a poster structure. Then design it using any free tool (Canva, etc.).",
               quiz: {
                 question: "Which is usually better in design?",
                 options: [
@@ -1436,18 +1298,7 @@ Choose one cause (save water, help strays, fundraiser). Ask Comet to suggest a p
               title: "Business = Solving Problems",
               level: "Starter",
               body:
-`Concept:
-A business is simply: find a problem, solve it, get paid fairly for the solution.
-
-AI/LLM Connection:
-• Ask Comet: “List 10 problems students/parents/teachers face daily. Turn them into simple business ideas.”
-• Ask: “Help me create a one-line pitch for this idea.”
-
-Real-World Application:
-• You can start tiny services: notes summarising, poster design, local delivery coordination, etc.
-
-Mini Project:
-Write down 3 problems you or your friends face at school or home. Ask Comet to turn each into a small service idea and first paying customer type.`,
+"Concept:\nA business is simply: find a problem, solve it, get paid fairly for the solution.\n\nAI/LLM Connection:\n• Ask Comet: “List 10 problems students/parents/teachers face daily. Turn them into simple business ideas.”\n• Ask: “Help me create a one-line pitch for this idea.”\n\nReal-World Application:\n• You can start tiny services: notes summarising, poster design, local delivery coordination, etc.\n\nMini Project:\nWrite down 3 problems you or your friends face at school or home. Ask Comet to turn each into a small service idea and first paying customer type.",
               quiz: {
                 question: "According to this lesson, business mainly starts from:",
                 options: [
@@ -1471,19 +1322,7 @@ Write down 3 problems you or your friends face at school or home. Ask Comet to t
               title: "What is an LLM? (Class 1–5 version)",
               level: "Core",
               body:
-`Concept:
-LLM = Large Language Model. It is a computer program that learned from many texts and predicts the next word.
-
-For Small Classes:
-• Think of it as a super-fast reader that suggests sentences, stories, answers.
-• It doesn’t “know everything”, but can help think faster.
-
-Real-World Application:
-• Homework help, idea generation, content creation, research.
-• Later: code, marketing, customer support, automation.
-
-Mini Project:
-Ask Comet: “Explain what you are in 3 lines to a 10-year-old.” Read and show it to a friend or parent.`,
+"Concept:\nLLM = Large Language Model. It is a computer program that learned from many texts and predicts the next word.\n\nFor Small Classes:\n• Think of it as a super-fast reader that suggests sentences, stories, answers.\n• It doesn’t “know everything”, but can help think faster.\n\nReal-World Application:\n• Homework help, idea generation, content creation, research.\n• Later: code, marketing, customer support, automation.\n\nMini Project:\nAsk Comet: “Explain what you are in 3 lines to a 10-year-old.” Read and show it to a friend or parent.",
               quiz: {
                 question: "An LLM mainly does what?",
                 options: [
@@ -1504,4 +1343,723 @@ Ask Comet: “Explain what you are in 3 lines to a 10-year-old.” Read and show
           topics: [
             {
               id: "cw-hook-body-cta",
-              tit
+              title: "Hook + Body + CTA (Simple Copywriting)",
+              level: "Starter",
+              body:
+"Concept:\nGood content often follows: Hook (grab attention) → Body (explain) → CTA (what next?).\n\nAI/LLM Connection:\n• Ask Comet: “Turn this paragraph into Hook + Body + CTA for [Instagram / LinkedIn / Email].”\n• Ask: “Give 3 different hooks for the same topic.”\n\nReal-World Application:\n• Posts, emails, landing pages, sales pages, fundraiser messages.\n\nMini Project:\nChoose any topic (fundraiser, school event, your skill). Write a rough paragraph. Ask Comet to convert it to Hook + Body + CTA. Compare with your version.",
+              quiz: {
+                question: "In this lesson, CTA stands for:",
+                options: [
+                  "Call to Action",
+                  "Code to Apply",
+                  "Copy Text Area",
+                  "Class Test Answer"
+                ],
+                answerIndex: 0
+              }
+            }
+          ]
+        },
+
+        FreelancingIncome: {
+          subjectLabel: "Freelancing & Online Income",
+          level: levelLabel,
+          topics: [
+            {
+              id: "free-skill-portfolio",
+              title: "Skills + Portfolio > Certificates",
+              level: "Starter",
+              body:
+"Concept:\nClients mostly care about what you can DO and SHOW, not just certificates.\n\nAI/LLM Connection:\n• Ask Comet: “List 5 simple online services I can offer as a student using AI (content, research, design, etc.).”\n• Ask: “Help me write a mini profile for my first freelancing gig.”\n\nReal-World Application:\n• Fiverr, Upwork, direct clients, local businesses.\n\nMini Project:\nPick one skill track you like (design, content, coding). With Comet’s help, write a 3-line profile and 3 sample service descriptions for a future gig.",
+              quiz: {
+                question: "For freelancing, what is usually more important?",
+                options: [
+                  "Only certificates",
+                  "Real skills and portfolio",
+                  "Fancy job title",
+                  "Having many apps installed"
+                ],
+                answerIndex: 1
+              }
+            }
+          ]
+        },
+
+        ProjectSkills: {
+          subjectLabel: "Projects, Management & Public Speaking",
+          level: levelLabel,
+          topics: [
+            {
+              id: "proj-small-start",
+              title: "Micro Projects: Start Tiny, Learn Fast",
+              level: "Starter",
+              body:
+"Concept:\nInstead of dreaming of a huge startup, start with tiny “micro projects” that finish in 1–7 days.\n\nAI/LLM Connection:\n• Ask Comet: “Suggest 5 micro projects for my age in [topic: design / AI / coding / marketing].”\n• Ask: “Create a 2-minute speech to present my project to my class.”\n\nReal-World Application:\n• Builds your portfolio and confidence.\n• Ready for hackathons, internships, real jobs later.\n\nMini Project:\nAsk Comet for 3 micro project ideas related to your favourite skill track. Choose one and plan 3 simple steps to finish it this week.",
+              quiz: {
+                question: "Micro projects are:",
+                options: [
+                  "Huge startups only",
+                  "Small, quickly finished projects to learn fast",
+                  "Only for toppers",
+                  "Only for adults"
+                ],
+                answerIndex: 1
+              }
+            }
+          ]
+        }
+      };
+    }
+
+    // Build syllabus for all classes
+    for (var c = 1; c <= 12; c++) {
+      var levelLabel =
+        c <= 5 ? "Foundations (Classes 1–5)" :
+        c <= 8 ? "Builders (Classes 6–8)" :
+        "Launchpad (Classes 9–12)";
+      syllabus[String(c)] = buildClassSyllabus(levelLabel);
+    }
+
+    // ---------- Progress Storage ----------
+    var STORAGE_KEY = "fs_progress_v1";
+    var progress = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+    if (!progress) {
+      progress = {
+        lessons: {},
+        quizAttempts: 0,
+        quizCorrect: 0
+      };
+    }
+
+    function saveProgress() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+      updateGlobalProgressUI();
+    }
+
+    // ---------- DOM References ----------
+    var classGrid;
+    var subjectsRow;
+    var topicList;
+    var lessonTitle;
+    var lessonBody;
+    var qaSection;
+    var quizQuestionEl;
+    var optionsContainer;
+    var nextQuestionBtn;
+    var speakLessonBtn;
+    var speakQuestionBtn;
+
+    var overallProgressFill;
+    var overallProgressLabel;
+    var overallScoreLabel;
+    var progressPillText;
+    var offlineLabel;
+    var onlineChip;
+    var storageNote;
+
+    var languageSelect;
+    var appTitle;
+    var appSubtitle;
+    var classHeading;
+    var classSubtitle;
+    var subjectHeading;
+    var subjectSubtitle;
+    var topicHeading;
+    var topicSubtitle;
+    var metaClass;
+    var metaSubject;
+    var metaTopicCount;
+
+    var knownLangSelect;
+    var targetLangSelect;
+    var langPairControls;
+
+    // AI elements
+    var aiBackdrop;
+    var openAiBtn;
+    var closeAiBtn;
+    var aiChat;
+    var aiTextInput;
+    var aiSendBtn;
+    var aiFileInput;
+    var aiUrlInput;
+    var aiUrlAnalyzeBtn;
+    var aiStatusDot;
+    var aiOnlineStatusText;
+    var aiStatusLine;
+
+    var currentClass = null;
+    var currentSubject = null;
+    var currentTopicIndex = 0;
+
+    // ---------- UI Language Handling ----------
+    function renderLanguage() {
+      var t = uiText[currentLang];
+      appTitle.textContent = t.title;
+      appSubtitle.textContent = t.subtitle;
+      classHeading.textContent = t.classHeading;
+      classSubtitle.textContent = t.classSubtitle;
+      subjectHeading.textContent = t.subjectHeading;
+      subjectSubtitle.textContent = t.subjectSubtitle;
+      topicHeading.textContent = t.topicHeading;
+      topicSubtitle.textContent = t.topicSubtitle;
+      offlineLabel.textContent = t.offlineReady;
+      storageNote.textContent = t.storageNote;
+
+      if (!currentClass || !currentSubject) {
+        lessonTitle.textContent = t.startTitle;
+        lessonBody.textContent = t.startBody;
+      }
+
+      updateGlobalProgressUI();
+    }
+
+    // ---------- Helpers ----------
+    function getClassData(classId) {
+      return syllabus[classId] || null;
+    }
+
+    function getSubjectData(classId, subjectKey) {
+      var cls = getClassData(classId);
+      if (!cls) return null;
+      var subj = cls[subjectKey];
+      return subj || null;
+    }
+
+    function getTopicKey(classId, subjectKey, topicId) {
+      return classId + "-" + subjectKey + "-" + topicId;
+    }
+
+    // ---------- Class & Subject ----------
+    function initClassGrid() {
+      classGrid.innerHTML = "";
+      for (var c = 1; c <= 12; c++) {
+        (function (cVal) {
+          var btn = document.createElement("button");
+          btn.className = "pill-btn";
+          btn.textContent = "Class " + cVal;
+          btn.dataset.classValue = String(cVal);
+          btn.addEventListener("click", function () {
+            var all = document.querySelectorAll("#classGrid .pill-btn");
+            for (var i = 0; i < all.length; i++) {
+              all[i].classList.remove("active");
+            }
+            btn.classList.add("active");
+            currentClass = String(cVal);
+            currentSubject = null;
+            renderSubjects();
+            renderTopics();
+            metaClass.textContent = "Class " + currentClass;
+            metaSubject.textContent = "Track \u2013";
+          });
+          classGrid.appendChild(btn);
+        })(c);
+      }
+    }
+
+    function renderSubjects() {
+      subjectsRow.innerHTML = "";
+      var data = getClassData(currentClass);
+      if (!data) {
+        subjectsRow.innerHTML =
+          '<span style="font-size:12px;opacity:0.7;">Syllabus for this class will be added soon.</span>';
+        metaTopicCount.textContent = "0 topics";
+        langPairControls.style.display = "none";
+        return;
+      }
+
+      for (var subjectKey in data) {
+        if (!data.hasOwnProperty(subjectKey)) continue;
+        var subject = data[subjectKey];
+        var card = document.createElement("div");
+        card.className = "subject-card";
+        if (currentSubject === subjectKey) card.classList.add("active");
+
+        var icon =
+          subjectKey === "MathSkills" ? "🧮" :
+          subjectKey === "ScienceThinking" ? "🔬" :
+          subjectKey === "EnglishCommunication" ? "🗣️" :
+          subjectKey === "Hindi" ? "📝" :
+          subjectKey === "SuperLearning" ? "⚡" :
+          subjectKey === "Languages" ? "🌍" :
+          subjectKey === "DigitalMarketing" ? "📊" :
+          subjectKey === "CodingNoCode" ? "💻" :
+          subjectKey === "DesignVideo" ? "🎨" :
+          subjectKey === "BusinessEntrepreneurship" ? "💼" :
+          subjectKey === "AITools" ? "🤖" :
+          subjectKey === "ContentWriting" ? "📝" :
+          subjectKey === "FreelancingIncome" ? "💰" :
+          subjectKey === "ProjectSkills" ? "🎯" :
+          "📘";
+
+        card.innerHTML =
+          '<div class="subject-pill">' + icon + " " + subject.subjectLabel + '</div>' +
+          '<div class="subject-main">' + subject.subjectLabel + '</div>' +
+          '<div class="subject-sub">' + subject.level + '</div>' +
+          '<div class="tag-row">' +
+            '<span class="tiny-tag">' + subject.topics.length + ' topics</span>' +
+            '<span class="tiny-tag">Skills + AI</span>' +
+          '</div>';
+
+        (function (subjectKey) {
+          card.addEventListener("click", function () {
+            var allCards = document.querySelectorAll(".subject-card");
+            for (var i = 0; i < allCards.length; i++) {
+              allCards[i].classList.remove("active");
+            }
+            card.classList.add("active");
+            currentSubject = subjectKey;
+            renderTopics();
+            metaSubject.textContent = subject.subjectLabel;
+          });
+        })(subjectKey);
+
+        subjectsRow.appendChild(card);
+      }
+    }
+
+    function renderTopics() {
+      var t = uiText[currentLang];
+      topicList.innerHTML = "";
+
+      if (!currentClass || !currentSubject) {
+        metaTopicCount.textContent = "0 topics";
+        lessonTitle.textContent = t.startTitle;
+        lessonBody.textContent = t.startBody;
+        qaSection.style.display = "none";
+        langPairControls.style.display = "none";
+        return;
+      }
+
+      var subjectData = getSubjectData(currentClass, currentSubject);
+      if (!subjectData) {
+        metaTopicCount.textContent = "0 topics";
+        topicList.innerHTML =
+          '<span style="font-size:12px;opacity:0.7;">Topics for this track will be added soon.</span>';
+        langPairControls.style.display = "none";
+        return;
+      }
+
+      metaTopicCount.textContent = subjectData.topics.length + " topics";
+
+      subjectData.topics.forEach(function (topic, index) {
+        var row = document.createElement("div");
+        row.className = "topic-item";
+        row.dataset.index = index;
+        row.innerHTML =
+          "<span>" + topic.title + "</span>" +
+          '<span style="font-size:11px;opacity:0.7;">' + topic.level + "</span>";
+        row.addEventListener("click", function () {
+          var all = document.querySelectorAll(".topic-item");
+          for (var i = 0; i < all.length; i++) {
+            all[i].classList.remove("active");
+          }
+          row.classList.add("active");
+          currentTopicIndex = index;
+          loadLessonAndQuiz();
+        });
+        topicList.appendChild(row);
+      });
+
+      if (currentSubject === "Languages") {
+        langPairControls.style.display = "flex";
+      } else {
+        langPairControls.style.display = "none";
+      }
+    }
+
+    function loadLessonAndQuiz() {
+      if (!currentClass || !currentSubject) return;
+      var subjectData = getSubjectData(currentClass, currentSubject);
+      if (!subjectData) return;
+
+      var topic = subjectData.topics[currentTopicIndex];
+      if (!topic) return;
+
+      if (currentSubject === "Languages") {
+        renderLanguagePhraseView(topic);
+      } else {
+        lessonTitle.textContent = topic.title;
+        lessonBody.textContent = topic.body;
+      }
+
+      qaSection.style.display = "block";
+      renderQuiz(topic);
+      markLessonCompleted(topic);
+    }
+
+    function markLessonCompleted(topic) {
+      var key = getTopicKey(currentClass, currentSubject, topic.id);
+      if (!progress.lessons[key]) {
+        progress.lessons[key] = { completed: true, bestScore: 0 };
+      } else if (!progress.lessons[key].completed) {
+        progress.lessons[key].completed = true;
+      }
+      saveProgress();
+    }
+
+    // ---------- Language Pair Controls ----------
+    function initLanguagePairSelectors() {
+      knownLangSelect.innerHTML = "";
+      targetLangSelect.innerHTML = "";
+
+      supportedLanguages.forEach(function (lang) {
+        var opt1 = document.createElement("option");
+        opt1.value = lang.code;
+        opt1.textContent = lang.native + " (" + lang.name + ")";
+        knownLangSelect.appendChild(opt1);
+
+        var opt2 = document.createElement("option");
+        opt2.value = lang.code;
+        opt2.textContent = lang.native + " (" + lang.name + ")";
+        targetLangSelect.appendChild(opt2);
+      });
+
+      var savedKnown = localStorage.getItem("fs_knownLang") || "en";
+      var savedTarget = localStorage.getItem("fs_targetLang") || "hi";
+
+      var hasKnown = supportedLanguages.some(function (l) { return l.code === savedKnown; });
+      var hasTarget = supportedLanguages.some(function (l) { return l.code === savedTarget; });
+
+      if (hasKnown) knownLangSelect.value = savedKnown;
+      if (hasTarget) targetLangSelect.value = savedTarget;
+
+      knownLangSelect.addEventListener("change", function () {
+        localStorage.setItem("fs_knownLang", knownLangSelect.value);
+        if (currentSubject === "Languages") renderLanguagePhraseView();
+      });
+
+      targetLangSelect.addEventListener("change", function () {
+        localStorage.setItem("fs_targetLang", targetLangSelect.value);
+        if (currentSubject === "Languages") renderLanguagePhraseView();
+      });
+    }
+
+    function renderLanguagePhraseView(topicParam) {
+      if (currentSubject !== "Languages") return;
+
+      var subjectData = getSubjectData(currentClass, currentSubject);
+      if (!subjectData) return;
+
+      var topic = topicParam || subjectData.topics[currentTopicIndex];
+      if (!topic) return;
+
+      var knownCode = knownLangSelect.value;
+      var targetCode = targetLangSelect.value;
+
+      lessonTitle.textContent = topic.title;
+
+      var explanationHtml = topic.body.replace(/\n/g, "<br>");
+
+      var tableHtml =
+        '<div style="margin-top:6px; font-size:12px;">' +
+          '<div style="display:flex; font-weight:600; margin-bottom:4px;">' +
+            '<div style="flex:1;">Concept</div>' +
+            '<div style="flex:1;">Known (' + knownCode + ')</div>' +
+            '<div style="flex:1;">Target (' + targetCode + ')</div>' +
+          '</div>';
+
+      languagePhrases.forEach(function (p) {
+        var knownPhrase = p.translations[knownCode] || "—";
+        var targetPhrase = p.translations[targetCode] || "—";
+        tableHtml +=
+          '<div style="display:flex; margin-bottom:3px;">' +
+            '<div style="flex:1;">' + p.concept + '</div>' +
+            '<div style="flex:1;">' + knownPhrase + '</div>' +
+            '<div style="flex:1;">' + targetPhrase + '</div>' +
+          '</div>';
+      });
+
+      tableHtml += "</div>";
+
+      lessonBody.innerHTML = explanationHtml + tableHtml;
+    }
+
+    // ---------- Quiz ----------
+    function renderQuiz(topic) {
+      var quiz = topic.quiz;
+      quizQuestionEl.textContent = quiz.question;
+      optionsContainer.innerHTML = "";
+
+      quiz.options.forEach(function (opt, index) {
+        var btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.textContent = String.fromCharCode(65 + index) + ". " + opt;
+        btn.dataset.index = index;
+        btn.addEventListener("click", function () {
+          handleAnswerClick(btn, index, quiz.answerIndex, topic);
+        });
+        optionsContainer.appendChild(btn);
+      });
+    }
+
+    function handleAnswerClick(btn, chosenIndex, correctIndex, topic) {
+      var optionButtons = optionsContainer.querySelectorAll(".option-btn");
+      for (var i = 0; i < optionButtons.length; i++) {
+        optionButtons[i].disabled = true;
+      }
+
+      progress.quizAttempts++;
+
+      if (chosenIndex === correctIndex) {
+        btn.classList.add("correct");
+        progress.quizCorrect++;
+      } else {
+        btn.classList.add("wrong");
+        if (optionButtons[correctIndex]) {
+          optionButtons[correctIndex].classList.add("correct");
+        }
+      }
+
+      var key = getTopicKey(currentClass, currentSubject, topic.id);
+      var lessonEntry = progress.lessons[key];
+      var currentBest = 0;
+      if (lessonEntry && typeof lessonEntry.bestScore === "number") {
+        currentBest = lessonEntry.bestScore;
+      }
+      var newScore = chosenIndex === correctIndex ? 100 : 0;
+      if (!lessonEntry) {
+        progress.lessons[key] = { completed: true, bestScore: newScore };
+      } else if (newScore > currentBest) {
+        progress.lessons[key].bestScore = newScore;
+      }
+
+      saveProgress();
+    }
+
+    // ---------- Text-to-Speech ----------
+    function speak(text, langOverride) {
+      if (!("speechSynthesis" in window)) {
+        alert("Text-to-speech not supported on this device.");
+        return;
+      }
+      var msg = new SpeechSynthesisUtterance(text);
+      var langCode = langOverride || currentLang;
+      msg.lang =
+        langCode === "hi" ? "hi-IN" :
+        langCode === "te" ? "te-IN" :
+        langCode === "es" ? "es-ES" :
+        langCode === "zh" ? "zh-CN" :
+        langCode === "ar" ? "ar-SA" :
+        langCode === "fr" ? "fr-FR" :
+        langCode === "pt" ? "pt-BR" :
+        langCode === "ru" ? "ru-RU" :
+        langCode === "ja" ? "ja-JP" :
+        langCode === "de" ? "de-DE" :
+        "en-IN";
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(msg);
+    }
+
+    // ---------- Progress UI ----------
+    function calculateTotalLessons() {
+      var count = 0;
+      for (var classId in syllabus) {
+        if (!syllabus.hasOwnProperty(classId)) continue;
+        var classObj = syllabus[classId];
+        for (var subjectKey in classObj) {
+          if (!classObj.hasOwnProperty(subjectKey)) continue;
+          count += classObj[subjectKey].topics.length;
+        }
+      }
+      return count;
+    }
+
+    function updateGlobalProgressUI() {
+      var t = uiText[currentLang];
+
+      var lessonKeys = Object.keys(progress.lessons || {});
+      var completedLessons = lessonKeys.filter(function (k) {
+        return progress.lessons[k].completed;
+      }).length;
+
+      var totalLessons = calculateTotalLessons();
+      var completionPercent = totalLessons === 0
+        ? 0
+        : Math.round((completedLessons / totalLessons) * 100);
+
+      var avgScore =
+        progress.quizAttempts === 0
+          ? 0
+          : Math.round((progress.quizCorrect / progress.quizAttempts) * 100);
+
+      overallProgressFill.style.width = completionPercent + "%";
+      overallProgressLabel.textContent =
+        completedLessons === 0
+          ? t.noLessons
+          : completedLessons + "/" + totalLessons + " lessons completed";
+      overallScoreLabel.textContent = t.avgScore(avgScore);
+      progressPillText.textContent =
+        t.progressPill(completedLessons, progress.quizAttempts, avgScore);
+    }
+
+    // ---------- Connectivity ----------
+    function updateOnlineStatus() {
+      var isOnline = navigator.onLine;
+      onlineChip.style.display = isOnline ? "inline-flex" : "none";
+
+      if (isOnline) {
+        aiStatusDot.style.background = "#22c55e";
+        aiOnlineStatusText.textContent = "Online AI";
+        aiStatusLine.textContent = "Using online AI model + offline syllabus";
+      } else {
+        aiStatusDot.style.background = "#f97316";
+        aiOnlineStatusText.textContent = "Offline mode";
+        aiStatusLine.textContent = "Using offline knowledge base only";
+      }
+    }
+
+    // ---------- Service Worker ----------
+    function registerServiceWorker() {
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("service-worker.js")
+          .then(function () { console.log("Service worker registered."); })
+          .catch(function (err) { console.error("Service worker registration failed:", err); });
+      }
+    }
+
+    // ---------- AI Assistant (Hybrid) ----------
+    var OPENROUTER_API_KEY = ""; // Put your key here when ready.
+
+    function addAiMessage(role, text) {
+      var row = document.createElement("div");
+      row.className = "ai-message-row " + (role === "user" ? "user" : "assistant");
+
+      var bubble = document.createElement("div");
+      bubble.className = "ai-message-bubble";
+      bubble.textContent = text;
+      row.appendChild(bubble);
+
+      aiChat.appendChild(row);
+      aiChat.scrollTop = aiChat.scrollHeight;
+    }
+
+    function addAiSystemNote(text) {
+      addAiMessage("assistant", text);
+    }
+
+    function getLocalContextSnippet() {
+      var snippet = "";
+      if (lessonTitle && lessonTitle.textContent && lessonTitle.textContent.trim().length > 0) {
+        snippet += "Current lesson title: " + lessonTitle.textContent + ". ";
+      }
+      if (lessonBody && lessonBody.textContent && lessonBody.textContent.trim().length > 0) {
+        snippet += "Lesson content: " + lessonBody.textContent.slice(0, 600);
+      }
+      return snippet;
+    }
+
+    function offlineAnswer(prompt) {
+      var lower = prompt.toLowerCase();
+      if (/freelanc|income|online money|earn/.test(lower)) {
+        return "Offline mode: Start small. Pick one skill (writing, design, research). Use AI to help you produce better work, then show 2–3 samples as your mini portfolio.";
+      }
+      if (/ai|llm|chatgpt|comet/.test(lower)) {
+        return "Offline mode: An LLM like Comet or ChatGPT is a language model that predicts the next word. Your power comes from asking smart questions and checking answers carefully.";
+      }
+      if (/project|startup|business/.test(lower)) {
+        return "Offline mode: Start with micro projects that solve a real problem around you. Keep them 1–7 days long, learn, then grow.";
+      }
+      return "Offline mode: Ask me about skills, AI, projects, business, language learning or any topic visible in this app. I’ll answer using the built-in syllabus and simple reasoning.";
+    }
+
+    function callOpenRouter(prompt, extraContext, callback) {
+      if (!OPENROUTER_API_KEY) {
+        callback("Online AI is not configured yet. Add your OpenRouter API key in index.html (OPENROUTER_API_KEY) to enable full AI answers.");
+        return;
+      }
+
+      var messages = [
+        {
+          role: "system",
+          content:
+"You are Comet, a kind, concise AI tutor for students (Class 1–12) learning future-ready skills, AI, freelancing and business. Explain step-by-step in simple language."
+        },
+        {
+          role: "user",
+          content: (extraContext ? ("Context:\n" + extraContext + "\n\n") : "") +
+            "Question:\n" + prompt
+        }
+      ];
+
+      fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer " + OPENROUTER_API_KEY,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          model: "meta-llama/llama-3-8b-instruct:free",
+          messages: messages,
+          max_tokens: 512,
+          temperature: 0.6
+        })
+      })
+      .then(function (res) {
+        if (!res.ok) {
+          callback("Error from online AI (" + res.status + "). I’ll fall back to offline thinking. Check your OpenRouter key and network.");
+          return null;
+        }
+        return res.json();
+      })
+      .then(function (data) {
+        if (!data) return;
+        var text = data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content ? data.choices[0].message.content : "";
+        callback(text.trim() || "Online AI returned an empty answer. Please try again.");
+      })
+      .catch(function (e) {
+        console.error("OpenRouter error", e);
+        callback("Online AI call failed (network or CORS). I’ll answer using offline knowledge instead.");
+      });
+    }
+
+    function answerWithHybridAI(prompt, extraContext) {
+      addAiMessage("user", prompt);
+      addAiSystemNote(navigator.onLine
+        ? "Thinking with online AI + skills syllabus..."
+        : "Thinking with offline skills syllabus...");
+
+      var ctx = extraContext || getLocalContextSnippet();
+      if (!navigator.onLine) {
+        var answer = offlineAnswer(prompt + " " + ctx);
+        addAiMessage("assistant", answer);
+        return;
+      }
+
+      callOpenRouter(prompt, ctx, function (answer) {
+        addAiMessage("assistant", answer);
+      });
+    }
+
+    function analyzeUrl(url) {
+      if (!navigator.onLine) {
+        addAiSystemNote("You are offline. I cannot fetch URLs, but you can paste text from the page and I’ll help you.");
+        return;
+      }
+      if (!url) {
+        addAiSystemNote("Please paste a URL first.");
+        return;
+      }
+      addAiSystemNote("Trying to fetch and analyze URL…");
+
+      fetch(url)
+        .then(function (res) { return res.text(); })
+        .then(function (text) {
+          var snippet = text.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").slice(0, 3000);
+          answerWithHybridAI(
+            "Summarize this webpage or video transcript in simple bullet points for a student. Focus on skills, AI, money or practical use.",
+            snippet
+          );
+        })
+        .catch(function (e) {
+          console.error("URL fetch error", e);
+          addAiSystemNote("I couldn't fetch that URL directly (CORS or network issue). Please copy-paste important text from the page, and I’ll summarize it.");
+        });
+    }
+
+    function handleFiles() {
+      var files = Array.from(aiFileInput.files || []);
+      if (!files.length) return;
+
+      addAiSys
