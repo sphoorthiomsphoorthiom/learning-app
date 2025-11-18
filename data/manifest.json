@@ -1,0 +1,140 @@
+{
+  "version": "2025.11.18",
+  "lastUpdated": "2025-11-18T14:00:00+05:30",
+  "boards": [
+    "NCERT",
+    "IB",
+    "Cambridge",
+    "WA",
+    "GLOBAL"
+  ],
+  "languages": [
+    "en",
+    "hi",
+    "te",
+    "ta",
+    "ka",
+    "ml",
+    "bn",
+    "mr",
+    "gu",
+    "pa"
+  ],
+  "packs": [
+    {
+      "id": "quizzes-class1-math-en",
+      "type": "quiz",
+      "board": "NCERT",
+      "classLevel": 1,
+      "subject": "math",
+      "lang": "en",
+      "url": "/learning-app/data/quizzes-class1-math-en.json",
+      "version": "1.0.0"
+    },
+    {
+      "id": "quizzes-class5-math-en",
+      "type": "quiz",
+      "board": "NCERT",
+      "classLevel": 5,
+      "subject": "math",
+      "lang": "en",
+      "url": "/learning-app/data/quizzes-class5-math-en.json",
+      "version": "1.0.0"
+    },
+    {
+      "id": "quizzes-class5-math-hi",
+      "type": "quiz",
+      "board": "NCERT",
+      "classLevel": 5,
+      "subject": "math",
+      "lang": "hi",
+      "url": "/learning-app/data/quizzes-class5-math-hi.json",
+      "version": "1.0.0"
+    },
+    {
+      "id": "quizzes-class5-math-te",
+      "type": "quiz",
+      "board": "NCERT",
+      "classLevel": 5,
+      "subject": "math",
+      "lang": "te",
+      "url": "/learning-app/data/quizzes-class5-math-te.json",
+      "version": "1.0.0"
+    },
+    {
+      "id": "stories-futureskills-en",
+      "type": "story",
+      "board": "GLOBAL",
+      "subject": "values",
+      "lang": "en",
+      "url": "/learning-app/data/stories-futureskills-en.json",
+      "version": "1.0.0"
+    },
+    {
+      "id": "stories-futureskills-hi",
+      "type": "story",
+      "board": "GLOBAL",
+      "subject": "values",
+      "lang": "hi",
+      "url": "/learning-app/data/stories-futureskills-hi.json",
+      "version": "1.0.0"
+    },
+    {
+      "id": "stories-futureskills-te",
+      "type": "story",
+      "board": "GLOBAL",
+      "subject": "values",
+      "lang": "te",
+      "url": "/learning-app/data/stories-futureskills-te.json",
+      "version": "1.0.0"
+    },
+    {
+      "id": "media-class3-values-en",
+      "type": "media",
+      "board": "GLOBAL",
+      "classLevel": 3,
+      "subject": "values",
+      "lang": "en",
+      "url": "/learning-app/data/media-class3-values-en.json",
+      "version": "1.0.0"
+    },
+    {
+      "id": "scriptures-gita-ch2-en",
+      "type": "scripture",
+      "board": "GLOBAL",
+      "classLevel": 9,
+      "subject": "values",
+      "lang": "en",
+      "url": "/learning-app/data/scriptures-gita-ch2-en.json",
+      "version": "1.0.0"
+    },
+    {
+      "id": "scriptures-upanishads-core-en",
+      "type": "scripture",
+      "board": "GLOBAL",
+      "classLevel": 11,
+      "subject": "values",
+      "lang": "en",
+      "url": "/learning-app/data/scriptures-upanishads-core-en.json",
+      "version": "1.0.0"
+    },
+    {
+      "id": "inspiration-world-max-en",
+      "type": "inspiration",
+      "board": "GLOBAL",
+      "subject": "values",
+      "lang": "en",
+      "url": "/learning-app/data/inspiration-world-max-en.json",
+      "version": "1.0.0"
+    },
+    {
+      "id": "yoga-pranayama-basics-en",
+      "type": "media",
+      "board": "GLOBAL",
+      "subject": "yoga",
+      "lang": "en",
+      "url": "/learning-app/data/yoga-pranayama-basics-en.json",
+      "version": "1.0.0"
+    }
+  ]
+}
